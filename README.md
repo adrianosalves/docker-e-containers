@@ -22,10 +22,12 @@ docker ps = Verifica quais os container está em execução.
 
 docker ps -a = Mostra os container executado recentemente e se eles estão em execução ou não!
 
-**2.Executando um contêiner**
+### 2.Executando um contêiner
 
-docker run "nome-da-imagem" sleep 10 = Executa a imagem no seu sistema por 10s depois finaliza.
-
+Executa a imagem no seu sistema por 10s depois finaliza.
+```
+docker run "nome-da-imagem" sleep 10
+```
 docker run "nome-da-imagem" sleep 1500 = Executa a imagem no seu sistema por 1500s depois finaliza.
 
 docker stop "id-da-imagem" ou "nome-da-imagem" = Finaliza a execução da imagem.
