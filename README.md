@@ -14,13 +14,15 @@ docker pull "nome-da-imagem" = Faz o Download da versão mais atualizada da imag
 
 docker images = verifica as imagens baixadas.
 
-docker run "nome-da-imagem" = Executa a imagem no seu sistema por alguns segundo e finaliza.
+docker run "nome-da-imagem" = Executa a imagem no seu sistema por alguns segundo e finaliza. É uma sintaxe mais simple e antiga.
+
+docker container run ""nome-da-imagem" = Executa a imagem no seu sistema por alguns segundo e finaliza. É uma sintaxe mais nova.
 
 docker ps = Verifica quais os container está em execução.
 
 docker ps -a = Mostra os container executado recentemente e se eles estão em execução ou não!
 
-*2.Executando um contêiner*
+**2.Executando um contêiner**
 
 docker run "nome-da-imagem" sleep 10 = Executa a imagem no seu sistema por 10s depois finaliza.
 
@@ -28,7 +30,10 @@ docker run "nome-da-imagem" sleep 1500 = Executa a imagem no seu sistema por 150
 
 docker stop "id-da-imagem" ou "nome-da-imagem" = Finaliza a execução da imagem.
 
-docker run -it "nome-da-imagem" = Executa a imagem no seu sistema, o uso do paramento "t" aloca um terminal (bash) permitindo trabalha com essa imagem, e o "i" permite interação com esse container instalar aplicações e etc...
+docker run -it "nome-da-imagem" = Executa a imagem no seu sistema, o uso do paramento "t" aloca um terminal (bash) permitindo trabalha com essa imagem, e o "i" permite interação com esse container instalar aplicações e etc. Porem pós usar o comando "exit" dentro do container ele é finalizado.
+
+docker run -it "nome-da-imagem" = Executa a imagem no seu sistema, com uso adicional do paramento "d" aloca um terminal (bash) permitindo trabalha com essa imagem, e o "i" permite interação com esse container instalar aplicações e etc. Porem pós usar o comando "exit" dentro do container ele é finalizado.
+docker run -dit "nome-da-imagem" = 
 
 
 
