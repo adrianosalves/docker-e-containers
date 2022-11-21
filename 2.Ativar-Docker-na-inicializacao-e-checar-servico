@@ -1,0 +1,36 @@
+┌──(root㉿kali)-[/home/kali/Downloads]
+└─# sudo systemctl enable docker --now
+Synchronizing state of docker.service with SysV service script with /lib/systemd/systemd-sysv-install.
+Executing: /lib/systemd/systemd-sysv-install enable docker
+                                                                                                                              
+┌──(root㉿kali)-[/home/kali/Downloads]
+└─# docker version
+Client:
+ Version:           20.10.19+dfsg1
+ API version:       1.41
+ Go version:        go1.19.2
+ Git commit:        d85ef84
+ Built:             Sat Oct 15 15:47:37 2022
+ OS/Arch:           linux/amd64
+ Context:           default
+ Experimental:      true
+
+Server:
+ Engine:
+  Version:          20.10.19+dfsg1
+  API version:      1.41 (minimum version 1.12)
+  Go version:       go1.19.2
+  Git commit:       c964641
+  Built:            Sat Oct 15 15:47:37 2022
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ containerd:
+  Version:          1.6.9~ds1
+  GitCommit:        1.6.9~ds1-1
+ runc:
+  Version:          1.1.4+ds1
+  GitCommit:        1.1.4+ds1-1
+ docker-init:
+  Version:          0.19.0
+  GitCommit:        
+                   
