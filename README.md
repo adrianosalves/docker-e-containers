@@ -8,6 +8,8 @@ Saber usar ferramentas como o Putty para Acessar Remoto o Servidores Linux.
 
 cat /etc/*release*  =  Verifica a versão do kernek do Linux.
 
+
+
 ### 1.Realizando o download de imagens e verificando seu estado:#
 
 Faz o Download da versão mais atualizada da imagem para seu sistema.
@@ -20,7 +22,7 @@ Verifica as imagens baixadas.
 docker images
 ```
 
-Executa a imagem no seu sistema por alguns segundo e finaliza. É uma sintaxe mais simple e antiga
+Executa o container no seu sistema por alguns segundo e finaliza. É uma sintaxe mais simple e antiga
 
 ```
 docker run "nome-do-container" 
