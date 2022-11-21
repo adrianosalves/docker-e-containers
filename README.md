@@ -139,6 +139,8 @@ docker cp "nome-do-arquivo.zip" "nome-do-container":/"nome-da-pasta"
 
 ### 7. Copiando arquivos do container
 
+Copiando arquivo do container para seu computador.
+
 ```
 docker cp "nome-do-container":/"pasta/nome-do-arquivo" "nome-do-arquivo-copia"
 ```
@@ -149,6 +151,22 @@ No portal "https://hub.docker.com" ao escolher a imagem para download é possive
 
 ```
 docker pull "nome-da-image":"tag"
+```
+
+### 9. Criando um container do MYSQL
+
+Importante especificar variavel de ambiente obrigatória **MYSQL_ROOT_PASSWORD** No portal "https://hub.docker.com/_/mysql" em Environment Variables.
+
+Download de uma container com o Mysql.
+
+```
+docker pull mysql
+```
+
+Com o paramento "-p" publicamos a porta do container no host, e o "-e" configura as variavesi de ambiente e o "-d" para executar em background, e "-p" especifica a porta do host local para o mysql para qualquer maquina da rede.
+
+```
+docker run -e MYSQL_ROOT_PASSWORD="digite-uma-senha" --name "nome-do-container" -d -p 3306:3306 mysql
 ```
 
 
