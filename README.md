@@ -61,7 +61,7 @@ Executa o container por 1500s depois finaliza.
 ```
 docker run "nome-do-container" sleep 1500 
 ```
-Finaliza a execução da imagem.
+Finaliza a execução do container.
 
 ```
 docker stop "id-do-container" ou "nome-do-container"
@@ -85,9 +85,31 @@ Executa o containe, com uso adicional do paramentro "exec" permite executar coma
 docker exec -it "nome-do-container" ou "id-do-container" /bin/bash
 ```
 
+### 4. Excluindo e nomeando contêineres:
 
+Remove container para que possa reduzir o uso de recurso e espaço da seu servidor.
 
+```
+docker rm "nome-do-container" ou "id-do-container"
+```
 
+Remove as images para que possa reduzir o uso de recurso e espaço da seu servidor.
+
+```
+docker rmi "nome-da-image"
+```
+
+Ao executar o comando docker para executar uma imagem que não foi baixada pelo seu sistema, se o docker não encontrar ele automaticamente alerta "Unable to find image 'xyz' localy" e depois inicia sozinho o download nos repositorio da ultima versão disponivel.
+ 
+```
+docker run -dti "nome-da-image"
+```
+
+Atribuir novo nome ao seu container.
+ 
+```
+docker run -dti --name "novo-nome" "nome-da-image"
+```
 
 
 
