@@ -26,4 +26,46 @@ CONTAINER ID   IMAGE         COMMAND    CREATED          STATUS                 
 1227b145fa4d   ubuntu        "bash"     15 seconds ago   Exited (0) 13 seconds ago             keen_volhard
 f108d72c80d5   hello-world   "/hello"   4 minutes ago    Exited (0) 4 minutes ago              infallible_bell    
 
+──(root㉿kali)-[/home/kali/Downloads]
+└─# docker run ubuntu sleep 10
+                                                                                                                              
+┌──(root㉿kali)-[/home/kali/Downloads]
+└─# docker ps -a              
+CONTAINER ID   IMAGE         COMMAND      CREATED              STATUS                          PORTS     NAMES
+31870cb18669   ubuntu        "sleep 10"   19 seconds ago       Exited (0) 8 seconds ago                  happy_dewdney
+1227b145fa4d   ubuntu        "bash"       About a minute ago   Exited (0) About a minute ago             keen_volhard
+f108d72c80d5   hello-world   "/hello"     5 minutes ago        Exited (0) 5 minutes ago                  infallible_bell
+
+┌──(root㉿kali)-[/home/kali/Downloads]
+└─# docker run ubuntu sleep 1500
+
+──(kali㉿kali)-[~]
+└─$ su root            
+Password: 
+┌──(root㉿kali)-[/home/kali]
+└─# docker ps
+CONTAINER ID   IMAGE     COMMAND        CREATED          STATUS          PORTS     NAMES
+d1c0e7ce8c5a   ubuntu    "sleep 1500"   22 seconds ago   Up 21 seconds             mystifying_ishizaka
+                                                                                                                              
+┌──(root㉿kali)-[/home/kali]
+└─# 
+
+──(root㉿kali)-[/home/kali]
+└─# docker stop mystifying_ishizaka
+mystifying_ishizaka
+
+┌──(root㉿kali)-[/home/kali/Downloads]
+└─# docker ps                   
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+                                                                                                                              
+┌──(root㉿kali)-[/home/kali/Downloads]
+└─# docker ps -a
+CONTAINER ID   IMAGE         COMMAND        CREATED         STATUS                            PORTS     NAMES
+d1c0e7ce8c5a   ubuntu        "sleep 1500"   3 minutes ago   Exited (137) About a minute ago             mystifying_ishizaka
+31870cb18669   ubuntu        "sleep 10"     4 minutes ago   Exited (0) 4 minutes ago                    happy_dewdney
+1227b145fa4d   ubuntu        "bash"         6 minutes ago   Exited (0) 5 minutes ago                    keen_volhard
+f108d72c80d5   hello-world   "/hello"       9 minutes ago   Exited (0) 9 minutes ago                    infallible_bell
+
+
+
 
