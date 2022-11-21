@@ -155,7 +155,9 @@ docker pull "nome-da-image":"tag"
 
 ### 9. Criando um container do MYSQL
 
-Importante especificar variavel de ambiente obrigatória **MYSQL_ROOT_PASSWORD** No portal "https://hub.docker.com/_/mysql" em Environment Variables.
+Importante especificar variavel de ambiente obrigatória **MYSQL_ROOT_PASSWORD**.
+
+No portal "https://hub.docker.com/_/mysql" em Environment Variables.
 
 Download de uma container com o Mysql.
 
