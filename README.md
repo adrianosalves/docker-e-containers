@@ -70,15 +70,19 @@ Executa o container, o uso do paramento "t" aloca um terminal (bash) permitindo 
 docker run -it "nome-do-container" 
 ```
 
-Executa o container, com uso adicional do paramento "d" aloca um terminal (bash) permitindo trabalha com o container, e o "i" permite interação com esse container instalar aplicações e etc. Porem spós usar o comando "exit" dentro do container ele é finalizado.
+### Executando aplicações no contêiner:
+
+Executa o container, com uso adicional do paramento "-d" exeuta o container em background e imprimi o ID. Assim mesmo que sair do container ele continuará em execução.
 
 ```
-docker run -it "nome-do-container" 
+docker run -dti "nome-do-container"
 ```
+Executa o containe, com uso adicional do paramentro "exec" perimite executar comandos dentro do container atraves do /bin/bash.
 
 ```
-docker run -dit "nome-do-container" = 
+docker exec -it "nome-do-container" ou "id-do-container" /bin/bash
 ```
+
 
 
 
