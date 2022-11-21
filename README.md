@@ -137,5 +137,11 @@ Para copia mais de um arquivo podemos compactar esses arquivos e depois copiar.
 docker cp "nome-do-arquivo.zip" "nome-do-container":/"nome-da-pasta"
 ```
 
+### 7. Copiando arquivos do container
+
+```
+docker cp "nome-do-container":/"pasta/nome-do-arquivo" "nome-do-arquivo-copia"
+```
+
 
 
