@@ -85,7 +85,7 @@ Executa o containe, com uso adicional do paramentro "exec" permite executar coma
 docker exec -it "nome-do-container" ou "id-do-container" /bin/bash
 ```
 
-### 4. Excluindo e nomeando contêineres:
+### 5. Excluindo e nomeando contêineres:
 
 Remove container para que possa reduzir o uso de recurso e espaço da seu servidor.
 
@@ -111,10 +111,31 @@ Atribuir novo nome ao seu container.
 docker run -dti --name "novo-nome" "nome-da-image"
 ```
 
+### 6. Copiando arquivos para o contêiner
 
+Criado uma pasta dentro do container.
+ 
+```
+docker exec "nome-do-container" mkdir /"nome-da-pasta"
+```
 
+Consultando pastas dentro do container.
+ 
+```
+docker exec "nome-do-container" ls /
+```
 
+Copiando um arquivo para dentro do containers.
+ 
+```
+docker cp "nome-do-arquivo" "nome-do-container":/"nome-da-pasta"
+```
 
+Para copia mais de um arquivo podemos compactar esses arquivos e depois copiar.
+
+```
+docker cp "nome-do-arquivo.zip" "nome-do-container":/"nome-da-pasta"
+```
 
 
 
