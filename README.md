@@ -64,13 +64,13 @@ Finaliza a execução da imagem.
 ```
 docker stop "id-do-container" ou "nome-do-container"
 ```
-Executa o container, o uso do paramento "t" aloca um terminal (bash) permitindo trabalha com o container, e o "i" permite interação com esse container instalar aplicações e etc. Porem pós usar o comando "exit" dentro do container ele é finalizado.
+Executa o container, o uso do paramento "t" aloca um terminal (bash) permitindo trabalha com o container, e o "i" permite interação com esse container instalar aplicações e etc. Porem spós usar o comando "exit" dentro do container ele é finalizado.
 
 ```
 docker run -it "nome-do-container" 
 ```
 
-Executa o container, com uso adicional do paramento "d" aloca um terminal (bash) permitindo trabalha com o container, e o "i" permite interação com esse container instalar aplicações e etc. Porem pós usar o comando "exit" dentro do container ele é finalizado.
+Executa o container, com uso adicional do paramento "d" aloca um terminal (bash) permitindo trabalha com o container, e o "i" permite interação com esse container instalar aplicações e etc. Porem spós usar o comando "exit" dentro do container ele é finalizado.
 
 ```
 docker run -it "nome-do-container" 
