@@ -1,0 +1,29 @@
+──(root㉿kali)-[/home/kali/Downloads]
+└─# docker pull ubuntu     
+Using default tag: latest
+latest: Pulling from library/ubuntu
+e96e057aae67: Pull complete 
+Digest: sha256:4b1d0c4a2d2aaf63b37111f34eb9fa89fa1bf53dd6e4ca954d47caebca4005c2
+Status: Downloaded newer image for ubuntu:latest
+docker.io/library/ubuntu:latest
+                                                                                                                              
+┌──(root㉿kali)-[/home/kali/Downloads]
+└─# docker images     
+REPOSITORY    TAG       IMAGE ID       CREATED         SIZE
+ubuntu        latest    a8780b506fa4   2 weeks ago     77.8MB
+hello-world   latest    feb5d9fea6a5   14 months ago   13.3kB
+                                                                                                                              
+┌──(root㉿kali)-[/home/kali/Downloads]
+└─# docker run ubuntu     
+                                                                                                                              
+┌──(root㉿kali)-[/home/kali/Downloads]
+└─# docker ps         
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+                                                                                                                              
+┌──(root㉿kali)-[/home/kali/Downloads]
+└─# docker ps -a
+CONTAINER ID   IMAGE         COMMAND    CREATED          STATUS                      PORTS     NAMES
+1227b145fa4d   ubuntu        "bash"     15 seconds ago   Exited (0) 13 seconds ago             keen_volhard
+f108d72c80d5   hello-world   "/hello"   4 minutes ago    Exited (0) 4 minutes ago              infallible_bell    
+
+
