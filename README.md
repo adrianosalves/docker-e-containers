@@ -169,5 +169,15 @@ Com o paramento "-p" publicamos a porta do container no host, e o "-e" configura
 docker run -e MYSQL_ROOT_PASSWORD="digite-uma-senha" --name "nome-do-container" -d -p 3306:3306 mysql
 ```
 
+Entrando no container do onde o mysql está instalado.
 
+```
+docker exec -it "nome-do-container" bash
+```
+
+Apos entrar dentro do container execute o comando abaixo para entrar no mysql será solicitado a senha 'Enter password:"digite-sua-senha" ela foi cadastrado no passo anterior.
+
+```
+# mysq -y -root -p --protocol=tcp
+```
 
