@@ -143,5 +143,13 @@ docker cp "nome-do-arquivo.zip" "nome-do-container":/"nome-da-pasta"
 docker cp "nome-do-container":/"pasta/nome-do-arquivo" "nome-do-arquivo-copia"
 ```
 
+### 8. TAGS
+
+No portal "https://hub.docker.com" ao escolher a imagem para download é possivel encontrar em *Supported Tags and Respective Dockerfile links* escolher uma versão especifica compativel com seu ambiente.
+
+```
+docker pull "nome-da-image":"tag"
+```
+
 
 
