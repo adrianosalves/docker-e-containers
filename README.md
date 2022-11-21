@@ -28,7 +28,8 @@ docker run "nome-da-imagem" sleep 1500 = Executa a imagem no seu sistema por 150
 
 docker stop "id-da-imagem" ou "nome-da-imagem" = Finaliza a execução da imagem.
 
-docker run -it "nome-da-imagem" = Executa a imagem no seu sistema, o uso do paramento "t" aloca um terminal (bash) permitindo trabalha com essa imagem, e o "i" permite interação com esse container.
+docker run -it "nome-da-imagem" = Executa a imagem no seu sistema, o uso do paramento "t" aloca um terminal (bash) permitindo trabalha com essa imagem, e o "i" permite interação com esse container instalar aplicações e etc...
+
 
 
 
