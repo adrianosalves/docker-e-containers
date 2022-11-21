@@ -1,0 +1,13 @@
+──(root㉿kali)-[/home/kali/Downloads]
+└─# docker pull hello-world
+Using default tag: latest
+latest: Pulling from library/hello-world
+2db29710123e: Pull complete 
+Digest: sha256:faa03e786c97f07ef34423fccceeec2398ec8a5759259f94d99078f264e9d7af
+Status: Downloaded newer image for hello-world:latest
+docker.io/library/hello-world:latest
+                                                                                                                              
+┌──(root㉿kali)-[/home/kali/Downloads]
+└─# docker images          
+REPOSITORY    TAG       IMAGE ID       CREATED         SIZE
+hello-world   latest    feb5d9fea6a5   14 months ago   13.3kB
