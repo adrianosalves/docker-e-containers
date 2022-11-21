@@ -6,3 +6,15 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 └─# docker ps -a
 CONTAINER ID   IMAGE         COMMAND    CREATED          STATUS                      PORTS     NAMES
 f108d72c80d5   hello-world   "/hello"   43 seconds ago   Exited (0) 41 seconds ago             infallible_bell
+
+┌──(root㉿kali)-[/home/kali/Downloads]
+└─# docker ps         
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+                                                                                                                              
+┌──(root㉿kali)-[/home/kali/Downloads]
+└─# docker ps -a
+CONTAINER ID   IMAGE         COMMAND    CREATED          STATUS                      PORTS     NAMES
+1227b145fa4d   ubuntu        "bash"     15 seconds ago   Exited (0) 13 seconds ago             keen_volhard
+f108d72c80d5   hello-world   "/hello"   4 minutes ago    Exited (0) 4 minutes ago              infallible_bell
+
+
