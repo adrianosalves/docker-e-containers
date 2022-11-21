@@ -1,0 +1,8 @@
+──(root㉿kali)-[/home/kali/Downloads]
+└─# docker ps              
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+                                                                                                                              
+┌──(root㉿kali)-[/home/kali/Downloads]
+└─# docker ps -a
+CONTAINER ID   IMAGE         COMMAND    CREATED          STATUS                      PORTS     NAMES
+f108d72c80d5   hello-world   "/hello"   43 seconds ago   Exited (0) 41 seconds ago             infallible_bell
