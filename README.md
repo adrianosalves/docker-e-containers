@@ -199,6 +199,6 @@ Quando o Docker é instalado é criado um dispositivo de rede que recebe um ip a
 ──(root㉿kali)-[/home/kali]
 └─# ip a | grep docker
 3: docker0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default 
-    *inet 172.17.0.1/16* brd 172.17.255.255 scope global docker0
+    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
 
 ```
