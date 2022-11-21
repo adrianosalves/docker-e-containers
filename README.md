@@ -210,3 +210,31 @@ Vamos agora identificar o IP do nosso container mysql.
             "IPAddress": "172.17.0.2",
                     "IPAddress": "172.17.0.2",
 ```
+Quando estamos na mesma faixa de IP do docker conseguimos entrar no mysql sem abrir o bash do container.
+
+```
+┌──(root㉿kali)-[/home/kali]
+└─# mysql -u root -p --protocol=tcp
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 14
+Server version: 8.0.31 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| aula               |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.002 sec)
+
+MySQL [(none)]> 
+```
