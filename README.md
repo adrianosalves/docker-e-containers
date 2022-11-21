@@ -175,9 +175,21 @@ Entrando no container do onde o mysql está instalado.
 docker exec -it "nome-do-container" bash
 ```
 
-Apos entrar dentro do container execute o comando abaixo para entrar no mysql será solicitado a senha 'Enter password:"digite-sua-senha" ela foi cadastrado no passo anterior.
+Apos entrar dentro do container execute o comando abaixo para entrar no mysql será solicitado a senha **'Enter password:"digite-sua-senha"** ela foi cadastrado no passo anterior.
 
 ```
-# mysq -y -root -p --protocol=tcp
+# mysql -y -root -p --protocol=tcp
+```
+
+Após entrar no **mysql** será possivel criar um banco de dados.
+
+```
+mysql> CREATE DATABASE "nome-do-seu-banco-de-dados";
+```
+
+Mostrar os bancos disponiveis.
+
+```
+mysql> show databases;
 ```
 
