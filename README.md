@@ -200,5 +200,13 @@ Quando o Docker é instalado é criado um dispositivo de rede que recebe um ip a
 └─# ip a | grep docker
 3: docker0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default 
     inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+```
+Vamos agora identificar o IP do nosso container mysql.
 
+```
+──(root㉿kali)-[/home/kali]
+└─# docker inspect mysql-B | grep IPAddress
+            "SecondaryIPAddresses": null,
+            "IPAddress": "172.17.0.2",
+                    "IPAddress": "172.17.0.2",
 ```
