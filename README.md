@@ -70,7 +70,7 @@ Executa o container, o uso do paramento "t" aloca um terminal (bash) permitindo 
 docker run -it "nome-do-container" 
 ```
 
-### Executando aplicações no contêiner:
+### 4. Executando aplicações no contêiner:
 
 Executa o container, com uso adicional do paramento "-d" exeuta o container em background e imprimi o ID. Assim mesmo que sair do container ele continuará em execução.
 
