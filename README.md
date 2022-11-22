@@ -240,3 +240,7 @@ MySQL [(none)]> show databases;
 
 MySQL [(none)]> 
 ```
+### 10. Acessando um container externamente
+
+
+
