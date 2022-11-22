@@ -524,8 +524,22 @@ MySQL [aula]>
 **NOTA:** Dessa forma seguindo os passos acima conseguimos mapear os dados para nosso container pois os dados estão sendo mapeado para um local fora do container.
 
 
+### 12. Montando mount um local de armazenamento
 
+**Tipos de mount**
 
+- bind mounts = permite criar uma pasta e fazer o redirecionamento dos dados do container para essa pasta.
+ 
+- named volumes = permite nomear um volume.
+
+- dockerfile volumes = permite criar volumes dentro do docker.
+
+Nos exercicios que fizemos anteriormente usamos o *bind mounts*.
+As montagens Bind apenas vincula uma determinada pasta ou arquivo do host dentro do conntainer:
+
+```
+docker run -v /host/pasta:/container/pasta mysql
+```
 
 
 
