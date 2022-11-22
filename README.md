@@ -476,7 +476,7 @@ df8f8256016aafc2f0a8b1364179bc3a7ece4dc70e820b069a183330ddac52a8
                                                                                                
 ┌──(root㉿kali)-[/data/mysql-B]
 └─# 
-```
+
 ┌──(root㉿kali)-[/data/mysql-B]
 └─# docker ps
 CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS                                                  NAMES
@@ -519,6 +519,7 @@ MySQL [aula]> select * from alunos;
 1 row in set (0.006 sec)
 
 MySQL [aula]> 
+```
 
 **NOTA:** Dessa forma seguindo os passos acima conseguimos mapear os dados para nosso container pois os dados estão sendo mapeado para um local fora do container.
 
