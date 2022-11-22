@@ -391,7 +391,7 @@ Reconfigurar nosso container do zero.
 
 Dessa forma mesmo ser perder o container podemos criar um novo container basta indicar o mesmo caminho e os dados seram recuperados.
 
-
+A partir do servidor onde está o container vamos entrar no Mysql e criar um banco de dados novamente.
 
 ```
 mysql> create database aula;
@@ -416,6 +416,114 @@ mysql> select * from alunos;
 
 mysql> 
 ```
+
+Nosso container está em execução.
+
+```
+┌──(root㉿kali)-[/data/mysql-B]
+└─# docker ps                   
+CONTAINER ID   IMAGE     COMMAND                  CREATED        STATUS       PORTS                                                            NAMES
+0af6db093672   mysql     "docker-entrypoint.s…"   10 hours ago   Up 9 hours   3306/tcp, 33060/tcp, 0.0.0.0:3386->3386/tcp, :::3386->3386/tcp   mysql-B
+
+````
+
+Agora vou desligar o container.
+
+```
+┌──(root㉿kali)-[/data/mysql-B]
+└─# docker stop mysql-B
+mysql-B
+
+```
+
+Agora vou remover o container.
+
+```
+──(root㉿kali)-[/data/mysql-B]
+└─# docker rm mysql-B
+mysql-B
+```
+
+Porem os meu dados continua salvo no seguinte local.
+
+```
+──(root㉿kali)-[/data/mysql-B]
+└─# ls /data/mysql-B 
+ aula            ca-key.pem           ib_buffer_pool   mysql.sock           sys
+ auto.cnf        ca.pem               ibdata1          performance_schema   undo_001
+ binlog.000001   client-cert.pem     '#innodb_redo'    private_key.pem      undo_002
+ binlog.000002   client-key.pem      '#innodb_temp'    public_key.pem
+ binlog.000003  '#ib_16384_0.dblwr'   mysql            server-cert.pem
+ binlog.index   '#ib_16384_1.dblwr'   mysql.ibd        server-key.pem
+```
+
+**NOTA:** Agora posso iniciar um novo container que vamos ter acesso ao dados novamente, podemos criar o container com o mesmo nome ou com um nome diferente. 
+
+Nesse momento não temos nenhum container em execução.
+
+```
+┌──(root㉿kali)-[/data/mysql-B]
+└─# docker ps        
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+```
+
+Criando um novo container com um nome diferente onde teremo o acesso as mesmas informações do container que foi removido.
+
+```
+┌──(root㉿kali)-[/data/mysql-B]
+└─# docker run -e MYSQL_ROOT_PASSWORD=Senha123 --name mysql-Novo -d -p 3306:3306 --volume=/data/mysql-B:/var/lib/mysql mysql
+df8f8256016aafc2f0a8b1364179bc3a7ece4dc70e820b069a183330ddac52a8
+                                                                                               
+┌──(root㉿kali)-[/data/mysql-B]
+└─# 
+```
+┌──(root㉿kali)-[/data/mysql-B]
+└─# docker ps
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS                                                  NAMES
+df8f8256016a   mysql     "docker-entrypoint.s…"   25 seconds ago   Up 23 seconds   0.0.0.0:3306->3306/tcp, :::3306->3306/tcp, 33060/tcp   mysql-Novo
+                                                                                               
+┌──(root㉿kali)-[/data/mysql-B]
+└─# mysql -u root -p --protocol=tcp --port=3306
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.31 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| aula               |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.137 sec)
+
+MySQL [(none)]> use aula;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MySQL [aula]> select * from alunos;
++---------+---------+-----------+----------+--------+
+| AlunoID | Nome    | Sobrenome | Endereco | Cidade |
++---------+---------+-----------+----------+--------+
+|       1 | Adriano | Alves     | Rua....  | Bahia  |
++---------+---------+-----------+----------+--------+
+1 row in set (0.006 sec)
+
+MySQL [aula]> 
+
+**NOTA:** Dessa forma seguindo os passos acima conseguimos mapear os dados para nosso container pois os dados estão sendo mapeado para um local fora do container.
+
+
+
 
 
 
