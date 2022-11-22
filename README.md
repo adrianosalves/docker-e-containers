@@ -389,6 +389,39 @@ Reconfigurar nosso container do zero.
 
 **NOTA:** Observe que após iniciar o novo container os arquivos do banco de dados ja está sendo gravado no novo caminho **/data/mysql-B**.
 
+Dessa forma mesmo ser perder o container podemos criar um novo container basta indicar o mesmo caminho e os dados seram recuperados.
+
+
+
+```
+mysql> create database aula;
+Query OK, 1 row affected (0.01 sec)
+
+mysql> use aula;
+Database changed
+
+mysql> select * from alunos;
+Empty set (0.00 sec)
+
+mysql> insert into alunos (AlunoID, Nome, Sobrenome, Endereco, Cidade) values (1,"Adriano","Alves","Rua....","Bahia");
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from alunos;
++---------+---------+-----------+----------+--------+
+| AlunoID | Nome    | Sobrenome | Endereco | Cidade |
++---------+---------+-----------+----------+--------+
+|       1 | Adriano | Alves     | Rua....  | Bahia  |
++---------+---------+-----------+----------+--------+
+1 row in set (0.00 sec)
+
+mysql> 
+```
+
+
+
+
+
+
 
 
 
