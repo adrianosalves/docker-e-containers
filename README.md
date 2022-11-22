@@ -336,7 +336,7 @@ Nosso container MySQL está no ar em execução.
 CONTAINER ID   IMAGE     COMMAND                  CREATED       STATUS       PORTS                                                  NAMES
 5337a48eeb0a   mysql     "docker-entrypoint.s…"   2 hours ago   Up 2 hours   0.0.0.0:3306->3306/tcp, :::3306->3306/tcp, 33060/tcp   mysql-B
 ```
-Vamos indentifica onde nosso container armazena os dados.
+Vamos indentificar onde nosso container armazena os dados.
 
 ```
 ──(root㉿kali)-[/home/kali]
@@ -345,6 +345,50 @@ Vamos indentifica onde nosso container armazena os dados.
 ```
 
 **NOTA:** Que a linha **"Destination": "/var/lib/mysql"** é o local padrão onde é armazenado os dados, seu quiser armazenar os dados em outro local fora do container eu preciso alterar esse campo para outro local.
+
+Para altera o local podemos fazer da seguinte forma, criar uma pasta em nossa maquina fisica fora do container.
+
+```
+──(root㉿kali)-[/]
+└─# mkdir /data        
+                                                                                               
+┌──(root㉿kali)-[/]
+└─# mkdir /data/mysql-B
+                                                                                               
+┌──(root㉿kali)-[/]
+```
+
+**NOTA:** Observe acima que criei duas pastas dentro "/" na minha maquina fisica fora do container, indicando o seguinte caminho **/data/mysql-B/**
+
+Precisamos desligar no container e depois vamo remover esse container.
+
+```
+docker stop mysql-B
+```
+
+```
+docker rm mysql-B
+```
+
+Reconfigurar nosso container do zero.
+
+```
+──(root㉿kali)-[/data/mysql-B]
+└─# docker run -e MYSQL_ROOT_PASSWORD=Senha123 --name mysql-B -d -p 3386:3386 --volume=/data/mysql-B:/var/lib/mysql mysql
+0af6db093672dc706123236c8f6726bc78acac67a14e35e1faa3884940845bf5
+                                                                                               
+┌──(root㉿kali)-[/data/mysql-B]
+└─# ls
+ auto.cnf            '#ib_16384_1.dblwr'  '#innodb_redo'   undo_1_trunc.log
+'#ib_16384_0.dblwr'   ibdata1              undo_001
+                                                                                               
+┌──(root㉿kali)-[/data/mysql-B]
+└─# 
+
+```
+
+**NOTA:** Observe que após iniciar o novo container os arquivos do banco de dados ja está sendo gravado no novo caminho **/data/mysql-B**.
+
 
 
 
