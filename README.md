@@ -271,3 +271,19 @@ MySQL [(none)]> show databases;
 
 MySQL [(none)]>
 ```
+
+Estamos agora entrando no banco de **aula** e criando um tabela **aluno**.
+
+```
+MySQL [(none)]> use aula;
+Database changed
+MySQL [aula]> create table aluno (
+    -> AlunoID int,
+    -> Nome varchar(50),
+    -> Sobrenome varchar(50),
+    -> Endereco varchar(150),
+    -> Cidade varchar(50));
+Query OK, 0 rows affected (0.133 sec)
+
+MySQL [aula]>
+```
