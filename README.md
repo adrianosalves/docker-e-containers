@@ -325,3 +325,26 @@ Agora vamos remover o container.
 docke rm mysql-B
 ```
 **NOTA:** Quando excluimos o container os dados são excluido tambem. Para não perder os dados quando exluir um container ou quando ocorre algum problema com o container é recomendado mapear o local dos dados para fora do container, se eu precisar subir um novo container conseguimos subir com os dados novamente.
+
+### 11. Montando mount um local de armazenamento
+
+Nosso container MySQL está no ar em execução.
+
+```
+┌──(root㉿kali)-[/home/kali]
+└─# docker ps                   
+CONTAINER ID   IMAGE     COMMAND                  CREATED       STATUS       PORTS                                                  NAMES
+5337a48eeb0a   mysql     "docker-entrypoint.s…"   2 hours ago   Up 2 hours   0.0.0.0:3306->3306/tcp, :::3306->3306/tcp, 33060/tcp   mysql-B
+```
+Vamos indentifica onde nosso container armazena os dados.
+
+```
+──(root㉿kali)-[/home/kali]
+└─# docker inspect mysql-B | grep "Destination"         
+                "Destination": "/var/lib/mysql"
+```
+
+**NOTA:** Que a linha **"Destination": "/var/lib/mysql"** é o local padrão onde é armazenado os dados, seu quiser armazenar os dados em outro local fora do container eu preciso alterar esse campo para outro local.
+
+
+
