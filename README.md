@@ -287,3 +287,19 @@ Query OK, 0 rows affected (0.133 sec)
 
 MySQL [aula]>
 ```
+Inserindo dados na tabela do Banco de Dados.
+
+```
+MySQL [aula]> insert into aluno(AlunoID, Nome, Sobrenome, Endereco, Cidade) values (1,'Manoel','Alves','Rua da Magueira','Bahia');
+Query OK, 1 row affected (0.023 sec)
+
+MySQL [aula]> select * from aluno;
++---------+--------+-----------+-----------------+--------+
+| AlunoID | Nome   | Sobrenome | Endereco        | Cidade |
++---------+--------+-----------+-----------------+--------+
+|       1 | Manoel | Alves     | Rua da Magueira | Bahia  |
++---------+--------+-----------+-----------------+--------+
+1 row in set (0.004 sec)
+
+MySQL [aula]>
+```
