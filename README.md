@@ -303,3 +303,25 @@ MySQL [aula]> select * from aluno;
 
 MySQL [aula]>
 ```
+
+### 11. Parando e reiniciando um container.
+
+Quando reiniciamos o servicos do container não perdemos os dados do MySQL.
+
+Agora vamos para nosso container. 
+
+```
+docker stop mysql-B
+```
+Agora vamos iniciar nosso container. 
+
+```
+docker start mysql-B
+```
+
+Agora vamos remover o container. 
+
+```
+docke rm mysql-B
+```
+**NOTA:** Quando excluimos o container os dados são excluido tambem. Para não perder os dados quando exluir um container ou quando ocorre algum problema com o container é recomendado mapear o local dos dados para fora do container, se eu precisar subir um novo container conseguimos subir com os dados novamente.
