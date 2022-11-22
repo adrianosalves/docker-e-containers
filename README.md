@@ -242,5 +242,28 @@ MySQL [(none)]>
 ```
 ### 10. Acessando um container externamente
 
+```
+c:\Program Files\MariaDB 10.10\bin>mysql.exe -u root -h 192.168.0.102 -p
+Enter password: ********
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 27
+Server version: 8.0.31 MySQL Community Server - GPL
 
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
 
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| aula               |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.008 sec)
+
+MySQL [(none)]>
+```
