@@ -242,6 +242,10 @@ MySQL [(none)]>
 ```
 ### 10. Acessando um container externamente
 
+https://www.mariadbtutorial.com/getting-started/connect-to-mariadb/
+
+Abaixo mostramos como podemos acessar o MysSQL remoto atraves de uma maquina Windows.
+
 ```
 c:\Program Files\MariaDB 10.10\bin>mysql.exe -u root -h 192.168.0.102 -p
 Enter password: ********
