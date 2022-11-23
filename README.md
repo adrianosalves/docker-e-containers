@@ -526,6 +526,65 @@ MySQL [aula]>
 
 ### 12. Montando mount um local de armazenamento
 
+As informações do container são salvas em **"/var/lib/mysql"** esse é a pasta padrão dentro do container.
+```
+┌──(root㉿kali)-[/data/mysql-B]
+└─# docker inspect  mysql-Novo | grep Destination
+                "Destination": "/var/lib/mysql",
+```
+Se quiser direcionar que essas informações seja salvo em outro local fora do container precisam alterar essa configuação, abaixo se como fazer essa configuração.
+
+Consulte qual container voce quer altera.
+
+```
+┌──(root㉿kali)-[/]
+└─# docker ps                                    
+CONTAINER ID   IMAGE     COMMAND                  CREATED        STATUS       PORTS                                                  NAMES
+df8f8256016a   mysql     "docker-entrypoint.s…"   10 hours ago   Up 9 hours   0.0.0.0:3306->3306/tcp, :::3306->3306/tcp, 33060/tcp   mysql-Novo
+```
+
+Cria uma nova pasta onde vai ser direcionado as informações para ser salva, vamos criar uma pasta na raiz do sistema fora do container.
+
+```
+┌──(root㉿kali)-[/]
+└─# mkdir /data/mysq-Novo                      
+                                                                                               
+┌──(root㉿kali)-[/]
+└─# ls /            
+adm   disk2           lib         media    root     sec         texto1.txt  ven
+bin   etc             lib32       mnt      run      srv         texto2.txt  vmlinuz
+boot  home            lib64       opt      sbin     sys         tmp         vmlinuz.old
+data  initrd.img      libx32      proc     script2  teste1.txt  usr
+dev   initrd.img.old  lost+found  publico  scripts  teste2.txt  var
+                                                                                               
+┌──(root㉿kali)-[/]
+└─# cd data 
+                                                                                               
+┌──(root㉿kali)-[/data]
+└─# ls  
+mysql-B  mysq-Novo
+```
+
+Pare o container "mysql-Novo" e remova.
+
+```
+──(root㉿kali)-[/data]
+└─# docker stop mysql-Novo
+mysql-Novo
+
+──(root㉿kali)-[/data]
+└─# docker rm mysql-Novo
+mysql-Novo
+                                                                                               
+┌──(root㉿kali)-[/data]
+└─# docker ps             
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+                                                                                               
+┌──(root㉿kali)-[/data]
+└─# 
+```
+
+
 **Tipos de mount**
 
 - bind mounts = permite criar uma pasta e fazer o redirecionamento dos dados do container para essa pasta.
@@ -538,7 +597,7 @@ Nos exercicios que fizemos anteriormente usamos o *bind mounts*.
 As montagens Bind apenas vincula uma determinada pasta ou arquivo do host dentro do conntainer:
 
 ```
-docker run -v /host/pasta:/container/pasta mysql
+docker run -v /host-pasta:/container/pasta mysql
 ```
 
 
