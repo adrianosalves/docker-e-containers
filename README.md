@@ -593,11 +593,30 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 
 - dockerfile volumes = permite criar volumes dentro do docker.
 
+**bind**
+
 Nos exercicios que fizemos anteriormente usamos o *bind mounts*.
 As montagens Bind apenas vincula uma determinada pasta ou arquivo do host dentro do conntainer:
 
 ```
-docker run -v /host-pasta:/container/pasta mysql
+docker run -v /host-pasta:/container-pasta mysql
+```
+
+**named**
+
+Volumes nomeados são volumes que podemos criar manualmente com o comando:
+
+```
+docker volume create "nome-do-volume" 
+```
+A diferença do "bind" é que especificamos uma pasta, quando trabalhamos com volumes eles são criado em **/var/lib/docker/volumes** e pode se referenciados apenas por seu nome.
+
+Exemplo:
+
+Quando criamos um volume chamado **"mysql_data"** podemos apenas referencia-lo com o comando:
+
+```
+docker run -v mysql_data:/container-pasta mysql
 ```
 
 ### Processamento, Logs e Rede
