@@ -619,6 +619,19 @@ Quando criamos um volume chamado **"mysql_data"** podemos apenas referencia-lo c
 docker run -v mysql_data:/container-pasta mysql
 ```
 
+**dockerfile volume**
+
+São volumes criados pela instrução VOLUME. Esses volumes também são criados em **/var/lib/docker/volumes**, mas não tem um determinado nome. O volume é criado ao executar o contêiner e são uteis para salvar dados persistentes. O desenvolvedor pode dizer onde estão os dados importantes e o que deve ser persistente.
+
+**qual devo utilizar?**
+
+Depende de cada um pessoa, se quiser manter tudo na "área do docker" (**/var/lib/docker**), poderá usar volumes. Caso queira manter sua propria estrutura de pastas, pode usar binds.
+
+**NOTA:** O Docker recomenda o uso de volumes em vez do uso de binds, pois os volumes são criados e gerenciados pelo docker.
+
+
+
+
 ### Processamento, Logs e Rede
 
 
