@@ -600,6 +600,9 @@ As montagens Bind apenas vincula uma determinada pasta ou arquivo do host dentro
 docker run -v /host-pasta:/container/pasta mysql
 ```
 
+### Processamento, Logs e Rede
+
+
 
 
 
