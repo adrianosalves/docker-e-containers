@@ -584,6 +584,7 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 └─# 
 ```
 
+## 13. Tipos de mount bind, named, dockerfile volume
 
 **Tipos de mount**
 
@@ -629,8 +630,105 @@ Depende de cada um pessoa, se quiser manter tudo na "área do docker" (**/var/li
 
 **NOTA:** O Docker recomenda o uso de volumes em vez do uso de binds, pois os volumes são criados e gerenciados pelo docker.
 
+## 13. Exemplos de tipos de mount, na prática
 
+Criar um metodo diferente "bind" e depois o "volume create".
 
+```
+──(root㉿kali)-[/data]
+└─# ls
+mysql-B  mysql-Novo
+
+┌──(root㉿kali)-[/data]
+└─# docker run -dti --mount type=bind,src=/data/mysql-Novo,dst=/data debian
+Unable to find image 'debian:latest' locally
+latest: Pulling from library/debian
+a8ca11554fce: Pull complete 
+Digest: sha256:3066ef83131c678999ce82e8473e8d017345a30f5573ad3e44f62e5c9c46442b
+Status: Downloaded newer image for debian:latest
+1ba5e75868892da9c0491bde16e01f165beb61a9e0e628f998fc21bb1698e667
+
+┌──(root㉿kali)-[/data]
+└─# docker exec -ti beautiful_saha bash 
+root@1ba5e7586889:/# ls
+bin   data  etc   lib    media  opt   root  sbin  sys  usr
+boot  dev   home  lib64  mnt    proc  run   srv   tmp  var
+root@1ba5e7586889:/# cd data/
+root@1ba5e7586889:/data# ls
+root@1ba5e7586889:/data# ls -la
+total 8
+drwxr-xr-x 2 root root 4096 Nov 22 21:27 .
+drwxr-xr-x 1 root root 4096 Nov 24 21:22 ..
+root@1ba5e7586889:/data# exit
+exit
+                                                                                               
+┌──(root㉿kali)-[/data]
+└─# ls
+mysql-B  mysql-Novo
+                                                                                               
+                                                                                             
+┌──(root㉿kali)-[/data]
+└─# cd mysql-Novo 
+                                                                                               
+┌──(root㉿kali)-[/data/mysql-Novo]
+└─# ls
+                                                                                               
+┌──(root㉿kali)-[/data/mysql-Novo]
+└─# touch MeuArquivo.txt
+                                                                                               
+┌──(root㉿kali)-[/data/mysql-Novo]
+└─# ls
+MeuArquivo.txt
+                                                                                               
+┌──(root㉿kali)-[/data/mysql-Novo]
+└─# docker exec -ti beautiful_saha bash
+root@1ba5e7586889:/# cd /data/
+root@1ba5e7586889:/data# ls
+MeuArquivo.txt
+root@1ba5e7586889:/data# 
+```
+
+Vamos criar um volume tipo "bind" somente leitura.
+
+```
+──(root㉿kali)-[/data/mysql-Novo]
+└─# docker ps                          
+CONTAINER ID   IMAGE     COMMAND   CREATED         STATUS         PORTS     NAMES
+1ba5e7586889   debian    "bash"    9 minutes ago   Up 9 minutes             beautiful_saha
+                                                                                               
+┌──(root㉿kali)-[/data/mysql-Novo]
+└─# docker stop 1ba       
+1ba
+                                                                                               
+┌──(root㉿kali)-[/data/mysql-Novo]
+└─# docker ps      
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+                                                                                               
+┌──(root㉿kali)-[/data/mysql-Novo]
+└─# docker run -dti --mount type=bind,src=/data/mysql-Novo,dst=/data debian,ro debian
+docker: invalid reference format.
+See 'docker run --help'.
+                                                                                               
+┌──(root㉿kali)-[/data/mysql-Novo]
+└─# docker run -dti --mount type=bind,src=/data/mysql-Novo,dst=/data,ro debian       
+69ce416ee2938cd0495d6fbb45b57c91d5e5ae0c5fec14c36ce73ee3409bebf5
+                                                                                               
+┌──(root㉿kali)-[/data/mysql-Novo]
+└─# docker ps                                                                 
+CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS          PORTS     NAMES
+69ce416ee293   debian    "bash"    13 seconds ago   Up 11 seconds             nice_elion
+                                                                                               
+┌──(root㉿kali)-[/data/mysql-Novo]
+└─# docker exec -ti 69ce416ee293 bash  
+root@69ce416ee293:/# cd /data/
+root@69ce416ee293:/data# ls
+MeuArquivo.txt
+root@69ce416ee293:/data# rm MeuArquivo.txt 
+rm: cannot remove 'MeuArquivo.txt': Read-only file system
+root@69ce416ee293:/data# touch Novo.txt
+touch: cannot touch 'Novo.txt': Read-only file system
+root@69ce416ee293:/data# 
+```
 
 ### Processamento, Logs e Rede
 
