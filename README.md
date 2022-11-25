@@ -831,7 +831,7 @@ local     eaf600e1e8ea4ef7b27311055e731c69bbeb632eb2a0d632571d3656a33e4082
 
 ```
 
-### Mount: Conclusão
+### Mount: 14 Conclusão
 
 Podemos remover um container sem a necessidade de usar o "stop".
 
@@ -928,6 +928,76 @@ DRIVER    VOLUME NAME
 ┌──(root㉿kali)-[/var/…/docker/volumes/data-sistema/_data]
 └─# 
 ```
+
+### 15. Exemplo: Apache Contêiner
+
+Instalar um Servidor Apache "httpd".
+
+```
+┌──(root㉿kali)-[/home/kali]
+└─# docker ps                              
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# docker pull httpd      
+Using default tag: latest
+latest: Pulling from library/httpd
+a603fa5e3b41: Pull complete 
+4691bd33efec: Pull complete 
+ff7b0b8c417a: Pull complete 
+9df1012343c7: Pull complete 
+b1c114085b25: Pull complete 
+Digest: sha256:f2e89def4c032b02c83e162c1819ccfcbd4ea6bdbc5ff784bbc68cba940a9046
+Status: Downloaded newer image for httpd:latest
+docker.io/library/httpd:latest
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# mkdir /data/apache-A
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# nano index.html       
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# nano index.html
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# docker run --name apache-A -d -p 80:80 --volume=/data/apache-A:/usr/local/apache2/htdocs httpd
+1ea6a8c3850c7ac0c080b28458f560a46fce3bc52d00ebb78263a6a57b3d8af2
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# docker ps                                                                                     
+CONTAINER ID   IMAGE     COMMAND              CREATED          STATUS          PORTS                               NAMES
+1ea6a8c3850c   httpd     "httpd-foreground"   19 seconds ago   Up 17 seconds   0.0.0.0:80->80/tcp, :::80->80/tcp   apache-A
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# 
+
+```
+
+Identificando o IP do meu servidor Apache.
+
+```
+┌──(root㉿kali)-[/home/kali]
+└─# ip a              
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:db:96:6a brd ff:ff:ff:ff:ff:ff
+    inet 192.168.1.107/24 brd 192.168.1.255 scope global dynamic noprefixroute eth0
+       valid_lft 6106sec preferred_lft 6106sec
+    inet6 fe80::a00:27ff:fedb:966a/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+```
+
+
+
+
+### 16. Exemplo: PHP - Apache
+
 
 
 
