@@ -765,6 +765,22 @@ root@817346bc22a0:/# cd /data
 root@817346bc22a0:/data# ls
 arquivo1.txt  arquivo2.txt
 root@817346bc22a0:/data# 
+
+┌──(root㉿kali)-[/var/…/docker/volumes/data-sistema/_data]
+└─# docker exec -ti debianA bash
+root@817346bc22a0:/# cd /data/
+root@817346bc22a0:/data# ls
+arquivo1.txt  arquivo2.txt
+root@817346bc22a0:/data# toucho obakkkkkkvaleu.txt
+bash: toucho: command not found
+root@817346bc22a0:/data# touch obakkkkkkvaleu.txt
+root@817346bc22a0:/data# exit
+exit
+                                                                                              
+┌──(root㉿kali)-[/var/…/docker/volumes/data-sistema/_data]
+└─# ls                          
+arquivo1.txt  arquivo2.txt  obakkkkkkvaleu.txt
+                                                 
 ```
 
 ### Processamento, Logs e Rede
