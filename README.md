@@ -998,7 +998,59 @@ Identificando o IP do meu servidor Apache.
 
 ### 16. Exemplo: PHP - Apache
 
+Instalação do PHP junto com o Apache.
 
+```
+┌──(root㉿kali)-[/home/kali]
+┌──(root㉿kali)-[/home/kali]
+└─# docker ps
+CONTAINER ID   IMAGE     COMMAND              CREATED         STATUS         PORTS                               NAMES
+1ea6a8c3850c   httpd     "httpd-foreground"   6 minutes ago   Up 6 minutes   0.0.0.0:80->80/tcp, :::80->80/tcp   apache-A
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# docker pull php:7.4-apache
+7.4-apache: Pulling from library/php
+a603fa5e3b41: Already exists 
+c428f1a49423: Pull complete 
+156740b07ef8: Pull complete 
+fb5a4c8af82f: Pull complete 
+25f85b498fd5: Pull complete 
+9b233e420ac7: Pull complete 
+fe42347c4ecf: Pull complete 
+d14eb2ed1e17: Pull complete 
+66d98f73acb6: Pull complete 
+d2c43c5efbc8: Pull complete 
+ab590b48ea47: Pull complete 
+80692ae2d067: Pull complete 
+05e465aaa99a: Pull complete 
+Digest: sha256:c9d7e608f73832673479770d66aacc8100011ec751d1905ff63fae3fe2e0ca6d
+Status: Downloaded newer image for php:7.4-apache
+docker.io/library/php:7.4-apache
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# mkdir /data/php-A           
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# docker run --name php-A -d -p 8080:80 --volume=/data/php-A:/var/www/html php:7.4-apache       
+6ae8347767cbe444b26322b21e7b6f301c62694386b680701d9e0be58f45c17b
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# docker ps                                                                              
+CONTAINER ID   IMAGE            COMMAND                  CREATED          STATUS          PORTS                                   NAMES
+6ae8347767cb   php:7.4-apache   "docker-php-entrypoi…"   6 seconds ago    Up 4 seconds    0.0.0.0:8080->80/tcp, :::8080->80/tcp   php-A
+1ea6a8c3850c   httpd            "httpd-foreground"       11 minutes ago   Up 11 minutes   0.0.0.0:80->80/tcp, :::80->80/tcp       apache-A
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# nano /data/php-A/index.php
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# nano /data/php-A/index.php
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# 
+
+
+```
 
 
 ### Processamento, Logs e Rede
