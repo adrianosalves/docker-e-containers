@@ -730,6 +730,43 @@ touch: cannot touch 'Novo.txt': Read-only file system
 root@69ce416ee293:/data# 
 ```
 
+Mountando volumes no docker.
+
+```
+docker volume create data-sistema
+
+
+──(root㉿kali)-[/var/…/docker/volumes/data-sistema/_data]
+└─# touch arquivo1.txt                                                        
+                                                                                               
+┌──(root㉿kali)-[/var/…/docker/volumes/data-sistema/_data]
+└─# touch arquivo2.txt
+
+                                                                                               
+┌──(root㉿kali)-[/var/…/docker/volumes/data-sistema/_data]
+└─# docker images                                                                
+REPOSITORY   TAG       IMAGE ID       CREATED         SIZE
+mysql        latest    3842e9cdffd2   8 days ago      538MB
+debian       10        1036dd279580   9 days ago      114MB
+debian       latest    c31f65dd4cc9   9 days ago      124MB
+ubuntu       latest    a8780b506fa4   3 weeks ago     77.8MB
+debian       9         662c05203bab   5 months ago    101MB
+centos       latest    5d0da3dc9764   14 months ago   231MB
+                                                                                              
+                                                                                               
+┌──(root㉿kali)-[/var/…/docker/volumes/data-sistema/_data]
+└─# docker run -dti --name debianA --mount type=volume,src=data-sistema,dst=/data debian 
+817346bc22a042ae7f213c379cb257a126f1e48b4967c5155eadb405faad8b64
+
+
+┌──(root㉿kali)-[/var/…/docker/volumes/data-sistema/_data]
+└─# docker exec -ti debianA bash
+root@817346bc22a0:/# cd /data
+root@817346bc22a0:/data# ls
+arquivo1.txt  arquivo2.txt
+root@817346bc22a0:/data# 
+```
+
 ### Processamento, Logs e Rede
 
 
