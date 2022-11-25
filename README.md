@@ -993,9 +993,6 @@ Identificando o IP do meu servidor Apache.
        valid_lft forever preferred_lft forever
 ```
 
-
-
-
 ### 16. Exemplo: PHP - Apache
 
 Instalação do PHP junto com o Apache.
@@ -1052,8 +1049,9 @@ CONTAINER ID   IMAGE            COMMAND                  CREATED          STATUS
 
 ```
 
-
 ### Processamento, Logs e Rede
+
+**17. 
 
 
 
