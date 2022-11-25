@@ -831,6 +831,105 @@ local     eaf600e1e8ea4ef7b27311055e731c69bbeb632eb2a0d632571d3656a33e4082
 
 ```
 
+### Mount: Conclusão
+
+Podemos remover um container sem a necessidade de usar o "stop".
+
+```
+┌──(root㉿kali)-[/var/…/docker/volumes/data-sistema/_data]
+└─# docker ps              
+CONTAINER ID   IMAGE     COMMAND   CREATED        STATUS        PORTS     NAMES
+69ce416ee293   debian    "bash"    25 hours ago   Up 25 hours             nice_elion
+                                                                                              
+┌──(root㉿kali)-[/var/…/docker/volumes/data-sistema/_data]
+└─# docker rm -f nice_elion
+nice_elion
+                                                                                              
+┌──(root㉿kali)-[/var/…/docker/volumes/data-sistema/_data]
+└─# docker ps              
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+                                                                                              
+┌──(root㉿kali)-[/var/…/docker/volumes/data-sistema/_data]
+└─# 
+```
+
+Podemos remover todos os container que não estão em execução.
+
+```
+──(root㉿kali)-[/var/…/docker/volumes/data-sistema/_data]
+└─# docker ps -a
+CONTAINER ID   IMAGE     COMMAND       CREATED        STATUS                      PORTS     NAMES
+1ba5e7586889   debian    "bash"        25 hours ago   Exited (137) 25 hours ago             beautiful_saha
+b222867a5090   ubuntu    "bash"        5 days ago     Exited (255) 4 days ago               Ubuntu-B
+db46ed6d1fba   centos    "/bin/bash"   5 days ago     Exited (255) 4 days ago               CentOS-A
+6805a80756eb   ubuntu    "bash"        5 days ago     Exited (255) 4 days ago               Ubuntu-A
+                                                                                              
+┌──(root㉿kali)-[/var/…/docker/volumes/data-sistema/_data]
+└─# docker container prune 
+WARNING! This will remove all stopped containers.
+Are you sure you want to continue? [y/N] y
+Deleted Containers:
+1ba5e75868892da9c0491bde16e01f165beb61a9e0e628f998fc21bb1698e667
+b222867a5090b83b356b224e3378c8e624759e1ef988afdf5a59f161e9774d7b
+db46ed6d1fba06a9008a81adb254a80b42e9b8a3ffa0bdd2dd8bff65fb515850
+6805a80756eb0065b8b09553cc890a5e4214192e7b1a4099d28ffbcc3ea726de
+
+Total reclaimed space: 108.7MB
+                                                                                              
+┌──(root㉿kali)-[/var/…/docker/volumes/data-sistema/_data]
+└─# docker ps -a          
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+                                                                                              
+┌──(root㉿kali)-[/var/…/docker/volumes/data-sistema/_data]
+└─# 
+```
+
+Podemos remover todos os volumes que não estão sendo usado por container.
+
+```
+┌──(root㉿kali)-[/var/…/docker/volumes/data-sistema/_data]
+└─# docker volume list  
+DRIVER    VOLUME NAME
+local     2f8c5a3c05acab5a1ebaa3577ecf06ab8bde099d7a69954201d7c7a20998b0bc
+local     03d6a487252d81e6c45a34fb07fc9e73f52a7e82cc0fb20468fea786ad8aa4b7
+local     8c8f206c16a37f166287f99678cd3236196ccb1035f02785288a354e402035b9
+local     9fc08ac8fb813edb5218132d2b1566aae87a6cfb7f312d33899f708705d644bb
+local     0475f5b898adc5c9150b80d6281bd7af8f251618a57aefe15302cd37dd6f76b9
+local     0852db82a6211c587a5bdced065b0dc4ecdd9232553e9e5c60d6908e2a5e3645
+local     5032bebe86cf64111c2e6f451890c2a2a3e9aad051de7022b31f68ae432fa9df
+local     11465415a31905f3470bfaeec62dbd08a6ceb05eefdf0a824e84ec0ec2548ea8
+local     ae303802a373c7a2432ef61a9938cde9aeca7405f0002169eaf6310687e246b3
+local     da67b732e1838da60068c27e67658298bbfc0d8ae256ed52d2be83fb28da2195
+local     eaf600e1e8ea4ef7b27311055e731c69bbeb632eb2a0d632571d3656a33e4082
+                                                                                              
+┌──(root㉿kali)-[/var/…/docker/volumes/data-sistema/_data]
+└─# docker volume prune 
+WARNING! This will remove all local volumes not used by at least one container.
+Are you sure you want to continue? [y/N] y
+Deleted Volumes:
+0475f5b898adc5c9150b80d6281bd7af8f251618a57aefe15302cd37dd6f76b9
+ae303802a373c7a2432ef61a9938cde9aeca7405f0002169eaf6310687e246b3
+5032bebe86cf64111c2e6f451890c2a2a3e9aad051de7022b31f68ae432fa9df
+8c8f206c16a37f166287f99678cd3236196ccb1035f02785288a354e402035b9
+eaf600e1e8ea4ef7b27311055e731c69bbeb632eb2a0d632571d3656a33e4082
+2f8c5a3c05acab5a1ebaa3577ecf06ab8bde099d7a69954201d7c7a20998b0bc
+9fc08ac8fb813edb5218132d2b1566aae87a6cfb7f312d33899f708705d644bb
+03d6a487252d81e6c45a34fb07fc9e73f52a7e82cc0fb20468fea786ad8aa4b7
+11465415a31905f3470bfaeec62dbd08a6ceb05eefdf0a824e84ec0ec2548ea8
+da67b732e1838da60068c27e67658298bbfc0d8ae256ed52d2be83fb28da2195
+0852db82a6211c587a5bdced065b0dc4ecdd9232553e9e5c60d6908e2a5e3645
+
+Total reclaimed space: 587.8MB
+                                                                                              
+┌──(root㉿kali)-[/var/…/docker/volumes/data-sistema/_data]
+└─# docker volume list 
+DRIVER    VOLUME NAME
+                                                                                              
+┌──(root㉿kali)-[/var/…/docker/volumes/data-sistema/_data]
+└─# 
+```
+
+
 
 ### Processamento, Logs e Rede
 
