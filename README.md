@@ -782,6 +782,55 @@ exit
 arquivo1.txt  arquivo2.txt  obakkkkkkvaleu.txt
                                                  
 ```
+Para remover volumes é necessário parar e remover os container associado a esse volume.
+
+```
+┌──(root㉿kali)-[/var/…/docker/volumes/data-sistema/_data]
+└─# docker ps                   
+CONTAINER ID   IMAGE     COMMAND   CREATED        STATUS        PORTS     NAMES
+817346bc22a0   debian    "bash"    22 hours ago   Up 22 hours             debianA
+69ce416ee293   debian    "bash"    24 hours ago   Up 24 hours             nice_elion
+                                                                                              
+┌──(root㉿kali)-[/var/…/docker/volumes/data-sistema/_data]
+┌──(root㉿kali)-[/var/…/docker/volumes/data-sistema/_data]
+└─# docker ps      
+CONTAINER ID   IMAGE     COMMAND   CREATED        STATUS        PORTS     NAMES
+817346bc22a0   debian    "bash"    22 hours ago   Up 22 hours             debianA
+69ce416ee293   debian    "bash"    24 hours ago   Up 24 hours             nice_elion
+                                                                                              
+┌──(root㉿kali)-[/var/…/docker/volumes/data-sistema/_data]
+└─# docker stop debianA
+debianA
+                                                                                              
+┌──(root㉿kali)-[/var/…/docker/volumes/data-sistema/_data]
+└─# docker rm debianA                                                                   
+debianA                                                                                                                                                                                  
+┌──(root㉿kali)-[/var/…/docker/volumes/data-sistema/_data]
+└─# docker ps 
+CONTAINER ID   IMAGE     COMMAND   CREATED        STATUS        PORTS     NAMES
+69ce416ee293   debian    "bash"    24 hours ago   Up 24 hours             nice_elion
+                                                                                              
+┌──(root㉿kali)-[/var/…/docker/volumes/data-sistema/_data]
+└─# docker volume rm data-sistema
+data-sistema
+                                                                                              
+┌──(root㉿kali)-[/var/…/docker/volumes/data-sistema/_data]
+└─# docker volume list           
+DRIVER    VOLUME NAME
+local     2f8c5a3c05acab5a1ebaa3577ecf06ab8bde099d7a69954201d7c7a20998b0bc
+local     03d6a487252d81e6c45a34fb07fc9e73f52a7e82cc0fb20468fea786ad8aa4b7
+local     8c8f206c16a37f166287f99678cd3236196ccb1035f02785288a354e402035b9
+local     9fc08ac8fb813edb5218132d2b1566aae87a6cfb7f312d33899f708705d644bb
+local     0475f5b898adc5c9150b80d6281bd7af8f251618a57aefe15302cd37dd6f76b9
+local     0852db82a6211c587a5bdced065b0dc4ecdd9232553e9e5c60d6908e2a5e3645
+local     5032bebe86cf64111c2e6f451890c2a2a3e9aad051de7022b31f68ae432fa9df
+local     11465415a31905f3470bfaeec62dbd08a6ceb05eefdf0a824e84ec0ec2548ea8
+local     ae303802a373c7a2432ef61a9938cde9aeca7405f0002169eaf6310687e246b3
+local     da67b732e1838da60068c27e67658298bbfc0d8ae256ed52d2be83fb28da2195
+local     eaf600e1e8ea4ef7b27311055e731c69bbeb632eb2a0d632571d3656a33e4082
+
+```
+
 
 ### Processamento, Logs e Rede
 
