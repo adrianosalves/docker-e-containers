@@ -1051,7 +1051,9 @@ CONTAINER ID   IMAGE            COMMAND                  CREATED          STATUS
 
 ### Processamento, Logs e Rede
 
-**17. 
+**17. Limitando emória e CPU**
+
+
 
 
 
