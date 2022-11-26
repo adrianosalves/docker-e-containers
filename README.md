@@ -1240,7 +1240,7 @@ e7ffdcb19cade11990991d60d713e7ff5ec4a74b0bdc02774000f01834c38c5f
                                                                                                           
 ┌──(root㉿kali)-[/home/kali]
 └─# 
-`` 
+```
 
 Analisar processos dentro de um container.
 
