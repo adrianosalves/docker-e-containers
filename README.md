@@ -3471,6 +3471,21 @@ Adriano
 
 ```
 
+### Gerando uma imagem MULTISTAGE
+
+Criar um binario de uma aplicacao com codigo.
+E publicar esse codigo em um container Linux.
+
+Usaremos uma linguagem "go".
+
+A maior dificuldade é manter essa imagem o menor possivel para publicar e replicar ela de forma mais rapida em container.
+
+Criaremos uma imagem com varios estagios com instrucoes "FROM" diferentes para usar bases diferentes e passar entre os estagios.
+
+
+
+
+
 
 
 
