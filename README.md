@@ -2137,7 +2137,26 @@ Successfully built d395bdf57b29
 Successfully tagged ubuntu-python:latest
                                                                                                           
 ┌──(root㉿kali)-[/images/ubuntu-python]
+└─# docker images                          
+REPOSITORY      TAG          IMAGE ID       CREATED          SIZE
+ubuntu-python   latest       d395bdf57b29   53 seconds ago   148MB
+mysql           latest       3842e9cdffd2   10 days ago      538MB
+httpd           latest       8653efc8c72d   10 days ago      145MB
+php             7.4-apache   20a3732f422b   11 days ago      453MB
+debian          10           1036dd279580   11 days ago      114MB
+debian          latest       c31f65dd4cc9   11 days ago      124MB
+ubuntu          latest       a8780b506fa4   3 weeks ago      77.8MB
+debian          9            662c05203bab   5 months ago     101MB
+centos          latest       5d0da3dc9764   14 months ago    231MB
+                                                                                                          
+┌──(root㉿kali)-[/images/ubuntu-python]
+└─# docker run -ti --name meu-app ubuntu-python
+Qual o seu nome? Adriano
+Adriano
+                                                                                                          
+┌──(root㉿kali)-[/images/ubuntu-python]
 └─# 
+
 ```
 
 
