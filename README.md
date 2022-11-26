@@ -4426,9 +4426,9 @@ a153fac509d2   webdevops/php-apache:alpine-php7   "/entrypoint supervi…"   9 m
        valid_lft forever preferred_lft forever
 ```
 
-Acessando o Banco de Dados da Aplicação.
+Acesso o Banco de Dados da Aplicação.
 
-[![Watch the video]()](https://youtu.be/NoQpCAki0X8)
+[![Watch the video](https://th.bing.com/th/id/R.085c190ae645e6391ef5194a5891d116?rik=JuswhmeaX8WEYw&pid=ImgRaw&r=0)](https://www.youtube.com/watch?v=NoQpCAki0X8)
 
 
 
