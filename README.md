@@ -1051,12 +1051,95 @@ CONTAINER ID   IMAGE            COMMAND                  CREATED          STATUS
 
 ### Processamento, Logs e Rede
 
-**17. Limitando emória e CPU**
+**17. Limitando Memória e CPU**
+
+```
+──(root㉿kali)-[/home/kali]
+└─# docker stats php-A
+
+CONTAINER ID   NAME      CPU %     MEM USAGE / LIMIT     MEM %     NET I/O           BLOCK I/O        PIDS
+6ae8347767cb   php-A     0.02%     16.28MiB / 974.9MiB   1.67%     3.02kB / 25.2kB   16.1MB / 4.1kB   9
+
+┌──(root㉿kali)-[/home/kali]
+└─# docker update php-A -m 128M --cpus 0.2
+Error response from daemon: Cannot update container 6ae8347767cbe444b26322b21e7b6f301c62694386b680701d9e0be58f45c17b: Memory limit should be smaller than already set memoryswap limit, update the memoryswap at the same time
+
+┌──(root㉿kali)-[/home/kali]
+└─# docker run --name ubuntu-C -dti -m 128M --cpus 2.0 ubuntu
+
+┌──(root㉿kali)-[/home/kali]
+└─# docker ps
+
+CONTAINER ID   IMAGE            COMMAND                  CREATED         STATUS         PORTS                                   NAMES
+e42fa71d93af   ubuntu           "bash"                   2 minutes ago   Up 2 minutes                                           ubuntu-C
+6ae8347767cb   php:7.4-apache   "docker-php-entrypoi…"   11 hours ago    Up 11 hours    0.0.0.0:8080->80/tcp, :::8080->80/tcp   php-A
+1ea6a8c3850c   httpd            "httpd-foreground"       11 hours ago    Up 11 hours    0.0.0.0:80->80/tcp, :::80->80/tcp       apache-A
+
+┌──(root㉿kali)-[/home/kali]
+└─# docker stats ubuntu-C
+
+CONTAINER ID   NAME       CPU %     MEM USAGE / LIMIT   MEM %     NET I/O     BLOCK I/O     PIDS
+e42fa71d93af   ubuntu-C   0.00%     3.629MiB / 128MiB   2.84%     726B / 0B   5.04MB / 0B   1
+```
+
+Vamos estressar um pouco o sistema operacional.
+
+```
+┌──(root㉿kali)-[/home/kali]
+└─# docker exec -ti ubuntu-C bash 
+root@e42fa71d93af:/# apt update
+Get:1 http://archive.ubuntu.com/ubuntu jammy InRelease [270 kB]
+Get:2 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB]
+Get:3 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [114 kB]
+Get:4 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [522 kB]
+Get:5 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [99.8 kB]
+Get:6 http://archive.ubuntu.com/ubuntu jammy/main amd64 Packages [1792 kB]
+Get:7 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages [4642 B]
+Get:8 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [775 kB]
+Get:9 http://archive.ubuntu.com/ubuntu jammy/universe amd64 Packages [17.5 MB]
+Get:10 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [618 kB]      
+Get:11 http://archive.ubuntu.com/ubuntu jammy/restricted amd64 Packages [164 kB]                          
+Get:12 http://archive.ubuntu.com/ubuntu jammy/multiverse amd64 Packages [266 kB]                          
+Get:13 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [924 kB]                        
+Get:14 http://archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [579 kB]                  
+Get:15 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [956 kB]                    
+Get:16 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages [8056 B]                  
+Get:17 http://archive.ubuntu.com/ubuntu jammy-backports/main amd64 Packages [3175 B]                      
+Get:18 http://archive.ubuntu.com/ubuntu jammy-backports/universe amd64 Packages [7275 B]                  
+Fetched 24.7 MB in 8s (2960 kB/s)                                                                         
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+All packages are up to date.
+root@e42fa71d93af:/# apt install stress -y
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following NEW packages will be installed:
+  stress
+0 upgraded, 1 newly installed, 0 to remove and 0 not upgraded.
+Need to get 18.4 kB of archives.
+After this operation, 52.2 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu jammy/universe amd64 stress amd64 1.0.5-1 [18.4 kB]
+Fetched 18.4 kB in 1s (29.6 kB/s)
+debconf: delaying package configuration, since apt-utils is not installed
+Selecting previously unselected package stress.
+(Reading database ... 4395 files and directories currently installed.)
+Preparing to unpack .../stress_1.0.5-1_amd64.deb ...
+Unpacking stress (1.0.5-1) ...
+Setting up stress (1.0.5-1) ...
 
 
+root@e42fa71d93af:/# stress --cpu 1 --vm-bytes 50m --vm 1 --vm-bytes 50m
+stress: info: [267] dispatching hogs: 1 cpu, 0 io, 1 vm, 0 hdd
 
+┌──(root㉿kali)-[/home/kali]
+└─# docker stats ubuntu-C
 
+CONTAINER ID   NAME       CPU %     MEM USAGE / LIMIT   MEM %     NET I/O       BLOCK I/O       PIDS
+e42fa71d93af   ubuntu-C   867.83%   23.31MiB / 128MiB   18.21%    1.32kB / 0B   5.6MB / 741kB   5
 
+```
 
 
 
