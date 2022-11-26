@@ -1788,6 +1788,192 @@ minha-rede
 └─# 
 ```
 
+### Definição e Criação de um Docker File
+
+**Primeiro Docker File**
+
+Como criar minha propria imagem do container com as minhas aplicações.
+
+```
+┌──(root㉿kali)-[/home/kali]
+└─# docker run -dti --name ubuntu-python ubuntu                  
+56279a4bebfc4a64caa551e3b8b230da6089ba6c31e64b171edf735649ed7a17
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# docker exec -ti ubuntu-python bash        
+root@56279a4bebfc:/# apt update 
+Get:1 http://archive.ubuntu.com/ubuntu jammy InRelease [270 kB]
+Get:2 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB]
+Get:3 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [522 kB]
+Get:4 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [114 kB]
+Get:5 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [99.8 kB]
+Get:6 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [775 kB]
+Get:7 http://archive.ubuntu.com/ubuntu jammy/multiverse amd64 Packages [266 kB]
+Get:8 http://archive.ubuntu.com/ubuntu jammy/main amd64 Packages [1792 kB]
+Get:9 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [618 kB]  
+Get:10 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages [4642 B]
+Get:11 http://archive.ubuntu.com/ubuntu jammy/restricted amd64 Packages [164 kB]      
+Get:12 http://archive.ubuntu.com/ubuntu jammy/universe amd64 Packages [17.5 MB]
+Get:13 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [924 kB]                       
+Get:14 http://archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [579 kB]                 
+Get:15 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [956 kB]                   
+Get:16 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages [8056 B]                 
+Get:17 http://archive.ubuntu.com/ubuntu jammy-backports/main amd64 Packages [3175 B]                     
+Get:18 http://archive.ubuntu.com/ubuntu jammy-backports/universe amd64 Packages [7275 B]                 
+Fetched 24.7 MB in 8s (3015 kB/s)                                                                        
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+All packages are up to date.
+root@56279a4bebfc:/# apt install -y python3 nano
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  libexpat1 libmpdec3 libpython3-stdlib libpython3.10-minimal libpython3.10-stdlib libreadline8
+  libsqlite3-0 media-types python3-minimal python3.10 python3.10-minimal readline-common
+Suggested packages:
+  hunspell python3-doc python3-tk python3-venv python3.10-venv python3.10-doc binutils binfmt-support
+  readline-doc
+The following NEW packages will be installed:
+  libexpat1 libmpdec3 libpython3-stdlib libpython3.10-minimal libpython3.10-stdlib libreadline8
+  libsqlite3-0 media-types nano python3 python3-minimal python3.10 python3.10-minimal readline-common
+0 upgraded, 14 newly installed, 0 to remove and 0 not upgraded.
+Need to get 6785 kB of archives.
+After this operation, 24.3 MB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libpython3.10-minimal amd64 3.10.6-1~22.04.1 [810 kB]
+Get:2 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libexpat1 amd64 2.4.7-1ubuntu0.2 [91.0 kB]
+Get:3 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3.10-minimal amd64 3.10.6-1~22.04.1 [2263 kB]
+Get:4 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3-minimal amd64 3.10.6-1~22.04 [24.3 kB]
+Get:5 http://archive.ubuntu.com/ubuntu jammy/main amd64 media-types all 7.0.0 [25.5 kB]
+Get:6 http://archive.ubuntu.com/ubuntu jammy/main amd64 libmpdec3 amd64 2.5.1-2build2 [86.8 kB]
+Get:7 http://archive.ubuntu.com/ubuntu jammy/main amd64 readline-common all 8.1.2-1 [53.5 kB]
+Get:8 http://archive.ubuntu.com/ubuntu jammy/main amd64 libreadline8 amd64 8.1.2-1 [153 kB]
+Get:9 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libsqlite3-0 amd64 3.37.2-2ubuntu0.1 [641 kB]
+Get:10 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libpython3.10-stdlib amd64 3.10.6-1~22.04.1 [1831 kB]
+Get:11 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3.10 amd64 3.10.6-1~22.04.1 [497 kB]
+Get:12 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libpython3-stdlib amd64 3.10.6-1~22.04 [6910 B]
+Get:13 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3 amd64 3.10.6-1~22.04 [22.8 kB]
+Get:14 http://archive.ubuntu.com/ubuntu jammy/main amd64 nano amd64 6.2-1 [280 kB]
+Fetched 6785 kB in 5s (1347 kB/s)
+debconf: delaying package configuration, since apt-utils is not installed
+Selecting previously unselected package libpython3.10-minimal:amd64.
+(Reading database ... 4395 files and directories currently installed.)
+Preparing to unpack .../libpython3.10-minimal_3.10.6-1~22.04.1_amd64.deb ...
+Unpacking libpython3.10-minimal:amd64 (3.10.6-1~22.04.1) ...
+Selecting previously unselected package libexpat1:amd64.
+Preparing to unpack .../libexpat1_2.4.7-1ubuntu0.2_amd64.deb ...
+Unpacking libexpat1:amd64 (2.4.7-1ubuntu0.2) ...
+Selecting previously unselected package python3.10-minimal.
+Preparing to unpack .../python3.10-minimal_3.10.6-1~22.04.1_amd64.deb ...
+Unpacking python3.10-minimal (3.10.6-1~22.04.1) ...
+Setting up libpython3.10-minimal:amd64 (3.10.6-1~22.04.1) ...
+Setting up libexpat1:amd64 (2.4.7-1ubuntu0.2) ...
+Setting up python3.10-minimal (3.10.6-1~22.04.1) ...
+Selecting previously unselected package python3-minimal.
+(Reading database ... 4697 files and directories currently installed.)
+Preparing to unpack .../0-python3-minimal_3.10.6-1~22.04_amd64.deb ...
+Unpacking python3-minimal (3.10.6-1~22.04) ...
+Selecting previously unselected package media-types.
+Preparing to unpack .../1-media-types_7.0.0_all.deb ...
+Unpacking media-types (7.0.0) ...
+Selecting previously unselected package libmpdec3:amd64.
+Preparing to unpack .../2-libmpdec3_2.5.1-2build2_amd64.deb ...
+Unpacking libmpdec3:amd64 (2.5.1-2build2) ...
+Selecting previously unselected package readline-common.
+Preparing to unpack .../3-readline-common_8.1.2-1_all.deb ...
+Unpacking readline-common (8.1.2-1) ...
+Selecting previously unselected package libreadline8:amd64.
+Preparing to unpack .../4-libreadline8_8.1.2-1_amd64.deb ...
+Unpacking libreadline8:amd64 (8.1.2-1) ...
+Selecting previously unselected package libsqlite3-0:amd64.
+Preparing to unpack .../5-libsqlite3-0_3.37.2-2ubuntu0.1_amd64.deb ...
+Unpacking libsqlite3-0:amd64 (3.37.2-2ubuntu0.1) ...
+Selecting previously unselected package libpython3.10-stdlib:amd64.
+Preparing to unpack .../6-libpython3.10-stdlib_3.10.6-1~22.04.1_amd64.deb ...
+Unpacking libpython3.10-stdlib:amd64 (3.10.6-1~22.04.1) ...
+Selecting previously unselected package python3.10.
+Preparing to unpack .../7-python3.10_3.10.6-1~22.04.1_amd64.deb ...
+Unpacking python3.10 (3.10.6-1~22.04.1) ...
+Selecting previously unselected package libpython3-stdlib:amd64.
+Preparing to unpack .../8-libpython3-stdlib_3.10.6-1~22.04_amd64.deb ...
+Unpacking libpython3-stdlib:amd64 (3.10.6-1~22.04) ...
+Setting up python3-minimal (3.10.6-1~22.04) ...
+Selecting previously unselected package python3.
+(Reading database ... 5126 files and directories currently installed.)
+Preparing to unpack .../python3_3.10.6-1~22.04_amd64.deb ...
+Unpacking python3 (3.10.6-1~22.04) ...
+Selecting previously unselected package nano.
+Preparing to unpack .../archives/nano_6.2-1_amd64.deb ...
+Unpacking nano (6.2-1) ...
+Setting up media-types (7.0.0) ...
+Setting up libsqlite3-0:amd64 (3.37.2-2ubuntu0.1) ...
+Setting up nano (6.2-1) ...
+update-alternatives: using /bin/nano to provide /usr/bin/editor (editor) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/man1/editor.1.gz because associated file /usr/share/man/man1/nano.1.gz (of link group editor) doesn't exist
+update-alternatives: using /bin/nano to provide /usr/bin/pico (pico) in auto mode
+update-alternatives: warning: skip creation of /usr/share/man/man1/pico.1.gz because associated file /usr/share/man/man1/nano.1.gz (of link group pico) doesn't exist
+Setting up libmpdec3:amd64 (2.5.1-2build2) ...
+Setting up readline-common (8.1.2-1) ...
+Setting up libreadline8:amd64 (8.1.2-1) ...
+Setting up libpython3.10-stdlib:amd64 (3.10.6-1~22.04.1) ...
+Setting up libpython3-stdlib:amd64 (3.10.6-1~22.04) ...
+Setting up python3.10 (3.10.6-1~22.04.1) ...
+Setting up python3 (3.10.6-1~22.04) ...
+running python rtupdate hooks for python3.10...
+running python post-rtupdate hooks for python3.10...
+Processing triggers for libc-bin (2.35-0ubuntu3.1) ...
+root@56279a4bebfc:/# 
+```
+
+Sempre apos a instalação é importante fazer uma limpeza dos arquivos das instalação que foram baixado que não são necessário dentro do container.
+
+```
+root@56279a4bebfc:/# apt clean
+root@56279a4bebfc:/# 
+```
+
+Criando nossa aplicação de simulacao dentro do container.
+
+```
+root@56279a4bebfc:/# cd /opt
+root@56279a4bebfc:/opt# nano app.py
+root@56279a4bebfc:/opt# cat app.py
+nome = input("Qual o seu nome? ")
+print(nome)
+root@56279a4bebfc:/opt# python3 app.y 
+Qual o seu nome? Adriano
+Adriano
+root@56279a4bebfc:/opt# exit
+exit
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# docker ps                         
+CONTAINER ID   IMAGE     COMMAND                  CREATED             STATUS             PORTS                                                  NAMES
+56279a4bebfc   ubuntu    "bash"                   10 minutes ago      Up 10 minutes                                                             ubuntu-python
+──(root㉿kali)-[/home/kali]
+└─# docker exec -ti ubuntu-python python3 /opt/app.py
+Qual o seu nome? Adriano
+Adriano
+                                                                                                          
+──(root㉿kali)-[/home/kali]
+└─# docker stop ubuntu-python                        
+ubuntu-python
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# docker rm ubuntu-python                    
+ubuntu-python
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# 
+```
+
+Criando nossa imagem do container.
+
+```
+
+
+
 
 
 
