@@ -1272,6 +1272,291 @@ e7ffdcb19cad   mysql     "docker-entrypoint.s…"   5 minutes ago    Up 5 minute
 e42fa71d93af   ubuntu    "bash"                   42 minutes ago   Up 19 minutes                                                          ubuntu-C
 ```                                         
 
+### Redes
+
+No servidor docker para saber o ip do seu servidor.
+
+```
+┌──(root㉿kali)-[/home/kali]
+└─# ip a              
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:db:96:6a brd ff:ff:ff:ff:ff:ff
+    inet 192.168.1.107/24 brd 192.168.1.255 scope global dynamic noprefixroute eth0
+       valid_lft 5276sec preferred_lft 5276sec
+    inet6 fe80::a00:27ff:fedb:966a/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+3: docker0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default 
+    link/ether 02:42:ea:66:da:09 brd ff:ff:ff:ff:ff:ff
+    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+       valid_lft forever preferred_lft forever
+    inet6 fe80::42:eaff:fe66:da09/64 scope link 
+       valid_lft forever preferred_lft forever
+```
+
+Para visualizar as redes disponiveis.
+
+Observe o "host" representa a rede padrão. E temos a rede "bridge" todo contanier criado e adiconado a essa rede e que permite ao comunicação com o seu host.
+
+É por isso que sempre quando voce tem ao ip do seu host consegue ter acesso aos containers.
+
+```
+──(root㉿kali)-[/home/kali]
+└─# docker network list
+NETWORK ID     NAME      DRIVER    SCOPE
+5f766f536f97   bridge    bridge    local
+713f1bde8a82   host      host      local
+45c169e9684f   none      null      local
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# 
+```
+
+Exemplo.
+abaixo temos acesso as informações da rede "bridge" e conseguimos visualizar alguns container que pertence a essa rede.
+Quando criamos os container se não especificar em qual rede ele será anexado por padrão ele será adicionado a rede "bridge".
+
+```
+──(root㉿kali)-[/home/kali]
+└─# docker network inspect bridge
+[
+    {
+        "Name": "bridge",
+        "Id": "5f766f536f97a4ce84567c446d12469d1e362824a8519c3b11913bfaa6720815",
+        "Created": "2022-11-26T06:01:07.845369928-05:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": null,
+            "Config": [
+                {
+                    "Subnet": "172.17.0.0/16",
+                    "Gateway": "172.17.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "e42fa71d93af5f4f39e0a45e3fda71b15a6b2a06873509b3ef40362b659d95f0": {
+                "Name": "ubuntu-C",
+                "EndpointID": "0727e1e07e5a9d0edbe70c8b4982117a021c8d234f1d82f66b957f2d2eb1e837",
+                "MacAddress": "02:42:ac:11:00:02",
+                "IPv4Address": "172.17.0.2/16",
+                "IPv6Address": ""
+            },
+            "e7ffdcb19cade11990991d60d713e7ff5ec4a74b0bdc02774000f01834c38c5f": {
+                "Name": "mysql-A",
+                "EndpointID": "857190dcb372e0607c8005a03151ea44319a208d2cbfeafb94ab0ab9fb34bef1",
+                "MacAddress": "02:42:ac:11:00:03",
+                "IPv4Address": "172.17.0.3/16",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {
+            "com.docker.network.bridge.default_bridge": "true",
+            "com.docker.network.bridge.enable_icc": "true",
+            "com.docker.network.bridge.enable_ip_masquerade": "true",
+            "com.docker.network.bridge.host_binding_ipv4": "0.0.0.0",
+            "com.docker.network.bridge.name": "docker0",
+            "com.docker.network.driver.mtu": "1500"
+        },
+        "Labels": {}
+    }
+]
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# 
+```
+
+Vamos fazer um teste de conectividade entre os containers.
+E vamos entrar no "ubuntu-C" e fazer um teste de ping no "mysql-A" .
+
+```
+──(root㉿kali)-[/home/kali]
+└─# docker exec -ti ubuntu-C bash
+root@e42fa71d93af:/# ping www.google.com.br
+bash: ping: command not found
+root@e42fa71d93af:/# apt-get install -y iputils-ping
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  libcap2-bin libpam-cap
+The following NEW packages will be installed:
+  iputils-ping libcap2-bin libpam-cap
+0 upgraded, 3 newly installed, 0 to remove and 0 not upgraded.
+Need to get 76.8 kB of archives.
+After this operation, 280 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu jammy/main amd64 libcap2-bin amd64 1:2.44-1build3 [26.0 kB]
+Get:2 http://archive.ubuntu.com/ubuntu jammy/main amd64 iputils-ping amd64 3:20211215-1 [42.9 kB]
+Get:3 http://archive.ubuntu.com/ubuntu jammy/main amd64 libpam-cap amd64 1:2.44-1build3 [7932 B]
+Fetched 76.8 kB in 1s (65.3 kB/s) 
+debconf: delaying package configuration, since apt-utils is not installed
+Selecting previously unselected package libcap2-bin.
+(Reading database ... 4404 files and directories currently installed.)
+Preparing to unpack .../libcap2-bin_1%3a2.44-1build3_amd64.deb ...
+Unpacking libcap2-bin (1:2.44-1build3) ...
+Selecting previously unselected package iputils-ping.
+Preparing to unpack .../iputils-ping_3%3a20211215-1_amd64.deb ...
+Unpacking iputils-ping (3:20211215-1) ...
+Selecting previously unselected package libpam-cap:amd64.
+Preparing to unpack .../libpam-cap_1%3a2.44-1build3_amd64.deb ...
+Unpacking libpam-cap:amd64 (1:2.44-1build3) ...
+Setting up libcap2-bin (1:2.44-1build3) ...
+Setting up libpam-cap:amd64 (1:2.44-1build3) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (No usable dialog-like program is installed, so the dialog based frontend cannot be used. at /usr/share/perl5/Debconf/FrontEnd/Dialog.pm line 78.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC contains: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.34.0 /usr/local/share/perl/5.34.0 /usr/lib/x86_64-linux-gnu/perl5/5.34 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.34 /usr/share/perl/5.34 /usr/local/lib/site_perl) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 7.)
+debconf: falling back to frontend: Teletype
+Setting up iputils-ping (3:20211215-1) ...
+oot@e42fa71d93af:/# ping 172.17.0.3 -c 3
+PING 172.17.0.3 (172.17.0.3) 56(84) bytes of data.
+64 bytes from 172.17.0.3: icmp_seq=1 ttl=64 time=0.061 ms
+64 bytes from 172.17.0.3: icmp_seq=2 ttl=64 time=0.090 ms
+64 bytes from 172.17.0.3: icmp_seq=3 ttl=64 time=0.074 ms
+
+--- 172.17.0.3 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2132ms
+rtt min/avg/max/mdev = 0.061/0.075/0.090/0.011 ms
+root@e42fa71d93af:/# 
+```
+
+Caso seja necessário isolar esses container em uma rede especifica.
+
+O comando abaixo criar uma rede e já especifica um sub-rede para esse rede.
+
+```
+┌──(root㉿kali)-[/home/kali]
+└─# docker network create minha-rede
+6f97c15967793dcd4a1023fcbae11484feece6671409d4068a6dce42d9ce1069
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# docker network inspect minha-rede                                              
+[
+    {
+        "Name": "minha-rede",
+        "Id": "6f97c15967793dcd4a1023fcbae11484feece6671409d4068a6dce42d9ce1069",
+        "Created": "2022-11-26T06:48:14.635163039-05:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "172.18.0.0/16",
+                    "Gateway": "172.18.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {},
+        "Options": {},
+        "Labels": {}
+    }
+]
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# 
+```
+
+vamos criar um novo container e associa a rede "minha-rede" .
+
+```
+┌──(root㉿kali)-[/home/kali]
+└─# docker ps                        
+CONTAINER ID   IMAGE     COMMAND                  CREATED             STATUS          PORTS                                                  NAMES
+e7ffdcb19cad   mysql     "docker-entrypoint.s…"   28 minutes ago      Up 28 minutes   0.0.0.0:3306->3306/tcp, :::3306->3306/tcp, 33060/tcp   mysql-A
+e42fa71d93af   ubuntu    "bash"                   About an hour ago   Up 10 minutes                                                          ubuntu-C
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# docker run -dti --name ubuntu-A --network minha-rede ubuntu                    
+c962f206cdca26d0675537514096fff05703996c65383c374ae11b21d24b0fc2
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# docker ps                                                  
+CONTAINER ID   IMAGE     COMMAND                  CREATED             STATUS          PORTS                                                  NAMES
+c962f206cdca   ubuntu    "bash"                   10 seconds ago      Up 8 seconds                                                           ubuntu-A
+e7ffdcb19cad   mysql     "docker-entrypoint.s…"   29 minutes ago      Up 29 minutes   0.0.0.0:3306->3306/tcp, :::3306->3306/tcp, 33060/tcp   mysql-A
+e42fa71d93af   ubuntu    "bash"                   About an hour ago   Up 11 minutes                                                          ubuntu-C
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# 
+```
+
+Ao consultar a nossa rede "minha-rede" observer que o container criado ja foi associado a rede com o * "IPv4Address": "172.18.0.2/16"*
+
+```
+┌──(root㉿kali)-[/home/kali]
+└─# docker network inspect minha-rede                          
+[
+    {
+        "Name": "minha-rede",
+        "Id": "6f97c15967793dcd4a1023fcbae11484feece6671409d4068a6dce42d9ce1069",
+        "Created": "2022-11-26T06:48:14.635163039-05:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "172.18.0.0/16",
+                    "Gateway": "172.18.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "c962f206cdca26d0675537514096fff05703996c65383c374ae11b21d24b0fc2": {
+                "Name": "ubuntu-A",
+                "EndpointID": "89b58f3e7c496f1f392f14e7bf5a6f25d791f6883e9548ffea2a3f4a975df8d5",
+                "MacAddress": "02:42:ac:12:00:02",
+                "IPv4Address": "172.18.0.2/16",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {},
+        "Labels": {}
+    }
+]
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# 
+```
+
+
+
+
 
 
 
