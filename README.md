@@ -3650,9 +3650,264 @@ Oi, Adriano! Eu sou a linguagem Go!
 └─# 
 ```
 
+### Realizando o upload de imagens para o Hub do Docker
+
+Vamos publicar nossa imagem na internet para que todos possam utilizar.
+
+```
+──(root㉿kali)-[/images/go]
+└─# docker rmi -f                            
+                                                                                                          
+┌──(root㉿kali)-[/images/go]
+└─# docker rmi -f 0e6591496f59               
+Untagged: app-go:1.0
+Deleted: sha256:0e6591496f59a35bcdcd00f78b7403f360b8838df500e15649e4762045e06fb4
+Deleted: sha256:fe8778faa4a0179d893193a9d912bd14d3dbe790453f596c8a42425ad0c40d51
+Deleted: sha256:fd69fcba1e4bc74278e40b8e8f65405e9dd714adfea3f7aa183b89b427943107
+Deleted: sha256:8b21677c2168f261fdec40a4f78582f398fccb4f8a558b372cf712058cf105e9
+                                                                                                                                
+
+──(root㉿kali)-[/images/go]
+└─# docker login              
+Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
+Username: "sua-conta-usuario"
+Password: 
+WARNING! Your password will be stored unencrypted in /root/.docker/config.json.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/engine/reference/commandline/login/#credentials-store
+
+Login Succeeded
+                                                                                                          
+┌──(root㉿kali)-[/images/go]
+└─# docker build . -t "sua-conta-usuario"/my-go-app:2022
+Sending build context to Docker daemon  3.072kB
+Step 1/10 : FROM golang as exec
+ ---> 8ee516e10ce0
+Step 2/10 : COPY app.go /go/src/app/
+ ---> Using cache
+ ---> fe2fa2e462f7
+Step 3/10 : ENV GO111MODULE=auto
+ ---> Using cache
+ ---> af0bcd993e21
+Step 4/10 : WORKDIR /go/src/app
+ ---> Using cache
+ ---> 04bfc886db74
+Step 5/10 : RUN go build -o app.go .
+ ---> Using cache
+ ---> 444e1f1ee246
+Step 6/10 : FROM alpine
+ ---> 49176f190c7e
+Step 7/10 : WORKDIR /appexec
+ ---> Running in 5294666b3855
+Removing intermediate container 5294666b3855
+ ---> 40f57ca9345f
+Step 8/10 : COPY --from=exec /go/src/app/ /appexec
+ ---> 08209abfdca8
+Step 9/10 : RUN chmod -R 755 /appexec
+ ---> Running in c7a82f68de04
+Removing intermediate container c7a82f68de04
+ ---> f3415e62b02b
+Step 10/10 : ENTRYPOINT ./app.go
+ ---> Running in 9b9b3a6bfb59
+Removing intermediate container 9b9b3a6bfb59
+ ---> 5ade241aceab
+Successfully built 5ade241aceab
+Successfully tagged "sua-conta-usuario"/my-go-app:2022
+                                                                                                          
+┌──(root㉿kali)-[/images/go]
+└─# docker images                            
+REPOSITORY           TAG          IMAGE ID       CREATED             SIZE
+"sua-conta-usuario"/my-go-app   2022         5ade241aceab   7 seconds ago       11MB
+<none>               <none>       444e1f1ee246   11 minutes ago      994MB
+<none>               <none>       26c215be04f6   11 minutes ago      992MB
+app-python           1.0          377b72ffbce6   About an hour ago   932MB
+debian-apache        1.0          6005e6fee061   2 hours ago         276MB
+ubuntu-python        latest       ae7845f0f8d0   3 hours ago         148MB
+<none>               <none>       d395bdf57b29   3 hours ago         148MB
+alpine               latest       49176f190c7e   3 days ago          7.05MB
+mysql                latest       3842e9cdffd2   10 days ago         538MB
+python               latest       ee4e7a0f1c35   10 days ago         932MB
+golang               latest       8ee516e10ce0   10 days ago         992MB
+httpd                latest       8653efc8c72d   11 days ago         145MB
+php                  7.4-apache   20a3732f422b   11 days ago         453MB
+debian               10           1036dd279580   11 days ago         114MB
+debian               latest       c31f65dd4cc9   11 days ago         124MB
+ubuntu               latest       a8780b506fa4   3 weeks ago         77.8MB
+debian               9            662c05203bab   5 months ago        101MB
+centos               latest       5d0da3dc9764   14 months ago       231MB
+                                                                                                          
+──(root㉿kali)-[/images/go]
+└─# docker push alvesnet/my-go-app:2022
+The push refers to repository [docker.io/alvesnet/my-go-app]
+c77963e7592c: Pushed 
+c5c5c75ee643: Pushed 
+ded7a220bb05: Mounted from library/alpine 
+2022: digest: sha256:61fb086e97fd2b2c5e9de78585443cef13e76481f999b77f08054964bcc3e83b size: 1157
+                                                                                                          
+┌──(root㉿kali)-[/images/go]
+└─# 
+ 
+```
+
+### Registry Criando um servidor de imagens
+
+Criar um servidor de images.
+
+### Docker compose
+
+**Introdução e instalação do Docker Compose
+
+```
+┌──(root㉿kali)-[/compose/primeiro]
+└─# docker-compose version                              
+Command 'docker-compose' not found, but can be installed with:
+apt install docker-compose
+Do you want to install it? (N/y)y
+apt install docker-compose
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  python3-docker python3-dockerpty
+The following NEW packages will be installed:
+  docker-compose python3-docker python3-dockerpty
+0 upgraded, 3 newly installed, 0 to remove and 1517 not upgraded.
+Need to get 225 kB of archives.
+After this operation, 1,141 kB of additional disk space will be used.
+Do you want to continue? [Y/n] y
+Get:1 http://kali.download/kali kali-rolling/main amd64 python3-docker all 5.0.3-1 [90.2 kB]
+Get:2 http://kali.download/kali kali-rolling/main amd64 python3-dockerpty all 0.4.1-4 [11.4 kB]
+Get:3 http://kali.download/kali kali-rolling/main amd64 docker-compose all 1.29.2-2 [124 kB]
+Fetched 225 kB in 6s (38.0 kB/s)        
+Selecting previously unselected package python3-docker.
+(Reading database ... 320488 files and directories currently installed.)
+Preparing to unpack .../python3-docker_5.0.3-1_all.deb ...
+Unpacking python3-docker (5.0.3-1) ...
+Selecting previously unselected package python3-dockerpty.
+Preparing to unpack .../python3-dockerpty_0.4.1-4_all.deb ...
+Unpacking python3-dockerpty (0.4.1-4) ...
+Selecting previously unselected package docker-compose.
+Preparing to unpack .../docker-compose_1.29.2-2_all.deb ...
+Unpacking docker-compose (1.29.2-2) ...
+Setting up python3-docker (5.0.3-1) ...
+Setting up python3-dockerpty (0.4.1-4) ...
+Setting up docker-compose (1.29.2-2) ...
+Processing triggers for kali-menu (2022.2.0) ...
+Processing triggers for man-db (2.10.2-1) ...
+Scanning processes...                                                                                     
+Scanning processor microcode...                                                                           
+Scanning linux images...                                                                                  
+
+Running kernel seems to be up-to-date.
+
+The processor microcode seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+                                                                                                          
+┌──(root㉿kali)-[/compose/primeiro]
+└─# docker-compose version
+docker-compose version 1.29.2, build unknown
+docker-py version: 5.0.3
+CPython version: 3.10.8
+OpenSSL version: OpenSSL 3.0.5 5 Jul 2022
+
+```
+
+
+
+**Docker compose exemplo prático**
+
+Instalar com o docker compose o servico do Mysql e o Adminer.
+
+```
+┌──(root㉿kali)-[/compose/primeiro]
+└─# nano docker-compose.yml
+                                                                                                          
+┌──(root㉿kali)-[/compose/primeiro]
+└─# cat docker-compose.yml 
+version: "3.8"
+
+services:
+  mysqlsrv:
+    image:mysql:5.7:  
+    enviroment:
+      image:mysql:5.7
+      MYSQL_ROOT_PASSWORD:"Senha123"
+      MYSQL_DATABASE:"testedb"
+    ports:
+      - "3306:3306"
+    volumes:
+      - /data/mysql-C:/var/lib/mysql
+    networks:
+      - minha-rede
+
+  adminer:
+    image:adminer
+    ports:
+    - 8080:8080
+    networks:
+    - minha-rede
+
+networks:
+  minha-rede:
+    driver: brigde
+                                                                                                          
+──(root㉿kali)-[/compose/primeiro]
+└─# docker-compose up -d   
+Creating network "primeiro_minha-rede" with driver "bridge"
+Pulling mysqlsrv (mysql:5.7)...
+5.7: Pulling from library/mysql
+9a0b9cd2dfe6: Pull complete
+c637408ee7df: Pull complete
+4c517093c276: Pull complete
+301cc7d68c2a: Pull complete
+17ca9bf9231a: Pull complete
+9ae101e5c786: Pull complete
+04baa409344e: Pull complete
+f0b6015bf853: Pull complete
+6005bb052ef8: Pull complete
+99f303d57050: Pull complete
+307a9a80c1df: Pull complete
+Digest: sha256:0e3435e72c493aec752d8274379b1eac4d634f47a7781a7a92b8636fa1dc94c1
+Status: Downloaded newer image for mysql:5.7
+Pulling adminer (adminer:)...
+latest: Pulling from library/adminer
+ca7dd9ec2225: Pull complete
+1b78b4fe0ca1: Pull complete
+9d6040f2a28f: Pull complete
+0e2e66b89284: Pull complete
+3b1be5f02bec: Pull complete
+96243f515dda: Pull complete
+4006f78ca99d: Pull complete
+3c76b37a5dd7: Pull complete
+6491a80416fc: Pull complete
+ff1b30214647: Pull complete
+e447fcad8764: Pull complete
+3814f2022577: Pull complete
+e2bcaf3bd070: Pull complete
+be31139c5821: Pull complete
+d183076dd611: Pull complete
+Digest: sha256:3b4e25b39404729b27bbb2895fa0a8fefe8ec19cdad1fe85c85500f4c080c7f4
+Status: Downloaded newer image for adminer:latest
+Creating primeiro_mysqlsrv_1 ... done
+Creating primeiro_adminer_1  ... done
+                                                                                                          
+┌──(root㉿kali)-[/compose/primeiro]
+└─# 
+
 
 
 ```
+
+docker-compose down ou up
+
+
 
 
 
