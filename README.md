@@ -3482,6 +3482,78 @@ A maior dificuldade é manter essa imagem o menor possivel para publicar e repli
 
 Criaremos uma imagem com varios estagios com instrucoes "FROM" diferentes para usar bases diferentes e passar entre os estagios.
 
+Vamos baixar o a imagem do "go" oficial.
+https://hub.docker.com/_/golang
+
+
+Vamos baixar uma versão especifica do Linux com no minima com até 5mb
+https://hub.docker.com/_/alpine
+
+
+
+```
+dir go        
+                                                                                                          
+┌──(root㉿kali)-[/images]
+└─# cd go 
+                                                                                                          
+┌──(root㉿kali)-[/images/go]
+└─# ls
+                                                                                                          
+┌──(root㉿kali)-[/images/go]
+└─# docker pull golang                          
+Using default tag: latest
+latest: Pulling from library/golang
+a8ca11554fce: Already exists 
+e4e46864aba2: Already exists 
+c85a0be79bfb: Already exists 
+195ea6a58ca8: Already exists 
+52908dc1c386: Pull complete 
+a2b47720d601: Pull complete 
+14a70245b07c: Pull complete 
+Digest: sha256:dc76ef03e54c34a00dcdca81e55c242d24b34d231637776c4bb5c1a8e8514253
+Status: Downloaded newer image for golang:latest
+docker.io/library/golang:latest
+
+┌──(root㉿kali)-[/images/go]
+└─# docker pull alpine
+Using default tag: latest
+latest: Pulling from library/alpine
+c158987b0551: Pull complete 
+Digest: sha256:8914eb54f968791faf6a8638949e480fef81e697984fba772b3976835194c6d4
+Status: Downloaded newer image for alpine:latest
+docker.io/library/alpine:latest
+                                                                                                          
+──(root㉿kali)-[/images/go]
+└─# docker images     
+REPOSITORY      TAG          IMAGE ID       CREATED          SIZE
+app-python      1.0          377b72ffbce6   15 minutes ago   932MB
+debian-apache   1.0          6005e6fee061   2 hours ago      276MB
+ubuntu-python   latest       ae7845f0f8d0   2 hours ago      148MB
+<none>          <none>       d395bdf57b29   2 hours ago      148MB
+alpine          latest       49176f190c7e   3 days ago       7.05MB
+mysql           latest       3842e9cdffd2   10 days ago      538MB
+python          latest       ee4e7a0f1c35   10 days ago      932MB
+golang          latest       8ee516e10ce0   10 days ago      992MB
+httpd           latest       8653efc8c72d   11 days ago      145MB
+php             7.4-apache   20a3732f422b   11 days ago      453MB
+debian          10           1036dd279580   11 days ago      114MB
+debian          latest       c31f65dd4cc9   11 days ago      124MB
+ubuntu          latest       a8780b506fa4   3 weeks ago      77.8MB
+debian          9            662c05203bab   5 months ago     101MB
+centos          latest       5d0da3dc9764   14 months ago    231MB
+                                                                                                          
+┌──(root㉿kali)-[/images/go]
+└─# 
+
+
+```
+
+
+
+```
+
+
 
 
 
