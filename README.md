@@ -1065,7 +1065,7 @@ CONTAINER ID   NAME      CPU %     MEM USAGE / LIMIT     MEM %     NET I/O      
 Error response from daemon: Cannot update container 6ae8347767cbe444b26322b21e7b6f301c62694386b680701d9e0be58f45c17b: Memory limit should be smaller than already set memoryswap limit, update the memoryswap at the same time
 
 ┌──(root㉿kali)-[/home/kali]
-└─# docker run --name ubuntu-C -dti -m 128M --cpus 2.0 ubuntu
+└─# docker run --name ubuntu-C -dti -m 128M --cpus 0.2 ubuntu
 
 ┌──(root㉿kali)-[/home/kali]
 └─# docker ps
@@ -1136,8 +1136,9 @@ stress: info: [267] dispatching hogs: 1 cpu, 0 io, 1 vm, 0 hdd
 ┌──(root㉿kali)-[/home/kali]
 └─# docker stats ubuntu-C
 
-CONTAINER ID   NAME       CPU %     MEM USAGE / LIMIT   MEM %     NET I/O       BLOCK I/O       PIDS
-e42fa71d93af   ubuntu-C   867.83%   23.31MiB / 128MiB   18.21%    1.32kB / 0B   5.6MB / 741kB   5
+CONTAINER ID   NAME       CPU %     MEM USAGE / LIMIT   MEM %     NET I/O       BLOCK I/O        PIDS
+e42fa71d93af   ubuntu-C   28.54%    49.91MiB / 128MiB   38.99%    1.02kB / 0B   299kB / 1.25MB   5
+
 
 ```
 
