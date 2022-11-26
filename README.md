@@ -4430,6 +4430,109 @@ Acesso o Banco de Dados da Aplicação.
 
 [![Watch the video](https://th.bing.com/th/id/R.085c190ae645e6391ef5194a5891d116?rik=JuswhmeaX8WEYw&pid=ImgRaw&r=0)](https://www.youtube.com/watch?v=NoQpCAki0X8)
 
+**Utilizando exemplos do Github do Docker**
+
+Usaremos outro exemplo.
+
+Nextcloud: mazenamento de Arquivos na Nuvem
+Redis: Banco de Dados utilizado em memoria para agilizar o processo antes de gravar no banco de dados.
+Mariadb: È uma versão opensource do Mysql os comando são mesmo a instalacao similar.
+
+```
+──(root㉿kali)-[/home/kali]
+└─# cd /compose 
+                                                                                                          
+┌──(root㉿kali)-[/compose]
+└─# 
+                                                                                                          
+┌──(root㉿kali)-[/compose]
+└─# ls
+php-mysql  primeiro
+                                                                                                          
+┌──(root㉿kali)-[/compose]
+└─# mkdir cloud
+                                                                                                          
+┌──(root㉿kali)-[/compose]
+└─# cd cloud   
+                                                                                                          
+┌──(root㉿kali)-[/compose/cloud]
+└─# ls
+                                                                                                          
+┌──(root㉿kali)-[/compose/cloud]
+└─# nano docker-compose.yml
+                                                                                                          
+┌──(root㉿kali)-[/compose/cloud]
+└─# docker-compose up -d                                
+Creating network "cloud_redisnet" with the default driver
+Creating network "cloud_dbnet" with the default driver
+Creating volume "cloud_db_data" with default driver
+Creating volume "cloud_nc_data" with default driver
+Pulling nc (nextcloud:apache)...
+apache: Pulling from library/nextcloud
+a603fa5e3b41: Already exists
+c428f1a49423: Already exists
+156740b07ef8: Already exists
+fb5a4c8af82f: Already exists
+25f85b498fd5: Already exists
+9b233e420ac7: Already exists
+fe42347c4ecf: Already exists
+9a6d1815e192: Pull complete
+f75b3fa4d0aa: Pull complete
+a7dfcc62e534: Pull complete
+e4c066aae5da: Pull complete
+7e78f1cb630f: Pull complete
+33ca68bf26ea: Pull complete
+073b9282a517: Pull complete
+4f88e82c05cc: Pull complete
+f2a26e47144e: Pull complete
+3e3fbaa76674: Pull complete
+7228284e6554: Pull complete
+c8a9e0c5a248: Pull complete
+a123244e7ee7: Pull complete
+Digest: sha256:a78077ed988fef925122d762102883102fb5b375dc1c758dd92b6b39eac22158
+Status: Downloaded newer image for nextcloud:apache
+Pulling redis (redis:alpine)...
+alpine: Pulling from library/redis
+ca7dd9ec2225: Already exists
+83276aa4de36: Pull complete
+731cc432e6da: Pull complete
+862de9590cc6: Pull complete
+a26b23e71d57: Pull complete
+4b937ee5a2e0: Pull complete
+Digest: sha256:2700d5097763fda285c463f4eefc3d0730a2df2a9d48e66707b19d5a5e5f23d4
+Status: Downloaded newer image for redis:alpine
+Pulling db (mariadb:10.5)...
+10.5: Pulling from library/mariadb
+eaead16dc43b: Pull complete
+4f6f4832182b: Pull complete
+6eed3156c415: Pull complete
+d1adc5c9f5ec: Pull complete
+ff10c4143de9: Pull complete
+86940c6e6b47: Pull complete
+eb690670c568: Pull complete
+ee0c944b1557: Pull complete
+Digest: sha256:78ee2bce40a0560223349f83a6ffc50422135f4870322509a00d3a79842dcbc3
+Status: Downloaded newer image for mariadb:10.5
+Creating cloud_redis_1 ... done
+Creating cloud_db_1    ... done
+Creating cloud_nc_1    ... done
+                                                                                                          
+┌──(root㉿kali)-[/compose/cloud]
+└─# 
+──(root㉿kali)-[/compose/cloud]
+└─# docker ps           
+CONTAINER ID   IMAGE                              COMMAND                  CREATED          STATUS          PORTS                                                      NAMES
+cdeb39af3f07   nextcloud:apache                   "/entrypoint.sh apac…"   11 minutes ago   Up 11 minutes   0.0.0.0:80->80/tcp, :::80->80/tcp                          cloud_nc_1
+7d074967c1b6   redis:alpine                       "docker-entrypoint.s…"   11 minutes ago   Up 11 minutes   6379/tcp                                                   cloud_redis_1
+7a78467e2f2f   mariadb:10.5                       "docker-entrypoint.s…"   11 minutes ago   Up 11 minutes   3306/tcp                                                   cloud_db_1
+f5db28cee216   phpmyadmin/phpmyadmin              "/docker-entrypoint.…"   2 hours ago      Up 2 hours      0.0.0.0:8080->80/tcp, :::8080->80/tcp                      php-mysql_phpmyadmin_1
+87b9b1998b34   mysql:5.7                          "docker-entrypoint.s…"   2 hours ago      Up 2 hours      0.0.0.0:3306->3306/tcp, :::3306->3306/tcp, 33060/tcp       php-mysql_db_1
+a153fac509d2   webdevops/php-apache:alpine-php7   "/entrypoint supervi…"   2 hours ago      Up 2 hours      443/tcp, 9000/tcp, 0.0.0.0:4500->80/tcp, :::4500->80/tcp   php-mysql_web_1
+```
+
+### Criando um container de uma Aplicação WEB
+      
+
 
 
 
