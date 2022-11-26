@@ -1623,9 +1623,125 @@ e42fa71d93af   ubuntu    "bash"                   About an hour ago   Up 21 minu
 ┌──(root㉿kali)-[/home/kali]
 └─# 
 
+``` 
+
+O container "myql-A" está na rede **"IPv4Address": "172.17.0.3/16",***
+
+```
+        "Containers": {       
+            "e7ffdcb19cade11990991d60d713e7ff5ec4a74b0bdc02774000f01834c38c5f": {
+                "Name": "mysql-A",
+                "EndpointID": "857190dcb372e0607c8005a03151ea44319a208d2cbfeafb94ab0ab9fb34bef1",
+                "MacAddress": "02:42:ac:11:00:03",
+                "IPv4Address": "172.17.0.3/16",
+                "IPv6Address": ""
 ```
 
 
+Os containers "ubuntu-A" e "ubuntu-B" está na rede **"IPv4Address": "172.18.0.2/16", " "172.18.0.3/16"**
+
+```
+        "Containers": {
+            "53ff3ae78011f4b847a9b28626f2f99da912808fe90cd4612a2326518a1c72e6": {
+                "Name": "ubuntu-B",
+                "EndpointID": "004d246c3232abc6c8070963d187dcd7d301ac44d6b7beac7f45ddfb42e0667f",
+                "MacAddress": "02:42:ac:12:00:03",
+                "IPv4Address": "172.18.0.3/16",
+                "IPv6Address": ""
+            },
+            "c962f206cdca26d0675537514096fff05703996c65383c374ae11b21d24b0fc2": {
+                "Name": "ubuntu-A",
+                "EndpointID": "89b58f3e7c496f1f392f14e7bf5a6f25d791f6883e9548ffea2a3f4a975df8d5",
+                "MacAddress": "02:42:ac:12:00:02",
+                "IPv4Address": "172.18.0.2/16",
+                "IPv6Address": ""
+
+```
+
+Teste de comunicao entre o "ubuntu-A" com o "ubuntu-B" e "mysql-A".
+Obsever que entre o "ubuntu-A" e "ubuntu-B" comunicação com sucesso pois eles está isolado.
+Mas no ultimo teste com o "mysql-A" não teve comunicação pois está em outra rede!.
+Dessa forma isolamos os containers.
+
+```
+┌──(root㉿kali)-[/home/kali]
+└─# docker exec -ti ubuntu-A bash
+root@c962f206cdca:/# apt update   
+Get:1 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB]                                
+Get:2 http://archive.ubuntu.com/ubuntu jammy InRelease [270 kB]             
+Get:3 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [522 kB]
+Get:4 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [114 kB]
+Get:5 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [99.8 kB]
+Get:6 http://archive.ubuntu.com/ubuntu jammy/restricted amd64 Packages [164 kB]
+Get:7 http://archive.ubuntu.com/ubuntu jammy/multiverse amd64 Packages [266 kB]
+Get:8 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [618 kB]
+Get:9 http://archive.ubuntu.com/ubuntu jammy/main amd64 Packages [1792 kB]
+Get:10 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages [4642 B]
+Get:11 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [775 kB]
+Get:12 http://archive.ubuntu.com/ubuntu jammy/universe amd64 Packages [17.5 MB]       
+Get:13 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [956 kB]                   
+Get:14 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [924 kB]                       
+Get:15 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages [8056 B]                 
+Get:16 http://archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [579 kB]                 
+Get:17 http://archive.ubuntu.com/ubuntu jammy-backports/main amd64 Packages [3175 B]                     
+Get:18 http://archive.ubuntu.com/ubuntu jammy-backports/universe amd64 Packages [7275 B]                 
+Fetched 24.7 MB in 16s (1582 kB/s)                                                                       
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+All packages are up to date.
+root@c962f206cdca:/# apt install -y iputils-ping
+Reading package lists... Done
+Building dependency tree... Done
+Reading state information... Done
+The following additional packages will be installed:
+  libcap2-bin libpam-cap
+The following NEW packages will be installed:
+  iputils-ping libcap2-bin libpam-cap
+0 upgraded, 3 newly installed, 0 to remove and 0 not upgraded.
+Need to get 76.8 kB of archives.
+After this operation, 280 kB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu jammy/main amd64 libcap2-bin amd64 1:2.44-1build3 [26.0 kB]
+Get:2 http://archive.ubuntu.com/ubuntu jammy/main amd64 iputils-ping amd64 3:20211215-1 [42.9 kB]
+Get:3 http://archive.ubuntu.com/ubuntu jammy/main amd64 libpam-cap amd64 1:2.44-1build3 [7932 B]
+Fetched 76.8 kB in 1s (67.1 kB/s)
+debconf: delaying package configuration, since apt-utils is not installed
+Selecting previously unselected package libcap2-bin.
+(Reading database ... 4395 files and directories currently installed.)
+Preparing to unpack .../libcap2-bin_1%3a2.44-1build3_amd64.deb ...
+Unpacking libcap2-bin (1:2.44-1build3) ...
+Selecting previously unselected package iputils-ping.
+Preparing to unpack .../iputils-ping_3%3a20211215-1_amd64.deb ...
+Unpacking iputils-ping (3:20211215-1) ...
+Selecting previously unselected package libpam-cap:amd64.
+Preparing to unpack .../libpam-cap_1%3a2.44-1build3_amd64.deb ...
+Unpacking libpam-cap:amd64 (1:2.44-1build3) ...
+Setting up libcap2-bin (1:2.44-1build3) ...
+Setting up libpam-cap:amd64 (1:2.44-1build3) ...
+debconf: unable to initialize frontend: Dialog
+debconf: (No usable dialog-like program is installed, so the dialog based frontend cannot be used. at /usr/share/perl5/Debconf/FrontEnd/Dialog.pm line 78.)
+debconf: falling back to frontend: Readline
+debconf: unable to initialize frontend: Readline
+debconf: (Can't locate Term/ReadLine.pm in @INC (you may need to install the Term::ReadLine module) (@INC contains: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.34.0 /usr/local/share/perl/5.34.0 /usr/lib/x86_64-linux-gnu/perl5/5.34 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.34 /usr/share/perl/5.34 /usr/local/lib/site_perl) at /usr/share/perl5/Debconf/FrontEnd/Readline.pm line 7.)
+debconf: falling back to frontend: Teletype
+Setting up iputils-ping (3:20211215-1) ...
+root@c962f206cdca:/# ping 172.18.0.3 -c 3
+PING 172.18.0.3 (172.18.0.3) 56(84) bytes of data.
+64 bytes from 172.18.0.3: icmp_seq=1 ttl=64 time=0.612 ms
+64 bytes from 172.18.0.3: icmp_seq=2 ttl=64 time=0.207 ms
+64 bytes from 172.18.0.3: icmp_seq=3 ttl=64 time=0.193 ms
+
+--- 172.18.0.3 ping statistics ---
+3 packets transmitted, 3 received, 0% packet loss, time 2027ms
+rtt min/avg/max/mdev = 0.193/0.337/0.612/0.194 ms
+root@c962f206cdca:/# ping 172.17.0.3 -c 3
+PING 172.17.0.3 (172.17.0.3) 56(84) bytes of data.
+
+--- 172.17.0.3 ping statistics ---
+3 packets transmitted, 0 received, 100% packet loss, time 2048ms
+
+root@c962f206cdca:/# 
+```
 
 
 
