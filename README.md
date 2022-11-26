@@ -2,8 +2,6 @@
 
 Necessário conhecimento de Linux!
 
-[![Watch the video]()](https://youtu.be/NoQpCAki0X8)
-
 Gerenciar Virtualização (Hyperv, AWS, GCP, Azure).
 
 Saber usar ferramentas como o Putty para Acessar Remoto o Servidores Linux.
@@ -4428,9 +4426,9 @@ a153fac509d2   webdevops/php-apache:alpine-php7   "/entrypoint supervi…"   9 m
        valid_lft forever preferred_lft forever
 ```
 
-Acesso o Banco de Dados da Aplicação.
+Acessando o Banco de Dados da Aplicação.
 
-
+[![Watch the video]()](https://youtu.be/NoQpCAki0X8)
 
 
 
