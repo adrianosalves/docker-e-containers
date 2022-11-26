@@ -1206,6 +1206,71 @@ Server:
 └─# 
 ```
 
+Obter logs dos container, como visualizar processos em execução, senhas criadas, portas liberadas.
+
+```
+──(root㉿kali)-[/home/kali]
+└─# docker run -e MYSQL_ROOT_PASSWORD=Senha123 --name mysql-A -d -p 3306:3306 mysql
+e7ffdcb19cade11990991d60d713e7ff5ec4a74b0bdc02774000f01834c38c5f
+                                                                                                                                                                                                               
+┌──(root㉿kali)-[/home/kali]
+└─# docker logs mysql-A                                                            
+2022-11-26 11:23:33+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 8.0.31-1.el8 started.
+2022-11-26 11:23:34+00:00 [Note] [Entrypoint]: Switching to dedicated user 'mysql'
+2022-11-26 11:23:34+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 8.0.31-1.el8 started.
+2022-11-26 11:23:34+00:00 [Note] [Entrypoint]: Initializing database files
+2022-11-26T11:23:34.280803Z 0 [Warning] [MY-011068] [Server] The syntax '--skip-host-cache' is deprecated and will be removed in a future release. Please use SET GLOBAL host_cache_size=0 instead.
+2022-11-26T11:23:34.282166Z 0 [System] [MY-013169] [Server] /usr/sbin/mysqld (mysqld 8.0.31) initializing of server in progress as process 79
+2022-11-26T11:23:34.333866Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2022-11-26T11:23:44.493650Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2022-11-26T11:23:47.829478Z 6 [Warning] [MY-010453] [Server] root@localhost is created with an empty password ! Please consider switching off the --initialize-insecure option.
+2022-11-26 11:23:55+00:00 [Note] [Entrypoint]: Database files initialized
+2022-11-26 11:23:55+00:00 [Note] [Entrypoint]: Starting temporary server
+2022-11-26T11:23:56.319952Z 0 [Warning] [MY-011068] [Server] The syntax '--skip-host-cache' is deprecated and will be removed in a future release. Please use SET GLOBAL host_cache_size=0 instead.
+2022-11-26T11:23:56.322826Z 0 [System] [MY-010116] [Server] /usr/sbin/mysqld (mysqld 8.0.31) starting as process 128
+2022-11-26T11:23:56.367101Z 1 [System] [MY-013576] [InnoDB] InnoDB initialization has started.
+2022-11-26T11:23:59.560582Z 1 [System] [MY-013577] [InnoDB] InnoDB initialization has ended.
+2022-11-26T11:24:00.769699Z 0 [Warning] [MY-010068] [Server] CA certificate ca.pem is self signed.
+2022-11-26T11:24:00.770217Z 0 [System] [MY-013602] [Server] Channel mysql_main configured to support TLS. Encrypted connections are now supported for this channel.
+2022-11-26T11:24:00.780770Z 0 [Warning] [MY-011810] [Server] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+2022-11-26T11:24:00.838311Z 0 [System] [MY-011323] [Server] X Plugin ready for connections. Socket: /var/run/mysqld/mysqlx.sock
+2022-11-26T11:24:00.839858Z 0 [System] [MY-010931] [Server] /usr/sbin/mysqld: ready for connections. Version: '8.0.31'  socket: '/var/run/mysqld/mysqld.sock'  port: 0  MySQL Community Server - GPL.
+2022-11-26 11:24:01+00:00 [Note] [Entrypoint]: Temporary server started.
+'/var/lib/mysql/mysql.sock' -> '/var/run/mysqld/mysqld.sock'
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# 
+`` 
+
+Analisar processos dentro de um container.
+
+```
+┌──(root㉿kali)-[/home/kali]
+└─# docker ps          
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS                                                  NAMES
+e7ffdcb19cad   mysql     "docker-entrypoint.s…"   4 minutes ago    Up 4 minutes    0.0.0.0:3306->3306/tcp, :::3306->3306/tcp, 33060/tcp   mysql-A
+e42fa71d93af   ubuntu    "bash"                   40 minutes ago   Up 18 minutes                                                          ubuntu-C
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# docker container top ubuntu-C 
+UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
+root                3684                3664                0                   06:09               pts/0               00:00:00            bash
+root                4131                3664                0                   06:10               pts/1               00:00:00            bash
+root                4158                4131                0                   06:10               pts/1               00:00:00            stress --cpu 1 --vm-bytes 50m --vm 1 --vm-bytes 50m
+root                4159                4158                7                   06:10               pts/1               00:01:17            stress --cpu 1 --vm-bytes 50m --vm 1 --vm-bytes 50m
+root                4160                4158                7                   06:10               pts/1               00:01:14            stress --cpu 1 --vm-bytes 50m --vm 1 --vm-bytes 50m
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# docker container top mysql-A 
+UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
+stunnel4            7341                7318                1                   06:23               ?                   00:00:04            mysqld
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# docker ps                    
+CONTAINER ID   IMAGE     COMMAND                  CREATED          STATUS          PORTS                                                  NAMES
+e7ffdcb19cad   mysql     "docker-entrypoint.s…"   5 minutes ago    Up 5 minutes    0.0.0.0:3306->3306/tcp, :::3306->3306/tcp, 33060/tcp   mysql-A
+e42fa71d93af   ubuntu    "bash"                   42 minutes ago   Up 19 minutes                                                          ubuntu-C
+```                                         
 
 
 
