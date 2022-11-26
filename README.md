@@ -3444,10 +3444,30 @@ Removing intermediate container c1717e4935d9
 Successfully built 377b72ffbce6
 Successfully tagged app-python:1.0
                                                                                                           
+──(root㉿kali)-[/images/python]
+└─# docker images                         
+REPOSITORY      TAG          IMAGE ID       CREATED              SIZE
+app-python      1.0          377b72ffbce6   About a minute ago   932MB
+debian-apache   1.0          6005e6fee061   About an hour ago    276MB
+ubuntu-python   latest       ae7845f0f8d0   2 hours ago          148MB
+<none>          <none>       d395bdf57b29   2 hours ago          148MB
+mysql           latest       3842e9cdffd2   10 days ago          538MB
+python          latest       ee4e7a0f1c35   10 days ago          932MB
+httpd           latest       8653efc8c72d   11 days ago          145MB
+php             7.4-apache   20a3732f422b   11 days ago          453MB
+debian          10           1036dd279580   11 days ago          114MB
+debian          latest       c31f65dd4cc9   11 days ago          124MB
+ubuntu          latest       a8780b506fa4   3 weeks ago          77.8MB
+debian          9            662c05203bab   5 months ago         101MB
+centos          latest       5d0da3dc9764   14 months ago        231MB
+                                                                                                          
+──(root㉿kali)-[/images/python]
+└─# docker run -ti --name runapp1 app-python:1.0                
+Qual o seu nome? Adriano
+Adriano
+                                                                                                          
 ┌──(root㉿kali)-[/images/python]
 └─# 
-
-
 
 ```
 
