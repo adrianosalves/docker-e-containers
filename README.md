@@ -3898,6 +3898,12 @@ Status: Downloaded newer image for adminer:latest
 Creating primeiro_mysqlsrv_1 ... done
 Creating primeiro_adminer_1  ... done
                                                                                                           
+──(root㉿kali)-[/compose/primeiro]
+└─# docker ps                          
+CONTAINER ID   IMAGE       COMMAND                  CREATED          STATUS          PORTS                                                  NAMES
+8be6d3280936   adminer     "entrypoint.sh docke…"   31 seconds ago   Up 28 seconds   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp              primeiro_adminer_1
+666e2115ce57   mysql:5.7   "docker-entrypoint.s…"   31 seconds ago   Up 28 seconds   0.0.0.0:3306->3306/tcp, :::3306->3306/tcp, 33060/tcp   primeiro_mysqlsrv_1
+                                                                                                          
 ┌──(root㉿kali)-[/compose/primeiro]
 └─# 
 
@@ -3905,7 +3911,523 @@ Creating primeiro_adminer_1  ... done
 
 ```
 
-docker-compose down ou up
+**docker compose down**
+
+Stop nos container e exclui as redes.
+
+```
+──(root㉿kali)-[/compose/primeiro]
+└─# docker-compose down 
+Stopping primeiro_adminer_1  ... done
+Stopping primeiro_mysqlsrv_1 ... done
+Removing primeiro_adminer_1  ... done
+Removing primeiro_mysqlsrv_1 ... done
+Removing network primeiro_minha-rede
+                                                                                                          
+DRIVER    SCOPE
+7acf1f13f4c7   bridge    bridge    local
+713f1bde8a82   host      host      local
+45c169e9684f   none      null      local
+                                                                                                          
+┌──(root㉿kali)-[/compose/primeiro]
+└─# docker ps        
+CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
+                                                                                                          
+┌──(root㉿kali)-[/compose/primeiro]
+└─# docker-compose up   
+Creating network "primeiro_minha-rede" with driver "bridge"
+Creating primeiro_mysqlsrv_1 ... done
+Creating primeiro_adminer_1  ... done
+Attaching to primeiro_adminer_1, primeiro_mysqlsrv_1
+mysqlsrv_1  | 2022-11-26 19:42:25+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 5.7.40-1.el7 started.
+adminer_1   | [Sat Nov 26 19:42:25 2022] PHP 7.4.33 Development Server (http://[::]:8080) started
+mysqlsrv_1  | 2022-11-26 19:42:25+00:00 [Note] [Entrypoint]: Switching to dedicated user 'mysql'
+mysqlsrv_1  | 2022-11-26 19:42:25+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 5.7.40-1.el7 started.
+mysqlsrv_1  | '/var/lib/mysql/mysql.sock' -> '/var/run/mysqld/mysqld.sock'
+mysqlsrv_1  | 2022-11-26T19:42:26.462518Z 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).
+mysqlsrv_1  | 2022-11-26T19:42:26.466958Z 0 [Note] mysqld (mysqld 5.7.40) starting as process 1 ...
+mysqlsrv_1  | 2022-11-26T19:42:26.479106Z 0 [Note] InnoDB: PUNCH HOLE support available
+mysqlsrv_1  | 2022-11-26T19:42:26.479292Z 0 [Note] InnoDB: Mutexes and rw_locks use GCC atomic builtins
+mysqlsrv_1  | 2022-11-26T19:42:26.479313Z 0 [Note] InnoDB: Uses event mutexes
+mysqlsrv_1  | 2022-11-26T19:42:26.479323Z 0 [Note] InnoDB: GCC builtin __atomic_thread_fence() is used for memory barrier
+mysqlsrv_1  | 2022-11-26T19:42:26.479332Z 0 [Note] InnoDB: Compressed tables use zlib 1.2.12
+mysqlsrv_1  | 2022-11-26T19:42:26.479341Z 0 [Note] InnoDB: Using Linux native AIO
+mysqlsrv_1  | 2022-11-26T19:42:26.480977Z 0 [Note] InnoDB: Number of pools: 1
+mysqlsrv_1  | 2022-11-26T19:42:26.481730Z 0 [Note] InnoDB: Using CPU crc32 instructions
+mysqlsrv_1  | 2022-11-26T19:42:26.486930Z 0 [Note] InnoDB: Initializing buffer pool, total size = 128M, instances = 1, chunk size = 128M
+mysqlsrv_1  | 2022-11-26T19:42:26.503739Z 0 [Note] InnoDB: Completed initialization of buffer pool
+mysqlsrv_1  | 2022-11-26T19:42:26.509485Z 0 [Note] InnoDB: If the mysqld execution user is authorized, page cleaner thread priority can be changed. See the man page of setpriority().
+mysqlsrv_1  | 2022-11-26T19:42:26.540119Z 0 [Note] InnoDB: Highest supported file format is Barracuda.
+mysqlsrv_1  | 2022-11-26T19:42:26.579526Z 0 [Note] InnoDB: Creating shared tablespace for temporary tables
+mysqlsrv_1  | 2022-11-26T19:42:26.579738Z 0 [Note] InnoDB: Setting file './ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+mysqlsrv_1  | 2022-11-26T19:42:26.650341Z 0 [Note] InnoDB: File './ibtmp1' size is now 12 MB.
+mysqlsrv_1  | 2022-11-26T19:42:26.652201Z 0 [Note] InnoDB: 96 redo rollback segment(s) found. 96 redo rollback segment(s) are active.
+mysqlsrv_1  | 2022-11-26T19:42:26.652526Z 0 [Note] InnoDB: 32 non-redo rollback segment(s) are active.
+mysqlsrv_1  | 2022-11-26T19:42:26.653846Z 0 [Note] InnoDB: Waiting for purge to start
+mysqlsrv_1  | 2022-11-26T19:42:26.709793Z 0 [Note] InnoDB: 5.7.40 started; log sequence number 12128391
+mysqlsrv_1  | 2022-11-26T19:42:26.714860Z 0 [Note] Plugin 'FEDERATED' is disabled.
+mysqlsrv_1  | 2022-11-26T19:42:26.725469Z 0 [Note] InnoDB: Loading buffer pool(s) from /var/lib/mysql/ib_buffer_pool
+mysqlsrv_1  | 2022-11-26T19:42:26.735127Z 0 [Note] Found ca.pem, server-cert.pem and server-key.pem in data directory. Trying to enable SSL support using them.
+mysqlsrv_1  | 2022-11-26T19:42:26.736070Z 0 [Note] Skipping generation of SSL certificates as certificate files are present in data directory.
+mysqlsrv_1  | 2022-11-26T19:42:26.736141Z 0 [Warning] A deprecated TLS version TLSv1 is enabled. Please use TLSv1.2 or higher.
+mysqlsrv_1  | 2022-11-26T19:42:26.736168Z 0 [Warning] A deprecated TLS version TLSv1.1 is enabled. Please use TLSv1.2 or higher.
+mysqlsrv_1  | 2022-11-26T19:42:26.742767Z 0 [Warning] CA certificate ca.pem is self signed.
+mysqlsrv_1  | 2022-11-26T19:42:26.745098Z 0 [Note] Skipping generation of RSA key pair as key files are present in data directory.
+mysqlsrv_1  | 2022-11-26T19:42:26.751749Z 0 [Note] Server hostname (bind-address): '*'; port: 3306
+mysqlsrv_1  | 2022-11-26T19:42:26.753508Z 0 [Note] IPv6 is available.
+mysqlsrv_1  | 2022-11-26T19:42:26.753632Z 0 [Note]   - '::' resolves to '::';
+mysqlsrv_1  | 2022-11-26T19:42:26.755716Z 0 [Note] Server socket created on IP: '::'.
+mysqlsrv_1  | 2022-11-26T19:42:26.763392Z 0 [Warning] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+mysqlsrv_1  | 2022-11-26T19:42:26.783721Z 0 [Note] InnoDB: Buffer pool(s) load completed at 221126 19:42:26
+mysqlsrv_1  | 2022-11-26T19:42:26.809040Z 0 [Note] Event Scheduler: Loaded 0 events
+mysqlsrv_1  | 2022-11-26T19:42:26.811292Z 0 [Note] mysqld: ready for connections.
+mysqlsrv_1  | Version: '5.7.40'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server (GPL)
+adminer_1   | [Sat Nov 26 19:42:54 2022] [::ffff:192.168.1.104]:51396 Accepted
+adminer_1   | [Sat Nov 26 19:42:54 2022] [::ffff:192.168.1.104]:51396 [403]: GET /?server=mysqlsrv&username=root&db=testedb&create=
+adminer_1   | [Sat Nov 26 19:42:54 2022] [::ffff:192.168.1.104]:51396 Closing
+adminer_1   | [Sat Nov 26 19:42:54 2022] [::ffff:192.168.1.104]:51397 Accepted
+adminer_1   | [Sat Nov 26 19:42:54 2022] [::ffff:192.168.1.104]:51398 Accepted
+adminer_1   | [Sat Nov 26 19:42:54 2022] [::ffff:192.168.1.104]:51398 Closed without sending a request; it was probably just an unused speculative preconnection
+adminer_1   | [Sat Nov 26 19:42:54 2022] [::ffff:192.168.1.104]:51398 Closing
+adminer_1   | [Sat Nov 26 19:42:54 2022] [::ffff:192.168.1.104]:51397 [200]: GET /?file=favicon.ico&version=4.8.1
+adminer_1   | [Sat Nov 26 19:42:54 2022] [::ffff:192.168.1.104]:51397 Closing
+adminer_1   | [Sat Nov 26 19:43:00 2022] [::ffff:192.168.1.104]:51513 Accepted
+adminer_1   | [Sat Nov 26 19:43:01 2022] [::ffff:192.168.1.104]:51513 [302]: POST /?server=mysqlsrv&username=root&db=testedb&create=
+adminer_1   | [Sat Nov 26 19:43:01 2022] [::ffff:192.168.1.104]:51513 Closing
+adminer_1   | [Sat Nov 26 19:43:01 2022] [::ffff:192.168.1.104]:51514 Accepted
+adminer_1   | [Sat Nov 26 19:43:01 2022] [::ffff:192.168.1.104]:51514 [200]: GET /?server=mysqlsrv&username=root&db=testedb&create=
+adminer_1   | [Sat Nov 26 19:43:01 2022] [::ffff:192.168.1.104]:51514 Closing
+
+```
+
+Para interromper a execução "CTRL+C" sera interrompido tudo. 
+
+```
+adminer_1   | [Sat Nov 26 19:43:01 2022] [::ffff:192.168.1.104]:51514 Closing
+^CGracefully stopping... (press Ctrl+C again to force)
+Stopping primeiro_adminer_1  ... done
+Stopping primeiro_mysqlsrv_1 ... 
+Killing primeiro_mysqlsrv_1  ... done
+ERROR: 2
+```
+
+Para iniciar em segundo plano.
+
+```
+┌──(root㉿kali)-[/compose/primeiro]
+└─# docker-compose up -d
+Starting primeiro_mysqlsrv_1 ... done
+Starting primeiro_adminer_1  ... done
+                                                                                                          
+┌──(root㉿kali)-[/compose/primeiro]
+└─# docker ps           
+CONTAINER ID   IMAGE       COMMAND                  CREATED         STATUS          PORTS                                                  NAMES
+8b7760d1ee37   adminer     "entrypoint.sh docke…"   3 minutes ago   Up 10 seconds   0.0.0.0:8080->8080/tcp, :::8080->8080/tcp              primeiro_adminer_1
+3b708554842c   mysql:5.7   "docker-entrypoint.s…"   3 minutes ago   Up 10 seconds   0.0.0.0:3306->3306/tcp, :::3306->3306/tcp, 33060/tcp   primeiro_mysqlsrv_1
+                                                                                                          
+┌──(root㉿kali)-[/compose/primeiro]
+└─# docker network ls      
+NETWORK ID     NAME                  DRIVER    SCOPE
+7acf1f13f4c7   bridge                bridge    local
+713f1bde8a82   host                  host      local
+45c169e9684f   none                  null      local
+a4e43338b2d4   primeiro_minha-rede   bridge    local
+                                                                                                          
+┌──(root㉿kali)-[/compose/primeiro]
+└─#                                     
+```
+
+Exemplo PHP APACHE MYSQL
+
+Vamos criar o docker componse mais complexo.
+
+```
+┌──(root㉿kali)-[/compose]
+└─# cd /data   
+                                                                                                          
+┌──(root㉿kali)-[/data]
+└─# ls
+apache-A  mysql-B  mysql-c  mysql-C  mysql-Novo  php-A
+                                                                                                          
+┌──(root㉿kali)-[/data]
+└─# mkdir php     
+                                                                                                          
+┌──(root㉿kali)-[/data]
+└─# cd php
+                                                                                                          
+┌──(root㉿kali)-[/data/php]
+└─# ls
+                                                                                                          
+┌──(root㉿kali)-[/data/php]
+└─# pwd
+/data/php
+                                                                                                          
+┌──(root㉿kali)-[/data/php]
+└─# nano index.php         
+                                                                                                          
+┌──(root㉿kali)-[/data/php]
+└─# cat index.php         
+<html>
+
+<head>
+<title>Exemplo PHP</title>
+</head>
+
+
+<?php
+ini_set("display_errors", 1);
+header('Content-Type: text/html; charset=iso-8859-1');
+
+
+
+echo 'Versao Atual do PHP: ' . phpversion() . '<br>';
+
+$servername = "db";
+$username = "root";
+$password = "Senha123";
+$database = "testedb";
+
+// Criar conexão
+
+
+$link = new mysqli($servername, $username, $password, $database);
+
+/* check connection */
+if (mysqli_connect_errno()) {
+    printf("Connect failed: %s\n", mysqli_connect_error());
+    exit();
+}
+
+$query = "SELECT * FROM tabela_exemplo";
+
+if ($result = mysqli_query($link, $query)) {
+
+    
+    while ($row = mysqli_fetch_assoc($result)) {
+        printf ("%s %s %s <br>", $row["nome"], $row["cidade"], $row["salario"]);
+    }
+
+    
+    mysqli_free_result($result);
+}
+
+
+mysqli_close($link);
+
+?>
+
+</html>
+                                                                                                          
+┌──(root㉿kali)-[/data/php]
+┌──(root㉿kali)-[/data/php]
+└─# nano upload.ini
+                                                                                                          
+┌──(root㉿kali)-[/data/php]
+└─# cat upload.ini          
+file_uploads = On
+memory_limit = 500M
+upload_max_filesize = 500M
+post_max_size = 500M
+max_execution_time = 600
+max_file_uploads = 50000
+max_execution_time = 5000
+max_input_time = 5000
+                                                                                                          
+┌──(root㉿kali)-[/data/php]
+└─# cd ..         
+──(root㉿kali)-[/data]
+└─# cd /compose 
+                                                                                                          
+┌──(root㉿kali)-[/compose]
+└─# ls
+primeiro
+                                                                                                          
+┌──(root㉿kali)-[/compose]
+└─# mkdir php-mysql
+                                                                                                          
+┌──(root㉿kali)-[/compose]
+└─# cd php-mysql 
+                                                                                                          
+┌──(root㉿kali)-[/compose/php-mysql]
+└─# nano docker-compose.yml
+                                                                                                          
+┌──(root㉿kali)-[/compose/php-mysql]
+└─# cat docker-compose.yml 
+version: "3.7"
+
+services:
+  web:
+    image: webdevops/php-apache:alpine-php7
+    ports:
+      - "4500:80"
+    volumes:
+      - /data/php/:/app
+
+    networks:
+      - minha-rede
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: "Senha123"
+      MYSQL_DATABASE: "testedb"
+    ports:
+      - "3306:3306"
+    volumes:
+      - /data/mysql-C:/var/lib/mysql
+
+    networks:
+      - minha-rede
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      MYSQL_ROOT_PASSWORD: "Senha123"
+    ports:
+      - "8080:80"
+    volumes:
+      - /data/php/admin/uploads.ini:/usr/local/etc/php/conf.d/php-phpmyadmin.ini
+
+    networks:
+      - minha-rede
+
+networks:
+   minha-rede:
+     driver: bridge
+                                                                                                          
+┌──(root㉿kali)-[/compose/php-mysql]
+└─# 
+
+┌──(root㉿kali)-[/compose/php-mysql]
+└─# docker-compose up 
+Starting php-mysql_phpmyadmin_1 ... done
+Starting php-mysql_web_1        ... done
+Starting php-mysql_db_1         ... done
+Attaching to php-mysql_db_1, php-mysql_phpmyadmin_1, php-mysql_web_1
+db_1          | 2022-11-26 20:38:03+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 5.7.40-1.el7 started.
+web_1         | -> Executing /opt/docker/provision/entrypoint.d/05-permissions.sh
+web_1         | -> Executing /opt/docker/provision/entrypoint.d/20-apache.sh
+web_1         | -> Executing /opt/docker/provision/entrypoint.d/20-php-fpm.sh
+web_1         | -> Executing /opt/docker/provision/entrypoint.d/20-php.sh
+web_1         | -> Executing /opt/docker/bin/service.d/supervisor.d//10-init.sh
+db_1          | 2022-11-26 20:38:04+00:00 [Note] [Entrypoint]: Switching to dedicated user 'mysql'
+db_1          | 2022-11-26 20:38:04+00:00 [Note] [Entrypoint]: Entrypoint script for MySQL Server 5.7.40-1.el7 started.
+phpmyadmin_1  | AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.20.0.3. Set the 'ServerName' directive globally to suppress this message
+phpmyadmin_1  | AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.20.0.3. Set the 'ServerName' directive globally to suppress this message
+phpmyadmin_1  | [Sat Nov 26 20:38:04.349929 2022] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.53 (Debian) PHP/8.0.19 configured -- resuming normal operations
+phpmyadmin_1  | [Sat Nov 26 20:38:04.353550 2022] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+db_1          | '/var/lib/mysql/mysql.sock' -> '/var/run/mysqld/mysqld.sock'
+web_1         | 2022-11-26 20:38:04,495 INFO Included extra file "/opt/docker/etc/supervisor.d/apache.conf" during parsing
+web_1         | 2022-11-26 20:38:04,495 INFO Included extra file "/opt/docker/etc/supervisor.d/cron.conf" during parsing
+web_1         | 2022-11-26 20:38:04,496 INFO Included extra file "/opt/docker/etc/supervisor.d/dnsmasq.conf" during parsing
+web_1         | 2022-11-26 20:38:04,497 INFO Included extra file "/opt/docker/etc/supervisor.d/php-fpm.conf" during parsing
+web_1         | 2022-11-26 20:38:04,497 INFO Included extra file "/opt/docker/etc/supervisor.d/postfix.conf" during parsing
+web_1         | 2022-11-26 20:38:04,497 INFO Included extra file "/opt/docker/etc/supervisor.d/ssh.conf" during parsing
+web_1         | 2022-11-26 20:38:04,498 INFO Included extra file "/opt/docker/etc/supervisor.d/syslog.conf" during parsing
+web_1         | 2022-11-26 20:38:04,498 INFO Set uid to user 0 succeeded
+web_1         | 2022-11-26 20:38:04,524 INFO RPC interface 'supervisor' initialized
+web_1         | 2022-11-26 20:38:04,525 INFO supervisord started with pid 1
+db_1          | 2022-11-26T20:38:05.138621Z 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated. Please use --explicit_defaults_for_timestamp server option (see documentation for more details).
+db_1          | 2022-11-26T20:38:05.149859Z 0 [Note] mysqld (mysqld 5.7.40) starting as process 1 ...
+db_1          | 2022-11-26T20:38:05.174636Z 0 [Note] InnoDB: PUNCH HOLE support available
+db_1          | 2022-11-26T20:38:05.174720Z 0 [Note] InnoDB: Mutexes and rw_locks use GCC atomic builtins
+db_1          | 2022-11-26T20:38:05.174726Z 0 [Note] InnoDB: Uses event mutexes
+db_1          | 2022-11-26T20:38:05.174728Z 0 [Note] InnoDB: GCC builtin __atomic_thread_fence() is used for memory barrier
+db_1          | 2022-11-26T20:38:05.174730Z 0 [Note] InnoDB: Compressed tables use zlib 1.2.12
+db_1          | 2022-11-26T20:38:05.174735Z 0 [Note] InnoDB: Using Linux native AIO
+db_1          | 2022-11-26T20:38:05.179218Z 0 [Note] InnoDB: Number of pools: 1
+db_1          | 2022-11-26T20:38:05.183464Z 0 [Note] InnoDB: Using CPU crc32 instructions
+db_1          | 2022-11-26T20:38:05.187095Z 0 [Note] InnoDB: Initializing buffer pool, total size = 128M, instances = 1, chunk size = 128M
+db_1          | 2022-11-26T20:38:05.202624Z 0 [Note] InnoDB: Completed initialization of buffer pool
+db_1          | 2022-11-26T20:38:05.207220Z 0 [Note] InnoDB: If the mysqld execution user is authorized, page cleaner thread priority can be changed. See the man page of setpriority().
+db_1          | 2022-11-26T20:38:05.230720Z 0 [Note] InnoDB: Highest supported file format is Barracuda.
+db_1          | 2022-11-26T20:38:05.331323Z 0 [Note] InnoDB: Creating shared tablespace for temporary tables
+db_1          | 2022-11-26T20:38:05.333626Z 0 [Note] InnoDB: Setting file './ibtmp1' size to 12 MB. Physically writing the file full; Please wait ...
+db_1          | 2022-11-26T20:38:05.373873Z 0 [Note] InnoDB: File './ibtmp1' size is now 12 MB.
+db_1          | 2022-11-26T20:38:05.375385Z 0 [Note] InnoDB: 96 redo rollback segment(s) found. 96 redo rollback segment(s) are active.
+db_1          | 2022-11-26T20:38:05.375479Z 0 [Note] InnoDB: 32 non-redo rollback segment(s) are active.
+db_1          | 2022-11-26T20:38:05.375819Z 0 [Note] InnoDB: Waiting for purge to start
+db_1          | 2022-11-26T20:38:05.429283Z 0 [Note] InnoDB: 5.7.40 started; log sequence number 12133968
+db_1          | 2022-11-26T20:38:05.431519Z 0 [Note] InnoDB: Loading buffer pool(s) from /var/lib/mysql/ib_buffer_pool
+db_1          | 2022-11-26T20:38:05.433212Z 0 [Note] Plugin 'FEDERATED' is disabled.
+db_1          | 2022-11-26T20:38:05.524153Z 0 [Note] Found ca.pem, server-cert.pem and server-key.pem in data directory. Trying to enable SSL support using them.
+db_1          | 2022-11-26T20:38:05.524316Z 0 [Note] Skipping generation of SSL certificates as certificate files are present in data directory.
+db_1          | 2022-11-26T20:38:05.524321Z 0 [Warning] A deprecated TLS version TLSv1 is enabled. Please use TLSv1.2 or higher.
+db_1          | 2022-11-26T20:38:05.524323Z 0 [Warning] A deprecated TLS version TLSv1.1 is enabled. Please use TLSv1.2 or higher.
+db_1          | 2022-11-26T20:38:05.528997Z 0 [Note] InnoDB: Buffer pool(s) load completed at 221126 20:38:05
+web_1         | 2022-11-26 20:38:05,534 INFO spawned: 'syslogd' with pid 44
+web_1         | 2022-11-26 20:38:05,554 INFO spawned: 'php-fpmd' with pid 45
+web_1         | 2022-11-26 20:38:05,556 INFO spawned: 'apached' with pid 46
+web_1         | 2022-11-26 20:38:05,559 INFO spawned: 'crond' with pid 47
+db_1          | 2022-11-26T20:38:05.565998Z 0 [Warning] CA certificate ca.pem is self signed.
+db_1          | 2022-11-26T20:38:05.566328Z 0 [Note] Skipping generation of RSA key pair as key files are present in data directory.
+db_1          | 2022-11-26T20:38:05.572464Z 0 [Note] Server hostname (bind-address): '*'; port: 3306
+db_1          | 2022-11-26T20:38:05.572580Z 0 [Note] IPv6 is available.
+db_1          | 2022-11-26T20:38:05.573847Z 0 [Note]   - '::' resolves to '::';
+db_1          | 2022-11-26T20:38:05.575111Z 0 [Note] Server socket created on IP: '::'.
+db_1          | 2022-11-26T20:38:05.585218Z 0 [Warning] Insecure configuration for --pid-file: Location '/var/run/mysqld' in the path is accessible to all OS users. Consider choosing a different directory.
+web_1         | -> Executing /opt/docker/bin/service.d/php-fpm.d//10-init.sh
+web_1         | Setting php-fpm user to application
+web_1         | 2022-11-26 20:38:05,614 INFO success: php-fpmd entered RUNNING state, process has stayed up for > than 0 seconds (startsecs)
+web_1         | 2022-11-26 20:38:05,615 INFO success: apached entered RUNNING state, process has stayed up for > than 0 seconds (startsecs)
+web_1         | 2022-11-26 20:38:05,615 INFO success: crond entered RUNNING state, process has stayed up for > than 0 seconds (startsecs)
+web_1         | -> Executing /opt/docker/bin/service.d/syslog-ng.d//10-init.sh
+web_1         | -> Executing /opt/docker/bin/service.d/cron.d//10-init.sh
+web_1         | -> Executing /opt/docker/bin/service.d/httpd.d//10-init.sh
+db_1          | 2022-11-26T20:38:05.771360Z 0 [Note] Event Scheduler: Loaded 0 events
+db_1          | 2022-11-26T20:38:05.772296Z 0 [Note] mysqld: ready for connections.
+db_1          | Version: '5.7.40'  socket: '/var/run/mysqld/mysqld.sock'  port: 3306  MySQL Community Server (GPL)
+web_1         | [Sat Nov 26 20:38:05.834706 2022] [so:warn] [pid 61:tid 140477215628136] AH01574: module slotmem_shm_module is already loaded, skipping
+web_1         | [Sat Nov 26 20:38:05.870581 2022] [so:warn] [pid 61:tid 140477215628136] AH01574: module socache_shmcb_module is already loaded, skipping
+web_1         | [2022-11-26T20:38:05.897557] WARNING: With use-dns(no), dns-cache() will be forced to 'no' too!;
+web_1         | [SYSLOG] syslog-ng[44]: syslog-ng starting up; version='3.19.1'
+web_1         | [Sat Nov 26 20:38:05.921358 2022] [so:warn] [pid 61:tid 140477215628136] AH01574: module slotmem_shm_module is already loaded, skipping
+web_1         | [Sat Nov 26 20:38:05.922808 2022] [so:warn] [pid 61:tid 140477215628136] AH01574: module socache_shmcb_module is already loaded, skipping
+web_1         | [Sat Nov 26 20:38:05.931523 2022] [lbmethod_heartbeat:notice] [pid 61:tid 140477215628136] AH02282: No slotmem from mod_heartmonitor
+web_1         | [Sat Nov 26 20:38:05.933144 2022] [core:warn] [pid 61:tid 140477215628136] AH00098: pid file /run/apache2/httpd.pid overwritten -- Unclean shutdown of previous Apache run?
+web_1         | [Sat Nov 26 20:38:05.935512 2022] [mpm_event:notice] [pid 61:tid 140477215628136] AH00489: Apache/2.4.43 (Unix) OpenSSL/1.1.1d configured -- resuming normal operations
+web_1         | [Sat Nov 26 20:38:05.937196 2022] [core:notice] [pid 61:tid 140477215628136] AH00094: Command line: '/usr/sbin/httpd -D FOREGROUND'
+web_1         | [26-Nov-2022 20:38:06] NOTICE: fpm is running, pid 45
+web_1         | [26-Nov-2022 20:38:06] NOTICE: ready to handle connections
+web_1         | 2022-11-26 20:38:07,256 INFO success: syslogd entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:47 +0000] "GET /?server=mysqlsrv&username=root&db=testedb&sql=select%20*%20from%20tabela_exemplo HTTP/1.1" 200 6527 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:48 +0000] "GET /js/vendor/codemirror/addon/lint/lint.css?v=5.2.0 HTTP/1.1" 200 1634 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:48 +0000] "GET /js/vendor/codemirror/addon/hint/show-hint.css?v=5.2.0 HTTP/1.1" 200 660 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:48 +0000] "GET /themes/pmahomme/jquery/jquery-ui.css HTTP/1.1" 200 8824 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:48 +0000] "GET /js/vendor/codemirror/lib/codemirror.css?v=5.2.0 HTTP/1.1" 200 2848 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:48 +0000] "GET /js/vendor/jquery/jquery.min.js?v=5.2.0 HTTP/1.1" 200 31255 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:48 +0000] "GET /themes/pmahomme/css/theme.css?v=5.2.0 HTTP/1.1" 200 61829 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:48 +0000] "GET /js/vendor/sprintf.js?v=5.2.0 HTTP/1.1" 200 2982 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:48 +0000] "GET /js/dist/ajax.js?v=5.2.0 HTTP/1.1" 200 8112 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:48 +0000] "GET /js/vendor/jquery/jquery-migrate.js?v=5.2.0 HTTP/1.1" 200 10026 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:48 +0000] "GET /js/dist/keyhandler.js?v=5.2.0 HTTP/1.1" 200 1385 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:48 +0000] "GET /js/vendor/jquery/jquery-ui.min.js?v=5.2.0 HTTP/1.1" 200 68358 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:48 +0000] "GET /js/dist/name-conflict-fixes.js?v=5.2.0 HTTP/1.1" 200 338 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:49 +0000] "GET /js/vendor/bootstrap/bootstrap.bundle.min.js?v=5.2.0 HTTP/1.1" 200 23406 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:49 +0000] "GET /js/vendor/js.cookie.js?v=5.2.0 HTTP/1.1" 200 1876 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:49 +0000] "GET /js/vendor/jquery/jquery.validate.js?v=5.2.0 HTTP/1.1" 200 14035 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:49 +0000] "GET /js/vendor/jquery/jquery.debounce-1.0.6.js?v=5.2.0 HTTP/1.1" 200 976 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:49 +0000] "GET /js/vendor/jquery/jquery-ui-timepicker-addon.js?v=5.2.0 HTTP/1.1" 200 19282 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:49 +0000] "GET /js/dist/menu_resizer.js?v=5.2.0 HTTP/1.1" 200 2283 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:49 +0000] "GET /js/dist/cross_framing_protection.js?v=5.2.0 HTTP/1.1" 200 613 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:49 +0000] "GET /js/messages.php?l=pt_BR&v=5.2.0&lang=pt_BR HTTP/1.1" 200 9482 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:49 +0000] "GET /js/dist/config.js?v=5.2.0 HTTP/1.1" 200 6771 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:49 +0000] "GET /js/dist/doclinks.js?v=5.2.0 HTTP/1.1" 200 4090 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:49 +0000] "GET /js/dist/navigation.js?v=5.2.0 HTTP/1.1" 200 11942 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:49 +0000] "GET /js/dist/functions.js?v=5.2.0 HTTP/1.1" 200 37758 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:50 +0000] "GET /js/dist/indexes.js?v=5.2.0 HTTP/1.1" 200 6619 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:50 +0000] "GET /js/dist/common.js?v=5.2.0 HTTP/1.1" 200 1902 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:50 +0000] "GET /js/dist/page_settings.js?v=5.2.0 HTTP/1.1" 200 950 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:50 +0000] "GET /js/vendor/codemirror/lib/codemirror.js?v=5.2.0 HTTP/1.1" 200 106796 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:50 +0000] "GET /js/vendor/codemirror/addon/runmode/runmode.js?v=5.2.0 HTTP/1.1" 200 1503 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:50 +0000] "GET /js/vendor/codemirror/mode/sql/sql.js?v=5.2.0 HTTP/1.1" 200 14799 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:50 +0000] "GET /js/vendor/codemirror/addon/hint/show-hint.js?v=5.2.0 HTTP/1.1" 200 5887 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:51 +0000] "GET /js/vendor/codemirror/addon/hint/sql-hint.js?v=5.2.0 HTTP/1.1" 200 3097 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:51 +0000] "GET /js/vendor/codemirror/addon/lint/lint.js?v=5.2.0 HTTP/1.1" 200 3318 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:51 +0000] "GET /js/dist/codemirror/addon/lint/sql-lint.js?v=5.2.0 HTTP/1.1" 200 800 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:51 +0000] "GET /js/vendor/tracekit.js?v=5.2.0 HTTP/1.1" 200 11963 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:51 +0000] "GET /js/dist/error_report.js?v=5.2.0 HTTP/1.1" 200 3043 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:51 +0000] "GET /js/dist/drag_drop_import.js?v=5.2.0 HTTP/1.1" 200 3798 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:51 +0000] "GET /js/dist/shortcuts_handler.js?v=5.2.0 HTTP/1.1" 200 1194 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:51 +0000] "GET /js/dist/console.js?v=5.2.0 HTTP/1.1" 200 10450 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:51 +0000] "GET /themes/dot.gif HTTP/1.1" 200 325 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:51 +0000] "GET /themes/pmahomme/img/logo_right.png HTTP/1.1" 200 4592 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:41:51 +0000] "GET /themes/pmahomme/img/b_help.png HTTP/1.1" 200 989 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 127.0.0.1 - - [26/Nov/2022:20:41:57 +0000] "OPTIONS * HTTP/1.0" 200 126 "-" "Apache/2.4.53 (Debian) PHP/8.0.19 (internal dummy connection)"
+phpmyadmin_1  | 127.0.0.1 - - [26/Nov/2022:20:41:58 +0000] "OPTIONS * HTTP/1.0" 200 126 "-" "Apache/2.4.53 (Debian) PHP/8.0.19 (internal dummy connection)"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:00 +0000] "POST /index.php?route=/ HTTP/1.1" 302 1002 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:01 +0000] "GET /index.php?route=/&route=%2F&db=testedb HTTP/1.1" 200 15259 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:01 +0000] "GET /js/dist/database/structure.js?v=5.2.0 HTTP/1.1" 200 4200 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:01 +0000] "GET /js/dist/table/change.js?v=5.2.0 HTTP/1.1" 200 8419 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:01 +0000] "GET /js/messages.php?l=pt_BR&v=5.2.0 HTTP/1.1" 200 9483 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:02 +0000] "GET /themes/pmahomme/img/logo_left.png HTTP/1.1" 200 2998 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:02 +0000] "GET /themes/pmahomme/img/arrow_ltr.png HTTP/1.1" 200 384 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:02 +0000] "GET /themes/pmahomme/img/s_loggoff.png HTTP/1.1" 200 910 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:02 +0000] "GET /themes/pmahomme/img/b_docs.png HTTP/1.1" 200 990 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:02 +0000] "GET /themes/pmahomme/img/b_home.png HTTP/1.1" 200 1018 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:02 +0000] "GET /themes/pmahomme/img/b_sqlhelp.png HTTP/1.1" 200 797 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:02 +0000] "GET /themes/pmahomme/img/s_cog.png HTTP/1.1" 200 726 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:02 +0000] "GET /themes/pmahomme/img/s_reload.png HTTP/1.1" 200 811 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:02 +0000] "GET /themes/pmahomme/img/s_link.png HTTP/1.1" 200 564 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:02 +0000] "GET /themes/pmahomme/img/b_newdb.png HTTP/1.1" 200 869 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:02 +0000] "POST /index.php?route=/config/get HTTP/1.1" 200 2470 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:02 +0000] "POST /index.php?route=/navigation&ajax_request=1 HTTP/1.1" 200 3226 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:02 +0000] "GET /themes/pmahomme/img/b_plus.png HTTP/1.1" 200 426 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:02 +0000] "GET /themes/pmahomme/img/s_db.png HTTP/1.1" 200 612 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:02 +0000] "POST /index.php?route=/config/get HTTP/1.1" 200 2561 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:03 +0000] "GET /themes/pmahomme/img/s_host.png HTTP/1.1" 200 875 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:03 +0000] "GET /themes/pmahomme/img/b_props.png HTTP/1.1" 200 857 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:03 +0000] "GET /themes/pmahomme/img/b_sql.png HTTP/1.1" 200 964 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:03 +0000] "GET /themes/pmahomme/img/b_search.png HTTP/1.1" 200 822 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:03 +0000] "GET /themes/pmahomme/img/b_export.png HTTP/1.1" 200 798 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:03 +0000] "GET /themes/pmahomme/img/b_tblops.png HTTP/1.1" 200 821 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:03 +0000] "GET /themes/pmahomme/img/b_import.png HTTP/1.1" 200 840 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:03 +0000] "GET /themes/pmahomme/img/s_rights.png HTTP/1.1" 200 745 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:03 +0000] "GET /themes/pmahomme/img/b_routines.png HTTP/1.1" 200 590 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:03 +0000] "GET /themes/pmahomme/img/b_events.png HTTP/1.1" 200 987 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:03 +0000] "GET /themes/pmahomme/img/b_triggers.png HTTP/1.1" 200 730 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:03 +0000] "GET /themes/pmahomme/img/b_relations.png HTTP/1.1" 200 423 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:03 +0000] "GET /themes/pmahomme/img/s_top.png HTTP/1.1" 200 503 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:03 +0000] "GET /themes/pmahomme/img/s_asc.png HTTP/1.1" 200 429 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:03 +0000] "GET /themes/pmahomme/img/b_no_favorite.png HTTP/1.1" 200 661 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:03 +0000] "GET /themes/pmahomme/img/b_browse.png HTTP/1.1" 200 770 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:03 +0000] "GET /themes/pmahomme/img/b_select.png HTTP/1.1" 200 877 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:03 +0000] "POST /index.php?route=/navigation&ajax_request=1 HTTP/1.1" 200 2850 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:03 +0000] "GET /themes/pmahomme/img/b_insrow.png HTTP/1.1" 200 440 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:03 +0000] "POST /index.php?route=/config/set HTTP/1.1" 200 2454 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:03 +0000] "GET /themes/pmahomme/img/b_empty.png HTTP/1.1" 200 805 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:03 +0000] "GET /themes/pmahomme/img/b_drop.png HTTP/1.1" 200 921 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:03 +0000] "GET /themes/pmahomme/img/b_tblanalyse.png HTTP/1.1" 200 435 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:03 +0000] "GET /themes/pmahomme/img/b_print.png HTTP/1.1" 200 923 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:03 +0000] "GET /themes/pmahomme/img/b_table_add.png HTTP/1.1" 200 855 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:03 +0000] "GET /themes/pmahomme/img/window-new.png HTTP/1.1" 200 752 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:03 +0000] "GET /themes/pmahomme/img/b_more.png HTTP/1.1" 200 394 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:03 +0000] "GET /themes/pmahomme/img/ajax_clock_small.gif HTTP/1.1" 200 2095 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:03 +0000] "GET /themes/pmahomme/img/console.png HTTP/1.1" 200 576 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:03 +0000] "GET /themes/pmahomme/img/b_minus.png HTTP/1.1" 200 406 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:03 +0000] "GET /favicon.ico HTTP/1.1" 200 22788 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:06 +0000] "GET /index.php?route=/sql&pos=0&db=testedb&table=tabela_exemplo&ajax_request=true&ajax_page_request=true&_nocache=1669495331968471152&token=4b3b243f6b6b244023377c4849644f64 HTTP/1.1" 200 7724 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:06 +0000] "GET /themes/pmahomme/img/s_tbl.png HTTP/1.1" 200 929 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:06 +0000] "GET /themes/pmahomme/img/b_tblexport.png HTTP/1.1" 200 798 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:06 +0000] "GET /themes/pmahomme/img/b_chart.png HTTP/1.1" 200 734 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:06 +0000] "GET /themes/pmahomme/img/b_tblimport.png HTTP/1.1" 200 840 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:06 +0000] "GET /themes/pmahomme/img/s_notice.png HTTP/1.1" 200 851 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:06 +0000] "GET /themes/pmahomme/img/s_success.png HTTP/1.1" 200 749 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:06 +0000] "GET /js/vendor/jquery/jquery.uitablefilter.js?v=5.2.0 HTTP/1.1" 200 1687 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:06 +0000] "GET /js/dist/gis_data_editor.js?v=5.2.0 HTTP/1.1" 200 3837 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:06 +0000] "GET /index.php?route=/recent-table&ajax_request=1&recent_table=1&no_debug=true&_nocache=166949533231350051&token=4b3b243f6b6b244023377c4849644f64 HTTP/1.1" 200 2516 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:06 +0000] "GET /js/dist/sql.js?v=5.2.0 HTTP/1.1" 200 9892 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:06 +0000] "GET /js/dist/multi_column_sort.js?v=5.2.0 HTTP/1.1" 200 868 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:06 +0000] "GET /js/dist/makegrid.js?v=5.2.0 HTTP/1.1" 200 17821 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:07 +0000] "GET /themes/pmahomme/img/b_view_add.png HTTP/1.1" 200 962 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 192.168.1.104 - - [26/Nov/2022:20:42:07 +0000] "GET /themes/pmahomme/img/col_pointer.png HTTP/1.1" 200 385 "http://192.168.1.107:8080/themes/pmahomme/css/theme.css?v=5.2.0" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:107.0) Gecko/20100101 Firefox/107.0"
+phpmyadmin_1  | 127.0.0.1 - - [26/Nov/2022:20:42:12 +0000] "OPTIONS * HTTP/1.0" 200 126 "-" "Apache/2.4.53 (Debian) PHP/8.0.19 (internal dummy connection)"
+
+──(root㉿kali)-[/home/kali]
+└─# docker ps                          
+CONTAINER ID   IMAGE                              COMMAND                  CREATED         STATUS         PORTS                                                      NAMES
+f5db28cee216   phpmyadmin/phpmyadmin              "/docker-entrypoint.…"   9 minutes ago   Up 4 minutes   0.0.0.0:8080->80/tcp, :::8080->80/tcp                      php-mysql_phpmyadmin_1
+87b9b1998b34   mysql:5.7                          "docker-entrypoint.s…"   9 minutes ago   Up 4 minutes   0.0.0.0:3306->3306/tcp, :::3306->3306/tcp, 33060/tcp       php-mysql_db_1
+a153fac509d2   webdevops/php-apache:alpine-php7   "/entrypoint supervi…"   9 minutes ago   Up 4 minutes   443/tcp, 9000/tcp, 0.0.0.0:4500->80/tcp, :::4500->80/tcp   php-mysql_web_1
+                                                                                                          
+──(root㉿kali)-[/home/kali]
+└─# ip a 
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:db:96:6a brd ff:ff:ff:ff:ff:ff
+    inet 192.168.1.107/24 brd 192.168.1.255 scope global dynamic noprefixroute eth0
+       valid_lft 2630sec preferred_lft 2630sec
+    inet6 fe80::a00:27ff:fedb:966a/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+```
+
+Acesso o Banco de Dados da Aplicação.
+
 
 
 
