@@ -3546,7 +3546,108 @@ centos          latest       5d0da3dc9764   14 months ago    231MB
 ┌──(root㉿kali)-[/images/go]
 └─# 
 
-
+┌──(root㉿kali)-[/home/kali]
+└─# cd /images 
+                                                                                                          
+┌──(root㉿kali)-[/images]
+└─# cd go     
+                                                                                                          
+┌──(root㉿kali)-[/images/go]
+└─# ls
+                                                                                                          
+┌──(root㉿kali)-[/images/go]
+└─# nano app.go
+                                                                                                          
+┌──(root㉿kali)-[/images/go]
+└─# nano dockerfile
+                                                                                                          
+┌──(root㉿kali)-[/images/go]
+└─# docker image build -t app-go:1.0 .    
+Sending build context to Docker daemon  3.072kB
+Step 1/9 : FROM golang as exec
+ ---> 8ee516e10ce0
+Step 2/9 : COPY app.go /go/src/app/
+ ---> fe2fa2e462f7
+Step 3/9 : WORKDIR /go/src/app
+ ---> Running in 81ece781eea1
+Removing intermediate container 81ece781eea1
+ ---> 26c215be04f6
+Step 4/9 : RUN go build -o app.go .
+ ---> Running in a29783c60886
+go: go.mod file not found in current directory or any parent directory; see 'go help modules'
+The command '/bin/sh -c go build -o app.go .' returned a non-zero code: 1
+                                                                                                          
+┌──(root㉿kali)-[/images/go]
+└─# nano dockerfile                   
+                                                                                                          
+┌──(root㉿kali)-[/images/go]
+└─# docker image build -t app-go:1.0 .
+Sending build context to Docker daemon  3.072kB
+Step 1/10 : FROM golang as exec
+ ---> 8ee516e10ce0
+Step 2/10 : COPY app.go /go/src/app/
+ ---> Using cache
+ ---> fe2fa2e462f7
+Step 3/10 : ENV GO111MODULE=auto
+ ---> Running in eedd86c4448c
+Removing intermediate container eedd86c4448c
+ ---> af0bcd993e21
+Step 4/10 : WORKDIR /go/src/app
+ ---> Running in 509aca1694f9
+Removing intermediate container 509aca1694f9
+ ---> 04bfc886db74
+Step 5/10 : RUN go build -o app.go .
+ ---> Running in 6488a61ee396
+Removing intermediate container 6488a61ee396
+ ---> 444e1f1ee246
+Step 6/10 : FROM alpine
+ ---> 49176f190c7e
+Step 7/10 : WORKDIR /appexec
+ ---> Running in b1f97d5ae0c4
+Removing intermediate container b1f97d5ae0c4
+ ---> 8b21677c2168
+Step 8/10 : COPY --from=exec /go/src/app/ /appexec
+ ---> fd69fcba1e4b
+Step 9/10 : RUN chmod -R 755 /appexec
+ ---> Running in b0f044450c4a
+Removing intermediate container b0f044450c4a
+ ---> fe8778faa4a0
+Step 10/10 : ENTRYPOINT ./app.go
+ ---> Running in 8baa1b0c7838
+Removing intermediate container 8baa1b0c7838
+ ---> 0e6591496f59
+Successfully built 0e6591496f59
+Successfully tagged app-go:1.0
+                                                                                                          
+┌──(root㉿kali)-[/images/go]
+└─# docker images                     
+REPOSITORY      TAG          IMAGE ID       CREATED              SIZE
+app-go          1.0          0e6591496f59   55 seconds ago       11MB
+<none>          <none>       444e1f1ee246   58 seconds ago       994MB
+<none>          <none>       26c215be04f6   About a minute ago   992MB
+app-python      1.0          377b72ffbce6   56 minutes ago       932MB
+debian-apache   1.0          6005e6fee061   2 hours ago          276MB
+ubuntu-python   latest       ae7845f0f8d0   3 hours ago          148MB
+<none>          <none>       d395bdf57b29   3 hours ago          148MB
+alpine          latest       49176f190c7e   3 days ago           7.05MB
+mysql           latest       3842e9cdffd2   10 days ago          538MB
+python          latest       ee4e7a0f1c35   10 days ago          932MB
+golang          latest       8ee516e10ce0   10 days ago          992MB
+httpd           latest       8653efc8c72d   11 days ago          145MB
+php             7.4-apache   20a3732f422b   11 days ago          453MB
+debian          10           1036dd279580   11 days ago          114MB
+debian          latest       c31f65dd4cc9   11 days ago          124MB
+ubuntu          latest       a8780b506fa4   3 weeks ago          77.8MB
+debian          9            662c05203bab   5 months ago         101MB
+centos          latest       5d0da3dc9764   14 months ago        231MB
+                                                                                                          
+──(root㉿kali)-[/images/go]
+└─# docker run -ti --name meuappOK app-go:1.0   
+Qual é o seu nome:? 
+Adriano
+Oi, Adriano! Eu sou a linguagem Go!                                                                                                           
+┌──(root㉿kali)-[/images/go]
+└─# 
 ```
 
 
