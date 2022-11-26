@@ -1971,6 +1971,176 @@ ubuntu-python
 Criando nossa imagem do container.
 
 ```
+┌──(root㉿kali)-[/]
+└─# cd /images 
+                                                                                                          
+┌──(root㉿kali)-[/images]
+└─# cd ubuntu-python 
+                                                                                                          
+┌──(root㉿kali)-[/images/ubuntu-python]
+└─# ls
+app.py  dockerfile
+                                                                                                          
+┌──(root㉿kali)-[/images/ubuntu-python]
+└─# cat app.py 
+nome = input("Qual o seu nome? ")
+print(nome)
+                                                                                                          
+┌──(root㉿kali)-[/images/ubuntu-python]
+└─# cat dockerfile 
+FROM ubuntu
+
+RUN apt update && apt install -y python3 && apt clean
+
+COPY app.py /opt/app.y
+
+CMD python3 /opt/app.py
+                                                                                                          
+┌──(root㉿kali)-[/images/ubuntu-python]
+└─# docker build . -t ubuntu-python 
+Sending build context to Docker daemon  3.072kB
+Step 1/4 : FROM ubuntu
+ ---> a8780b506fa4
+Step 2/4 : RUN apt update && apt install -y python3 && apt clean
+ ---> Running in 55c0ed915bc7
+
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+Get:1 http://archive.ubuntu.com/ubuntu jammy InRelease [270 kB]
+Get:2 http://security.ubuntu.com/ubuntu jammy-security InRelease [110 kB]
+Get:3 http://security.ubuntu.com/ubuntu jammy-security/multiverse amd64 Packages [4642 B]
+Get:4 http://archive.ubuntu.com/ubuntu jammy-updates InRelease [114 kB]
+Get:5 http://security.ubuntu.com/ubuntu jammy-security/restricted amd64 Packages [522 kB]
+Get:6 http://archive.ubuntu.com/ubuntu jammy-backports InRelease [99.8 kB]
+Get:7 http://security.ubuntu.com/ubuntu jammy-security/main amd64 Packages [618 kB]
+Get:8 http://archive.ubuntu.com/ubuntu jammy/multiverse amd64 Packages [266 kB]
+Get:9 http://security.ubuntu.com/ubuntu jammy-security/universe amd64 Packages [775 kB]
+Get:10 http://archive.ubuntu.com/ubuntu jammy/universe amd64 Packages [17.5 MB]
+Get:11 http://archive.ubuntu.com/ubuntu jammy/restricted amd64 Packages [164 kB]
+Get:12 http://archive.ubuntu.com/ubuntu jammy/main amd64 Packages [1792 kB]
+Get:13 http://archive.ubuntu.com/ubuntu jammy-updates/universe amd64 Packages [956 kB]
+Get:14 http://archive.ubuntu.com/ubuntu jammy-updates/multiverse amd64 Packages [8056 B]
+Get:15 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 Packages [924 kB]
+Get:16 http://archive.ubuntu.com/ubuntu jammy-updates/restricted amd64 Packages [579 kB]
+Get:17 http://archive.ubuntu.com/ubuntu jammy-backports/universe amd64 Packages [7275 B]
+Get:18 http://archive.ubuntu.com/ubuntu jammy-backports/main amd64 Packages [3175 B]
+Fetched 24.7 MB in 13s (1934 kB/s)
+Reading package lists...
+Building dependency tree...
+Reading state information...
+All packages are up to date.
+
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.                           
+                                                                                                          
+Reading package lists...                                                                                  
+Building dependency tree...
+Reading state information...
+The following additional packages will be installed:
+  libexpat1 libmpdec3 libpython3-stdlib libpython3.10-minimal
+  libpython3.10-stdlib libreadline8 libsqlite3-0 media-types python3-minimal
+  python3.10 python3.10-minimal readline-common
+Suggested packages:
+  python3-doc python3-tk python3-venv python3.10-venv python3.10-doc binutils
+  binfmt-support readline-doc
+The following NEW packages will be installed:
+  libexpat1 libmpdec3 libpython3-stdlib libpython3.10-minimal
+  libpython3.10-stdlib libreadline8 libsqlite3-0 media-types python3
+  python3-minimal python3.10 python3.10-minimal readline-common
+0 upgraded, 13 newly installed, 0 to remove and 0 not upgraded.
+Need to get 6506 kB of archives.
+After this operation, 23.4 MB of additional disk space will be used.
+Get:1 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libpython3.10-minimal amd64 3.10.6-1~22.04.1 [810 kB]
+Get:2 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libexpat1 amd64 2.4.7-1ubuntu0.2 [91.0 kB]
+Get:3 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3.10-minimal amd64 3.10.6-1~22.04.1 [2263 kB]
+Get:4 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3-minimal amd64 3.10.6-1~22.04 [24.3 kB]
+Get:5 http://archive.ubuntu.com/ubuntu jammy/main amd64 media-types all 7.0.0 [25.5 kB]
+Get:6 http://archive.ubuntu.com/ubuntu jammy/main amd64 libmpdec3 amd64 2.5.1-2build2 [86.8 kB]
+Get:7 http://archive.ubuntu.com/ubuntu jammy/main amd64 readline-common all 8.1.2-1 [53.5 kB]
+Get:8 http://archive.ubuntu.com/ubuntu jammy/main amd64 libreadline8 amd64 8.1.2-1 [153 kB]
+Get:9 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libsqlite3-0 amd64 3.37.2-2ubuntu0.1 [641 kB]
+Get:10 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libpython3.10-stdlib amd64 3.10.6-1~22.04.1 [1831 kB]
+Get:11 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3.10 amd64 3.10.6-1~22.04.1 [497 kB]
+Get:12 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 libpython3-stdlib amd64 3.10.6-1~22.04 [6910 B]
+Get:13 http://archive.ubuntu.com/ubuntu jammy-updates/main amd64 python3 amd64 3.10.6-1~22.04 [22.8 kB]
+debconf: delaying package configuration, since apt-utils is not installed
+Fetched 6506 kB in 5s (1341 kB/s)                                                                         
+Selecting previously unselected package libpython3.10-minimal:amd64.
+(Reading database ... 4395 files and directories currently installed.)
+Preparing to unpack .../libpython3.10-minimal_3.10.6-1~22.04.1_amd64.deb ...
+Unpacking libpython3.10-minimal:amd64 (3.10.6-1~22.04.1) ...
+Selecting previously unselected package libexpat1:amd64.
+Preparing to unpack .../libexpat1_2.4.7-1ubuntu0.2_amd64.deb ...
+Unpacking libexpat1:amd64 (2.4.7-1ubuntu0.2) ...
+Selecting previously unselected package python3.10-minimal.
+Preparing to unpack .../python3.10-minimal_3.10.6-1~22.04.1_amd64.deb ...
+Unpacking python3.10-minimal (3.10.6-1~22.04.1) ...
+Setting up libpython3.10-minimal:amd64 (3.10.6-1~22.04.1) ...
+Setting up libexpat1:amd64 (2.4.7-1ubuntu0.2) ...
+Setting up python3.10-minimal (3.10.6-1~22.04.1) ...
+Selecting previously unselected package python3-minimal.
+(Reading database ... 4697 files and directories currently installed.)
+Preparing to unpack .../0-python3-minimal_3.10.6-1~22.04_amd64.deb ...
+Unpacking python3-minimal (3.10.6-1~22.04) ...
+Selecting previously unselected package media-types.
+Preparing to unpack .../1-media-types_7.0.0_all.deb ...
+Unpacking media-types (7.0.0) ...
+Selecting previously unselected package libmpdec3:amd64.
+Preparing to unpack .../2-libmpdec3_2.5.1-2build2_amd64.deb ...
+Unpacking libmpdec3:amd64 (2.5.1-2build2) ...
+Selecting previously unselected package readline-common.
+Preparing to unpack .../3-readline-common_8.1.2-1_all.deb ...
+Unpacking readline-common (8.1.2-1) ...
+Selecting previously unselected package libreadline8:amd64.
+Preparing to unpack .../4-libreadline8_8.1.2-1_amd64.deb ...
+Unpacking libreadline8:amd64 (8.1.2-1) ...
+Selecting previously unselected package libsqlite3-0:amd64.
+Preparing to unpack .../5-libsqlite3-0_3.37.2-2ubuntu0.1_amd64.deb ...
+Unpacking libsqlite3-0:amd64 (3.37.2-2ubuntu0.1) ...
+Selecting previously unselected package libpython3.10-stdlib:amd64.
+Preparing to unpack .../6-libpython3.10-stdlib_3.10.6-1~22.04.1_amd64.deb ...
+Unpacking libpython3.10-stdlib:amd64 (3.10.6-1~22.04.1) ...
+Selecting previously unselected package python3.10.
+Preparing to unpack .../7-python3.10_3.10.6-1~22.04.1_amd64.deb ...
+Unpacking python3.10 (3.10.6-1~22.04.1) ...
+Selecting previously unselected package libpython3-stdlib:amd64.
+Preparing to unpack .../8-libpython3-stdlib_3.10.6-1~22.04_amd64.deb ...
+Unpacking libpython3-stdlib:amd64 (3.10.6-1~22.04) ...
+Setting up python3-minimal (3.10.6-1~22.04) ...
+Selecting previously unselected package python3.
+(Reading database ... 5126 files and directories currently installed.)
+Preparing to unpack .../python3_3.10.6-1~22.04_amd64.deb ...
+Unpacking python3 (3.10.6-1~22.04) ...
+Setting up media-types (7.0.0) ...
+Setting up libsqlite3-0:amd64 (3.37.2-2ubuntu0.1) ...
+Setting up libmpdec3:amd64 (2.5.1-2build2) ...
+Setting up readline-common (8.1.2-1) ...
+Setting up libreadline8:amd64 (8.1.2-1) ...
+Setting up libpython3.10-stdlib:amd64 (3.10.6-1~22.04.1) ...
+Setting up libpython3-stdlib:amd64 (3.10.6-1~22.04) ...
+Setting up python3.10 (3.10.6-1~22.04.1) ...
+Setting up python3 (3.10.6-1~22.04) ...
+running python rtupdate hooks for python3.10...
+running python post-rtupdate hooks for python3.10...
+Processing triggers for libc-bin (2.35-0ubuntu3.1) ...
+
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.                           
+                                                                                                          
+Removing intermediate container 55c0ed915bc7                                                              
+ ---> 9e49494d8f79
+Step 3/4 : COPY app.py /opt/app.y
+ ---> f4ecc147f359
+Step 4/4 : CMD python3 /opt/app.py
+ ---> Running in a3e6e1afba6d
+Removing intermediate container a3e6e1afba6d
+ ---> d395bdf57b29
+Successfully built d395bdf57b29
+Successfully tagged ubuntu-python:latest
+                                                                                                          
+┌──(root㉿kali)-[/images/ubuntu-python]
+└─# 
+```
+
+
 
 
 
