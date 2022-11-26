@@ -3370,6 +3370,86 @@ CONTAINER ID   IMAGE               COMMAND                  CREATED         STAT
 
 ```
 
+Outra formar de usar uma diferente linguagem de programacao.
+Exemplo vamos baixar uma imagem oficial do python.
+
+```
+┌──(root㉿kali)-[/images]
+└─# docker images
+REPOSITORY      TAG          IMAGE ID       CREATED             SIZE
+debian-apache   1.0          6005e6fee061   About an hour ago   276MB
+ubuntu-python   latest       ae7845f0f8d0   2 hours ago         148MB
+<none>          <none>       d395bdf57b29   2 hours ago         148MB
+mysql           latest       3842e9cdffd2   10 days ago         538MB
+httpd           latest       8653efc8c72d   11 days ago         145MB
+php             7.4-apache   20a3732f422b   11 days ago         453MB
+debian          10           1036dd279580   11 days ago         114MB
+debian          latest       c31f65dd4cc9   11 days ago         124MB
+ubuntu          latest       a8780b506fa4   3 weeks ago         77.8MB
+debian          9            662c05203bab   5 months ago        101MB
+centos          latest       5d0da3dc9764   14 months ago       231MB
+                                                                                                          
+┌──(root㉿kali)-[/images]
+└─# docker pull python
+Using default tag: latest
+latest: Pulling from library/python
+a8ca11554fce: Already exists 
+e4e46864aba2: Pull complete 
+c85a0be79bfb: Pull complete 
+195ea6a58ca8: Pull complete 
+157f16ed0a0c: Pull complete 
+884b144bec28: Pull complete 
+1c469643b609: Pull complete 
+4c0ac982aa89: Pull complete 
+049db2c7eb8a: Pull complete 
+Digest: sha256:10fc14aa6ae69f69e4c953cffd9b0964843d8c163950491d2138af891377bc1d
+Status: Downloaded newer image for python:latest
+docker.io/library/python:latest
+                                                                                                          
+──(root㉿kali)-[/images]
+└─# cd python 
+                                                                                                          
+┌──(root㉿kali)-[/images/python]
+└─# ls
+app.py
+                                                                                                          
+┌──(root㉿kali)-[/images/python]
+└─# nano dockerfile
+                                                                                                          
+┌──(root㉿kali)-[/images/python]
+└─# cat dockerfile 
+FROM python
+
+WORKDIR /usr/src/app
+
+COPY app.py /usr/src/app
+
+CMD ["python", "./app.py"]
+
+──(root㉿kali)-[/images/python]
+└─# docker image build -t app-python:1.0 .       
+Sending build context to Docker daemon  3.072kB
+Step 1/4 : FROM python
+ ---> ee4e7a0f1c35
+Step 2/4 : WORKDIR /usr/src/app
+ ---> Running in cc05a9d3981d
+Removing intermediate container cc05a9d3981d
+ ---> 942c7e125c79
+Step 3/4 : COPY app.py /usr/src/app
+ ---> 36147e38479d
+Step 4/4 : CMD ["python", "./app.py"]
+ ---> Running in c1717e4935d9
+Removing intermediate container c1717e4935d9
+ ---> 377b72ffbce6
+Successfully built 377b72ffbce6
+Successfully tagged app-python:1.0
+                                                                                                          
+┌──(root㉿kali)-[/images/python]
+└─# 
+
+
+
+```
 
 
 
