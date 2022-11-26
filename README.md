@@ -1659,8 +1659,11 @@ Os containers "ubuntu-A" e "ubuntu-B" está na rede **"IPv4Address": "172.18.0.2
 ```
 
 Teste de comunicao entre o "ubuntu-A" com o "ubuntu-B" e "mysql-A".
+
 Obsever que entre o "ubuntu-A" e "ubuntu-B" comunicação com sucesso pois eles está isolado.
+
 Mas no ultimo teste com o "mysql-A" não teve comunicação pois está em outra rede!.
+
 Dessa forma isolamos os containers.
 
 ```
@@ -1741,6 +1744,48 @@ PING 172.17.0.3 (172.17.0.3) 56(84) bytes of data.
 3 packets transmitted, 0 received, 100% packet loss, time 2048ms
 
 root@c962f206cdca:/# 
+```
+
+Excluindo uma rede.
+
+```
+┌──(root㉿kali)-[/home/kali]
+└─# docker ps                                                    
+CONTAINER ID   IMAGE     COMMAND                  CREATED             STATUS             PORTS                                                  NAMES
+53ff3ae78011   ubuntu    "bash"                   22 minutes ago      Up 22 minutes                                                             ubuntu-B
+c962f206cdca   ubuntu    "bash"                   32 minutes ago      Up 32 minutes                                                             ubuntu-A
+e7ffdcb19cad   mysql     "docker-entrypoint.s…"   About an hour ago   Up About an hour   0.0.0.0:3306->3306/tcp, :::3306->3306/tcp, 33060/tcp   mysql-A
+e42fa71d93af   ubuntu    "bash"                   2 hours ago         Up 43 minutes                                                             ubuntu-C
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# docker rm -f ubuntu-A ubuntu-B                               
+ubuntu-A
+ubuntu-B
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# docker network --help         
+
+Usage:  docker network COMMAND
+
+Manage networks
+
+Commands:
+  connect     Connect a container to a network
+  create      Create a network
+  disconnect  Disconnect a container from a network
+  inspect     Display detailed information on one or more networks
+  ls          List networks
+  prune       Remove all unused networks
+  rm          Remove one or more networks
+
+Run 'docker network COMMAND --help' for more information on a command.
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# docker network rm minha-rede
+minha-rede
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# 
 ```
 
 
