@@ -1506,7 +1506,7 @@ e42fa71d93af   ubuntu    "bash"                   About an hour ago   Up 11 minu
 └─# 
 ```
 
-Ao consultar a nossa rede "minha-rede" observer que o container criado ja foi associado a rede com o * "IPv4Address": "172.18.0.2/16"*
+Ao consultar a nossa rede "minha-rede" observer que o container criado ja foi associado a rede com o **"IPv4Address": "172.18.0.2/16"**
 
 ```
 ┌──(root㉿kali)-[/home/kali]
@@ -1552,6 +1552,77 @@ Ao consultar a nossa rede "minha-rede" observer que o container criado ja foi as
                                                                                                           
 ┌──(root㉿kali)-[/home/kali]
 └─# 
+```
+
+Criando mais um container para a rede "minha-rede", observer que o container criado ja foi associado a rede com outro ip  **"IPv4Address": "172.18.0.3/16"**.
+
+```
+┌──(root㉿kali)-[/home/kali]
+└─# docker run -dti --name ubuntu-B --network minha-rede ubuntu  
+53ff3ae78011f4b847a9b28626f2f99da912808fe90cd4612a2326518a1c72e6
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# docker ps                                                    
+CONTAINER ID   IMAGE     COMMAND                  CREATED             STATUS          PORTS                                                  NAMES
+53ff3ae78011   ubuntu    "bash"                   5 seconds ago       Up 3 seconds                                                           ubuntu-B
+c962f206cdca   ubuntu    "bash"                   10 minutes ago      Up 10 minutes                                                          ubuntu-A
+e7ffdcb19cad   mysql     "docker-entrypoint.s…"   39 minutes ago      Up 39 minutes   0.0.0.0:3306->3306/tcp, :::3306->3306/tcp, 33060/tcp   mysql-A
+e42fa71d93af   ubuntu    "bash"                   About an hour ago   Up 21 minutes                                                          ubuntu-C
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# 
+
+┌──(root㉿kali)-[/home/kali]
+└─# docker network inspect minha-rede
+[
+    {
+        "Name": "minha-rede",
+        "Id": "6f97c15967793dcd4a1023fcbae11484feece6671409d4068a6dce42d9ce1069",
+        "Created": "2022-11-26T06:48:14.635163039-05:00",
+        "Scope": "local",
+        "Driver": "bridge",
+        "EnableIPv6": false,
+        "IPAM": {
+            "Driver": "default",
+            "Options": {},
+            "Config": [
+                {
+                    "Subnet": "172.18.0.0/16",
+                    "Gateway": "172.18.0.1"
+                }
+            ]
+        },
+        "Internal": false,
+        "Attachable": false,
+        "Ingress": false,
+        "ConfigFrom": {
+            "Network": ""
+        },
+        "ConfigOnly": false,
+        "Containers": {
+            "53ff3ae78011f4b847a9b28626f2f99da912808fe90cd4612a2326518a1c72e6": {
+                "Name": "ubuntu-B",
+                "EndpointID": "004d246c3232abc6c8070963d187dcd7d301ac44d6b7beac7f45ddfb42e0667f",
+                "MacAddress": "02:42:ac:12:00:03",
+                "IPv4Address": "172.18.0.3/16",
+                "IPv6Address": ""
+            },
+            "c962f206cdca26d0675537514096fff05703996c65383c374ae11b21d24b0fc2": {
+                "Name": "ubuntu-A",
+                "EndpointID": "89b58f3e7c496f1f392f14e7bf5a6f25d791f6883e9548ffea2a3f4a975df8d5",
+                "MacAddress": "02:42:ac:12:00:02",
+                "IPv4Address": "172.18.0.2/16",
+                "IPv6Address": ""
+            }
+        },
+        "Options": {},
+        "Labels": {}
+    }
+]
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# 
+
 ```
 
 
