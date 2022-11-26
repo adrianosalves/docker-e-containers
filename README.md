@@ -2159,6 +2159,802 @@ Adriano
 
 ```
 
+## Criando uma imagem personalizada do Apache
+
+Vamos criar uma imagem mais complexa com um servidor web, html e css com uma aplicação e outros arquivos.
+
+```
+──(root㉿kali)-[/images/ubuntu-python]
+└─# cd ..           
+                                                                                                          
+┌──(root㉿kali)-[/images]
+└─# ls
+ubuntu-python
+                                                                                                          
+┌──(root㉿kali)-[/images]
+└─# mkdir debian-apache
+                                                                                                          
+┌──(root㉿kali)-[/images]
+└─# cd debian-apache 
+                                                                                                          
+┌──(root㉿kali)-[/images/debian-apache]
+└─# ls
+                                                                                                          
+┌──(root㉿kali)-[/images/debian-apache]
+└─# mkdir site         
+                                                                                                          
+┌──(root㉿kali)-[/images/debian-apache]
+└─# cd site         
+                                                                                                          
+┌──(root㉿kali)-[/images/debian-apache/site]
+└─# ls
+                                                                                                          
+┌──(root㉿kali)-[/images/debian-apache/site]
+└─# wget http?//site136863367.hospedagemdesites.ws/site1.zip
+--2022-11-26 08:57:46--  http://http/?//site136863367.hospedagemdesites.ws/site1.zip
+Resolving http (http)... failed: Name or service not known.
+wget: unable to resolve host address ‘http’
+                                                                                                          
+┌──(root㉿kali)-[/images/debian-apache/site]
+└─# wget http://site136863367.hospedagemdesites.ws/site1.zip
+--2022-11-26 08:57:52--  http://site136863367.hospedagemdesites.ws/site1.zip
+Resolving site136863367.hospedagemdesites.ws (site136863367.hospedagemdesites.ws)... failed: Name or service not known.
+wget: unable to resolve host address ‘site136863367.hospedagemdesites.ws’
+                                                                                                          
+┌──(root㉿kali)-[/images/debian-apache/site]
+└─# ls
+                                                                                                          
+┌──(root㉿kali)-[/images/debian-apache/site]
+└─# wget http://site1368633667.hospedagemdesites.ws/site1.zip
+--2022-11-26 08:59:08--  http://site1368633667.hospedagemdesites.ws/site1.zip
+Resolving site1368633667.hospedagemdesites.ws (site1368633667.hospedagemdesites.ws)... 186.202.153.153
+Connecting to site1368633667.hospedagemdesites.ws (site1368633667.hospedagemdesites.ws)|186.202.153.153|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 17781671 (17M) [application/zip]
+Saving to: ‘site1.zip’
+
+site1.zip                  100%[======================================>]  16.96M   416KB/s    in 38s     
+
+2022-11-26 08:59:47 (457 KB/s) - ‘site1.zip’ saved [17781671/17781671]
+
+┌──(root㉿kali)-[/images/debian-apache/site]
+└─# unzip site1.zip     
+Archive:  site1.zip
+  inflating: about.html              
+  inflating: blog.html               
+  inflating: blog-single.html        
+  inflating: contact.html            
+   creating: css/
+  inflating: css/style.css           
+  inflating: css/style.css.map       
+  inflating: elements.html           
+   creating: img/
+  inflating: img/.DS_Store           
+  inflating: img/about.png           
+   creating: img/blog/
+  inflating: img/blog/.DS_Store      
+  inflating: img/blog/ads-banner.jpg  
+  inflating: img/blog/blog-home-banner.jpg  
+  inflating: img/blog/c1.jpg         
+  inflating: img/blog/c2.jpg         
+  inflating: img/blog/c3.jpg         
+  inflating: img/blog/c4.jpg         
+  inflating: img/blog/c5.jpg         
+  inflating: img/blog/c6.jpg         
+  inflating: img/blog/cat-widget1.jpg  
+  inflating: img/blog/cat-widget2.jpg  
+  inflating: img/blog/cat-widget3.jpg  
+  inflating: img/blog/feature-img1.jpg  
+  inflating: img/blog/feature-img2.jpg  
+  inflating: img/blog/feature-img3.jpg  
+  inflating: img/blog/feature-img4.jpg  
+  inflating: img/blog/feature-img5.jpg  
+  inflating: img/blog/next.jpg       
+  inflating: img/blog/post-img1.jpg  
+  inflating: img/blog/post-img2.jpg  
+  inflating: img/blog/pp1.jpg        
+  inflating: img/blog/pp2.jpg        
+  inflating: img/blog/pp3.jpg        
+  inflating: img/blog/pp4.jpg        
+  inflating: img/blog/prev.jpg       
+  inflating: img/blog/s-img.jpg      
+  inflating: img/blog/user-info.png  
+  inflating: img/blog1.png           
+  inflating: img/blog2.png           
+  inflating: img/blog3.png           
+  inflating: img/blog4.png           
+  inflating: img/blog5.png           
+   creating: img/elements/
+  inflating: img/elements/.DS_Store  
+  inflating: img/elements/a.jpg      
+  inflating: img/elements/a2.jpg     
+  inflating: img/elements/d.jpg      
+  inflating: img/elements/disabled-check.png  
+  inflating: img/elements/disabled-radio.png  
+  inflating: img/elements/f1.jpg     
+  inflating: img/elements/f2.jpg     
+  inflating: img/elements/f3.jpg     
+  inflating: img/elements/f4.jpg     
+  inflating: img/elements/f5.jpg     
+  inflating: img/elements/f6.jpg     
+  inflating: img/elements/f7.jpg     
+  inflating: img/elements/f8.jpg     
+  inflating: img/elements/g1.jpg     
+  inflating: img/elements/g2.jpg     
+  inflating: img/elements/g3.jpg     
+  inflating: img/elements/g4.jpg     
+  inflating: img/elements/g5.jpg     
+  inflating: img/elements/g6.jpg     
+  inflating: img/elements/g7.jpg     
+  inflating: img/elements/g8.jpg     
+  inflating: img/elements/primary-check.png  
+  inflating: img/elements/primary-radio.png  
+  inflating: img/elements/success-check.png  
+  inflating: img/elements/success-radio.png  
+  inflating: img/elements/user1.png  
+  inflating: img/elements/user2.png  
+  inflating: img/footer-bg.png       
+  inflating: img/hero-1.png          
+  inflating: img/hero-2.png          
+  inflating: img/hero-3.png          
+   creating: img/icons/
+  inflating: img/logo.png            
+  inflating: img/portfolio1.png      
+  inflating: img/portfolio2.png      
+  inflating: img/portfolio3.png      
+  inflating: img/portfolio4.png      
+  inflating: img/project-bg.png      
+  inflating: img/testimonial.png     
+  inflating: index.html              
+   creating: js/
+  inflating: js/main.js              
+  inflating: projects.html           
+   creating: scss/
+  inflating: scss/.DS_Store          
+  inflating: scss/style.scss         
+   creating: scss/themes/
+  inflating: scss/themes/_about.scss  
+  inflating: scss/themes/_blog.scss  
+  inflating: scss/themes/_breadcrumb.scss  
+  inflating: scss/themes/_btn.scss   
+  inflating: scss/themes/_contact.scss  
+  inflating: scss/themes/_elements.scss  
+  inflating: scss/themes/_footer.scss  
+  inflating: scss/themes/_form.scss  
+  inflating: scss/themes/_global.scss  
+  inflating: scss/themes/_header.scss  
+  inflating: scss/themes/_hero.scss  
+  inflating: scss/themes/_mixin.scss  
+  inflating: scss/themes/_overview.scss  
+  inflating: scss/themes/_section-intro.scss  
+  inflating: scss/themes/_service.scss  
+  inflating: scss/themes/_slider.scss  
+  inflating: scss/themes/_social-icons.scss  
+  inflating: scss/themes/_tips.scss  
+  inflating: scss/themes/_variables.scss  
+  inflating: service.html            
+   creating: Sparsh Architecture - Doc/
+  inflating: Sparsh Architecture - Doc/.DS_Store  
+   creating: Sparsh Architecture - Doc/css/
+  inflating: Sparsh Architecture - Doc/css/.DS_Store  
+  inflating: Sparsh Architecture - Doc/css/font-awesome.min.css  
+  inflating: Sparsh Architecture - Doc/css/main.css  
+  inflating: Sparsh Architecture - Doc/css/normalize.min.css  
+   creating: Sparsh Architecture - Doc/fonts/
+  inflating: Sparsh Architecture - Doc/fonts/.DS_Store  
+  inflating: Sparsh Architecture - Doc/fonts/FontAwesome.otf  
+  inflating: Sparsh Architecture - Doc/fonts/fontawesome-webfont.eot  
+  inflating: Sparsh Architecture - Doc/fonts/fontawesome-webfont.svg  
+  inflating: Sparsh Architecture - Doc/fonts/fontawesome-webfont.ttf  
+  inflating: Sparsh Architecture - Doc/fonts/fontawesome-webfont.woff  
+   creating: Sparsh Architecture - Doc/img/
+  inflating: Sparsh Architecture - Doc/img/.DS_Store  
+  inflating: Sparsh Architecture - Doc/img/logo.png  
+  inflating: Sparsh Architecture - Doc/index.html  
+   creating: Sparsh Architecture - Doc/js/
+  inflating: Sparsh Architecture - Doc/js/.DS_Store  
+  inflating: Sparsh Architecture - Doc/js/custom.js  
+  inflating: Sparsh Architecture - Doc/js/jquery.nav.js  
+  inflating: Sparsh Architecture - Doc/js/jquery-1.11.0.min.js  
+   creating: Sparsh Architecture - Doc/syntax-highlighter/
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/.DS_Store  
+   creating: Sparsh Architecture - Doc/syntax-highlighter/scripts/
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/scripts/shAutoloader.js  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/scripts/shBrushAppleScript.js  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/scripts/shBrushAS3.js  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/scripts/shBrushBash.js  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/scripts/shBrushColdFusion.js  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/scripts/shBrushCpp.js  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/scripts/shBrushCSharp.js  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/scripts/shBrushCss.js  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/scripts/shBrushDelphi.js  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/scripts/shBrushDiff.js  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/scripts/shBrushErlang.js  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/scripts/shBrushGroovy.js  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/scripts/shBrushJava.js  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/scripts/shBrushJavaFX.js  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/scripts/shBrushJScript.js  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/scripts/shBrushPerl.js  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/scripts/shBrushPhp.js  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/scripts/shBrushPlain.js  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/scripts/shBrushPowerShell.js  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/scripts/shBrushPython.js  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/scripts/shBrushRuby.js  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/scripts/shBrushSass.js  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/scripts/shBrushScala.js  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/scripts/shBrushSql.js  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/scripts/shBrushVb.js  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/scripts/shBrushXml.js  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/scripts/shCore.js  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/scripts/shLegacy.js  
+   creating: Sparsh Architecture - Doc/syntax-highlighter/styles/
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/styles/shCore.css  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/styles/shCoreDefault.css  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/styles/shCoreDjango.css  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/styles/shCoreEclipse.css  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/styles/shCoreEmacs.css  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/styles/shCoreFadeToGrey.css  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/styles/shCoreMDUltra.css  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/styles/shCoreMidnight.css  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/styles/shCoreRDark.css  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/styles/shThemeDefault.css  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/styles/shThemeDjango.css  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/styles/shThemeEclipse.css  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/styles/shThemeEmacs.css  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/styles/shThemeFadeToGrey.css  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/styles/shThemeMDUltra.css  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/styles/shThemeMidnight.css  
+  inflating: Sparsh Architecture - Doc/syntax-highlighter/styles/shThemeRDark.css  
+   creating: vendor/
+  inflating: vendor/.DS_Store        
+   creating: vendor/bootstrap/
+  inflating: vendor/bootstrap/bootstrap.bundle.min.js  
+  inflating: vendor/bootstrap/bootstrap.min.css  
+   creating: vendor/flat-icon/
+  inflating: vendor/flat-icon/_flaticon.scss  
+  inflating: vendor/flat-icon/backup.txt  
+  inflating: vendor/flat-icon/debug.log  
+  inflating: vendor/flat-icon/flaticon.css  
+  inflating: vendor/flat-icon/Flaticon.eot  
+  inflating: vendor/flat-icon/flaticon.html  
+  inflating: vendor/flat-icon/Flaticon.svg  
+  inflating: vendor/flat-icon/Flaticon.ttf  
+  inflating: vendor/flat-icon/Flaticon.woff  
+   creating: vendor/flat-icon/license/
+  inflating: vendor/flat-icon/license/license.html  
+   creating: vendor/fonts/
+  inflating: vendor/fonts/CircularStd-Black.otf  
+  inflating: vendor/fonts/CircularStd-BlackItalic.otf  
+  inflating: vendor/fonts/CircularStd-Bold.otf  
+  inflating: vendor/fonts/CircularStd-BoldItalic.otf  
+  inflating: vendor/fonts/CircularStd-Book.otf  
+  inflating: vendor/fonts/CircularStd-BookItalic.otf  
+  inflating: vendor/fonts/CircularStd-Medium.otf  
+  inflating: vendor/fonts/CircularStd-MediumItalic.otf  
+   creating: vendor/iconfont/
+  inflating: vendor/iconfont/codepoints  
+  inflating: vendor/iconfont/debug.log  
+  inflating: vendor/iconfont/material-icons.css  
+  inflating: vendor/iconfont/MaterialIcons-Regular.eot  
+  inflating: vendor/iconfont/MaterialIcons-Regular.ijmap  
+  inflating: vendor/iconfont/MaterialIcons-Regular.svg  
+  inflating: vendor/iconfont/MaterialIcons-Regular.ttf  
+  inflating: vendor/iconfont/MaterialIcons-Regular.woff  
+  inflating: vendor/iconfont/MaterialIcons-Regular.woff2  
+  inflating: vendor/iconfont/README.md  
+   creating: vendor/jquery/
+  inflating: vendor/jquery/jquery-3.2.1.min.js  
+   creating: vendor/js/
+  inflating: vendor/js/main.js       
+   creating: vendor/owl-carousel/
+  inflating: vendor/owl-carousel/owl.carousel.min.css  
+  inflating: vendor/owl-carousel/owl.carousel.min.js  
+  inflating: vendor/owl-carousel/owl.theme.default.min.css  
+   creating: vendor/scripts/
+  inflating: vendor/scripts/App.js   
+   creating: vendor/scripts/modules/
+  inflating: vendor/scripts/modules/Slider.js  
+  inflating: vendor/scripts/Vendor.js  
+   creating: vendor/simplyCountdown/
+  inflating: vendor/simplyCountdown/.gitignore  
+  inflating: vendor/simplyCountdown/bower.json  
+   creating: vendor/simplyCountdown/css/
+  inflating: vendor/simplyCountdown/css/demo.css  
+   creating: vendor/simplyCountdown/css/demo-only/
+  inflating: vendor/simplyCountdown/css/demo-only/prism.css  
+   creating: vendor/simplyCountdown/css/less/
+  inflating: vendor/simplyCountdown/css/less/demo.less  
+  inflating: vendor/simplyCountdown/css/less/simplyCountdown.theme.default.less  
+  inflating: vendor/simplyCountdown/css/less/simplyCountdown.theme.losange.less  
+  inflating: vendor/simplyCountdown/css/simplyCountdown.theme.custom.css  
+  inflating: vendor/simplyCountdown/css/simplyCountdown.theme.default.css  
+  inflating: vendor/simplyCountdown/css/simplyCountdown.theme.losange.css  
+   creating: vendor/simplyCountdown/dev/
+  inflating: vendor/simplyCountdown/dev/simplyCountdown.js  
+  inflating: vendor/simplyCountdown/gulpfile.js  
+  inflating: vendor/simplyCountdown/index.html  
+  inflating: vendor/simplyCountdown/LICENSE  
+  inflating: vendor/simplyCountdown/package.json  
+  inflating: vendor/simplyCountdown/README.md  
+   creating: vendor/simplyCountdown/dist/
+  inflating: vendor/simplyCountdown/dist/simplyCountdown.min.js  
+   creating: vendor/themify-icons/
+   creating: vendor/themify-icons/demo-files/
+  inflating: vendor/themify-icons/demo-files/demo.css  
+   creating: vendor/themify-icons/fonts/
+  inflating: vendor/themify-icons/fonts/themify.eot  
+  inflating: vendor/themify-icons/fonts/themify.svg  
+  inflating: vendor/themify-icons/fonts/themify.ttf  
+  inflating: vendor/themify-icons/fonts/themify.woff  
+   creating: vendor/themify-icons/ie7/
+  inflating: vendor/themify-icons/ie7/ie7.css  
+  inflating: vendor/themify-icons/ie7/ie7.js  
+  inflating: vendor/themify-icons/index.html  
+  inflating: vendor/themify-icons/readme.txt  
+   creating: vendor/themify-icons/SVG/
+  inflating: vendor/themify-icons/SVG/agenda.svg  
+  inflating: vendor/themify-icons/SVG/alarm-clock.svg  
+  inflating: vendor/themify-icons/SVG/alert.svg  
+  inflating: vendor/themify-icons/SVG/align-center.svg  
+  inflating: vendor/themify-icons/SVG/align-justify.svg  
+  inflating: vendor/themify-icons/SVG/align-left.svg  
+  inflating: vendor/themify-icons/SVG/align-right.svg  
+  inflating: vendor/themify-icons/SVG/anchor.svg  
+  inflating: vendor/themify-icons/SVG/android.svg  
+  inflating: vendor/themify-icons/SVG/angle-double-down.svg  
+  inflating: vendor/themify-icons/SVG/angle-double-left.svg  
+  inflating: vendor/themify-icons/SVG/angle-double-right.svg  
+  inflating: vendor/themify-icons/SVG/angle-double-up.svg  
+  inflating: vendor/themify-icons/SVG/angle-down.svg  
+  inflating: vendor/themify-icons/SVG/angle-left.svg  
+  inflating: vendor/themify-icons/SVG/angle-right.svg  
+  inflating: vendor/themify-icons/SVG/angle-up.svg  
+  inflating: vendor/themify-icons/SVG/announcement.svg  
+  inflating: vendor/themify-icons/SVG/apple.svg  
+  inflating: vendor/themify-icons/SVG/archive.svg  
+  inflating: vendor/themify-icons/SVG/arrow.svg  
+  inflating: vendor/themify-icons/SVG/arrow-circle-down.svg  
+  inflating: vendor/themify-icons/SVG/arrow-circle-left.svg  
+  inflating: vendor/themify-icons/SVG/arrow-circle-right.svg  
+  inflating: vendor/themify-icons/SVG/arrow-circle-up.svg  
+  inflating: vendor/themify-icons/SVG/arrow-down.svg  
+  inflating: vendor/themify-icons/SVG/arrow-left.svg  
+  inflating: vendor/themify-icons/SVG/arrow-right.svg  
+  inflating: vendor/themify-icons/SVG/arrows-corner.svg  
+  inflating: vendor/themify-icons/SVG/arrows-horizontal.svg  
+  inflating: vendor/themify-icons/SVG/arrows-vertical.svg  
+  inflating: vendor/themify-icons/SVG/arrow-top-left.svg  
+  inflating: vendor/themify-icons/SVG/arrow-top-right.svg  
+  inflating: vendor/themify-icons/SVG/arrow-up.svg  
+  inflating: vendor/themify-icons/SVG/back-left.svg  
+  inflating: vendor/themify-icons/SVG/back-right.svg  
+  inflating: vendor/themify-icons/SVG/bag.svg  
+  inflating: vendor/themify-icons/SVG/bar-chart.svg  
+  inflating: vendor/themify-icons/SVG/bar-chart-alt.svg  
+  inflating: vendor/themify-icons/SVG/basketball.svg  
+  inflating: vendor/themify-icons/SVG/bell.svg  
+  inflating: vendor/themify-icons/SVG/blackboard.svg  
+  inflating: vendor/themify-icons/SVG/bolt.svg  
+  inflating: vendor/themify-icons/SVG/bolt-alt.svg  
+  inflating: vendor/themify-icons/SVG/book.svg  
+  inflating: vendor/themify-icons/SVG/bookmark.svg  
+  inflating: vendor/themify-icons/SVG/bookmark-alt.svg  
+  inflating: vendor/themify-icons/SVG/briefcase.svg  
+  inflating: vendor/themify-icons/SVG/brush.svg  
+  inflating: vendor/themify-icons/SVG/brush-alt.svg  
+  inflating: vendor/themify-icons/SVG/calendar.svg  
+  inflating: vendor/themify-icons/SVG/camera.svg  
+  inflating: vendor/themify-icons/SVG/car.svg  
+  inflating: vendor/themify-icons/SVG/check.svg  
+  inflating: vendor/themify-icons/SVG/check-box.svg  
+  inflating: vendor/themify-icons/SVG/clip.svg  
+  inflating: vendor/themify-icons/SVG/clipboard.svg  
+  inflating: vendor/themify-icons/SVG/close.svg  
+  inflating: vendor/themify-icons/SVG/cloud.svg  
+  inflating: vendor/themify-icons/SVG/cloud-down.svg  
+  inflating: vendor/themify-icons/SVG/cloud-up.svg  
+  inflating: vendor/themify-icons/SVG/comment.svg  
+  inflating: vendor/themify-icons/SVG/comment-alt.svg  
+  inflating: vendor/themify-icons/SVG/comments.svg  
+  inflating: vendor/themify-icons/SVG/comments-smiley.svg  
+  inflating: vendor/themify-icons/SVG/control-backward.svg  
+  inflating: vendor/themify-icons/SVG/control-eject.svg  
+  inflating: vendor/themify-icons/SVG/control-forward.svg  
+  inflating: vendor/themify-icons/SVG/control-pause.svg  
+  inflating: vendor/themify-icons/SVG/control-play.svg  
+  inflating: vendor/themify-icons/SVG/control-record.svg  
+  inflating: vendor/themify-icons/SVG/control-shuffle.svg  
+  inflating: vendor/themify-icons/SVG/control-skip-backward.svg  
+  inflating: vendor/themify-icons/SVG/control-skip-forward.svg  
+  inflating: vendor/themify-icons/SVG/control-stop.svg  
+  inflating: vendor/themify-icons/SVG/credit-card.svg  
+  inflating: vendor/themify-icons/SVG/crown.svg  
+  inflating: vendor/themify-icons/SVG/css3.svg  
+  inflating: vendor/themify-icons/SVG/cup.svg  
+  inflating: vendor/themify-icons/SVG/cut.svg  
+  inflating: vendor/themify-icons/SVG/dashboard.svg  
+  inflating: vendor/themify-icons/SVG/desktop.svg  
+  inflating: vendor/themify-icons/SVG/direction.svg  
+  inflating: vendor/themify-icons/SVG/direction-alt.svg  
+  inflating: vendor/themify-icons/SVG/download.svg  
+  inflating: vendor/themify-icons/SVG/dribbble.svg  
+  inflating: vendor/themify-icons/SVG/dropbox.svg  
+  inflating: vendor/themify-icons/SVG/dropbox-alt.svg  
+  inflating: vendor/themify-icons/SVG/drupal.svg  
+  inflating: vendor/themify-icons/SVG/email.svg  
+  inflating: vendor/themify-icons/SVG/envelope.svg  
+  inflating: vendor/themify-icons/SVG/eraser.svg  
+  inflating: vendor/themify-icons/SVG/exchange-vertical.svg  
+  inflating: vendor/themify-icons/SVG/export.svg  
+  inflating: vendor/themify-icons/SVG/eye.svg  
+  inflating: vendor/themify-icons/SVG/facebook.svg  
+  inflating: vendor/themify-icons/SVG/face-sad.svg  
+  inflating: vendor/themify-icons/SVG/face-smile.svg  
+  inflating: vendor/themify-icons/SVG/file.svg  
+  inflating: vendor/themify-icons/SVG/files.svg  
+  inflating: vendor/themify-icons/SVG/filter.svg  
+  inflating: vendor/themify-icons/SVG/flag.svg  
+  inflating: vendor/themify-icons/SVG/flag-alt.svg  
+  inflating: vendor/themify-icons/SVG/flag-alt-2.svg  
+  inflating: vendor/themify-icons/SVG/flickr.svg  
+  inflating: vendor/themify-icons/SVG/flickr-alt.svg  
+  inflating: vendor/themify-icons/SVG/folder.svg  
+  inflating: vendor/themify-icons/SVG/fullscreen.svg  
+  inflating: vendor/themify-icons/SVG/gallery.svg  
+  inflating: vendor/themify-icons/SVG/game.svg  
+  inflating: vendor/themify-icons/SVG/gift.svg  
+  inflating: vendor/themify-icons/SVG/github.svg  
+  inflating: vendor/themify-icons/SVG/google.svg  
+  inflating: vendor/themify-icons/SVG/hand-drag.svg  
+  inflating: vendor/themify-icons/SVG/hand-open.svg  
+  inflating: vendor/themify-icons/SVG/hand-point-down.svg  
+  inflating: vendor/themify-icons/SVG/hand-point-left.svg  
+  inflating: vendor/themify-icons/SVG/hand-point-right.svg  
+  inflating: vendor/themify-icons/SVG/hand-point-up.svg  
+  inflating: vendor/themify-icons/SVG/hand-stop.svg  
+  inflating: vendor/themify-icons/SVG/harddrive.svg  
+  inflating: vendor/themify-icons/SVG/harddrives.svg  
+  inflating: vendor/themify-icons/SVG/headphone.svg  
+  inflating: vendor/themify-icons/SVG/headphone-alt.svg  
+  inflating: vendor/themify-icons/SVG/heart.svg  
+  inflating: vendor/themify-icons/SVG/heart-broken.svg  
+  inflating: vendor/themify-icons/SVG/help.svg  
+  inflating: vendor/themify-icons/SVG/help-alt.svg  
+  inflating: vendor/themify-icons/SVG/home.svg  
+  inflating: vendor/themify-icons/SVG/html5.svg  
+  inflating: vendor/themify-icons/SVG/hummer.svg  
+  inflating: vendor/themify-icons/SVG/id-badge.svg  
+  inflating: vendor/themify-icons/SVG/image.svg  
+  inflating: vendor/themify-icons/SVG/import.svg  
+  inflating: vendor/themify-icons/SVG/infinite.svg  
+  inflating: vendor/themify-icons/SVG/info.svg  
+  inflating: vendor/themify-icons/SVG/info-alt.svg  
+  inflating: vendor/themify-icons/SVG/ink-pen.svg  
+  inflating: vendor/themify-icons/SVG/instagram.svg  
+  inflating: vendor/themify-icons/SVG/Italic.svg  
+  inflating: vendor/themify-icons/SVG/joomla.svg  
+  inflating: vendor/themify-icons/SVG/jsfiddle.svg  
+  inflating: vendor/themify-icons/SVG/key.svg  
+  inflating: vendor/themify-icons/SVG/layers.svg  
+  inflating: vendor/themify-icons/SVG/layers-alt.svg  
+  inflating: vendor/themify-icons/SVG/layout.svg  
+  inflating: vendor/themify-icons/SVG/layout-accordion-list.svg  
+  inflating: vendor/themify-icons/SVG/layout-accordion-merged.svg  
+  inflating: vendor/themify-icons/SVG/layout-accordion-separated.svg  
+  inflating: vendor/themify-icons/SVG/layout-column2.svg  
+  inflating: vendor/themify-icons/SVG/layout-column2-alt.svg  
+  inflating: vendor/themify-icons/SVG/layout-column3.svg  
+  inflating: vendor/themify-icons/SVG/layout-column3-alt.svg  
+  inflating: vendor/themify-icons/SVG/layout-column4.svg  
+  inflating: vendor/themify-icons/SVG/layout-column4-alt.svg  
+  inflating: vendor/themify-icons/SVG/layout-cta-btn-left.svg  
+  inflating: vendor/themify-icons/SVG/layout-cta-btn-right.svg  
+  inflating: vendor/themify-icons/SVG/layout-cta-center.svg  
+  inflating: vendor/themify-icons/SVG/layout-cta-left.svg  
+  inflating: vendor/themify-icons/SVG/layout-cta-right.svg  
+  inflating: vendor/themify-icons/SVG/layout-grid2.svg  
+  inflating: vendor/themify-icons/SVG/layout-grid2-alt.svg  
+  inflating: vendor/themify-icons/SVG/layout-grid2-thumb.svg  
+  inflating: vendor/themify-icons/SVG/layout-grid3.svg  
+  inflating: vendor/themify-icons/SVG/layout-grid3-alt.svg  
+  inflating: vendor/themify-icons/SVG/layout-grid4.svg  
+  inflating: vendor/themify-icons/SVG/layout-grid4-alt.svg  
+  inflating: vendor/themify-icons/SVG/layout-line-solid.svg  
+  inflating: vendor/themify-icons/SVG/layout-list-large-image.svg  
+  inflating: vendor/themify-icons/SVG/layout-list-post.svg  
+  inflating: vendor/themify-icons/SVG/layout-list-thumb.svg  
+  inflating: vendor/themify-icons/SVG/layout-list-thumb-alt.svg  
+  inflating: vendor/themify-icons/SVG/layout-media-center.svg  
+  inflating: vendor/themify-icons/SVG/layout-media-center-alt.svg  
+  inflating: vendor/themify-icons/SVG/layout-media-left.svg  
+  inflating: vendor/themify-icons/SVG/layout-media-left-alt.svg  
+  inflating: vendor/themify-icons/SVG/layout-media-overlay.svg  
+  inflating: vendor/themify-icons/SVG/layout-media-overlay-alt.svg  
+  inflating: vendor/themify-icons/SVG/layout-media-overlay-alt-2.svg  
+  inflating: vendor/themify-icons/SVG/layout-media-right.svg  
+  inflating: vendor/themify-icons/SVG/layout-media-right-alt.svg  
+  inflating: vendor/themify-icons/SVG/layout-menu.svg  
+  inflating: vendor/themify-icons/SVG/layout-menu-full.svg  
+  inflating: vendor/themify-icons/SVG/layout-menu-separated.svg  
+  inflating: vendor/themify-icons/SVG/layout-menu-v.svg  
+  inflating: vendor/themify-icons/SVG/layout-placeholder.svg  
+  inflating: vendor/themify-icons/SVG/layout-sidebar-2.svg  
+  inflating: vendor/themify-icons/SVG/layout-sidebar-left.svg  
+  inflating: vendor/themify-icons/SVG/layout-sidebar-none.svg  
+  inflating: vendor/themify-icons/SVG/layout-sidebar-right.svg  
+  inflating: vendor/themify-icons/SVG/layout-slider.svg  
+  inflating: vendor/themify-icons/SVG/layout-slider-alt.svg  
+  inflating: vendor/themify-icons/SVG/layout-tab.svg  
+  inflating: vendor/themify-icons/SVG/layout-tab-min.svg  
+  inflating: vendor/themify-icons/SVG/layout-tab-v.svg  
+  inflating: vendor/themify-icons/SVG/layout-tab-window.svg  
+  inflating: vendor/themify-icons/SVG/layout-width-default.svg  
+  inflating: vendor/themify-icons/SVG/layout-width-default-alt.svg  
+  inflating: vendor/themify-icons/SVG/layout-width-full.svg  
+  inflating: vendor/themify-icons/SVG/light-bulb.svg  
+  inflating: vendor/themify-icons/SVG/line-dashed.svg  
+  inflating: vendor/themify-icons/SVG/line-dotted.svg  
+  inflating: vendor/themify-icons/SVG/line-double.svg  
+  inflating: vendor/themify-icons/SVG/link.svg  
+  inflating: vendor/themify-icons/SVG/linkedin.svg  
+  inflating: vendor/themify-icons/SVG/linux.svg  
+  inflating: vendor/themify-icons/SVG/list.svg  
+  inflating: vendor/themify-icons/SVG/list-ol.svg  
+  inflating: vendor/themify-icons/SVG/location-arrow.svg  
+  inflating: vendor/themify-icons/SVG/location-pin.svg  
+  inflating: vendor/themify-icons/SVG/lock.svg  
+  inflating: vendor/themify-icons/SVG/loop.svg  
+  inflating: vendor/themify-icons/SVG/magnet.svg  
+  inflating: vendor/themify-icons/SVG/map.svg  
+  inflating: vendor/themify-icons/SVG/map-alt.svg  
+  inflating: vendor/themify-icons/SVG/marker.svg  
+  inflating: vendor/themify-icons/SVG/marker-alt.svg  
+  inflating: vendor/themify-icons/SVG/medall.svg  
+  inflating: vendor/themify-icons/SVG/medall-alt.svg  
+  inflating: vendor/themify-icons/SVG/menu.svg  
+  inflating: vendor/themify-icons/SVG/menu-alt.svg  
+  inflating: vendor/themify-icons/SVG/microphone.svg  
+  inflating: vendor/themify-icons/SVG/microphone-alt.svg  
+  inflating: vendor/themify-icons/SVG/microsoft.svg  
+  inflating: vendor/themify-icons/SVG/microsoft-alt.svg  
+  inflating: vendor/themify-icons/SVG/minus.svg  
+  inflating: vendor/themify-icons/SVG/mobile.svg  
+  inflating: vendor/themify-icons/SVG/money.svg  
+  inflating: vendor/themify-icons/SVG/more.svg  
+  inflating: vendor/themify-icons/SVG/more-alt.svg  
+  inflating: vendor/themify-icons/SVG/mouse.svg  
+  inflating: vendor/themify-icons/SVG/mouse-alt.svg  
+  inflating: vendor/themify-icons/SVG/music.svg  
+  inflating: vendor/themify-icons/SVG/music-alt.svg  
+  inflating: vendor/themify-icons/SVG/na.svg  
+  inflating: vendor/themify-icons/SVG/new-window.svg  
+  inflating: vendor/themify-icons/SVG/notepad.svg  
+  inflating: vendor/themify-icons/SVG/package.svg  
+  inflating: vendor/themify-icons/SVG/paint-bucket.svg  
+  inflating: vendor/themify-icons/SVG/paint-roller.svg  
+  inflating: vendor/themify-icons/SVG/palette.svg  
+  inflating: vendor/themify-icons/SVG/panel.svg  
+  inflating: vendor/themify-icons/SVG/paragraph.svg  
+  inflating: vendor/themify-icons/SVG/pencil.svg  
+  inflating: vendor/themify-icons/SVG/pencil-alt.svg  
+  inflating: vendor/themify-icons/SVG/pencil-alt2.svg  
+  inflating: vendor/themify-icons/SVG/pie-chart.svg  
+  inflating: vendor/themify-icons/SVG/pin.svg  
+  inflating: vendor/themify-icons/SVG/pin2.svg  
+  inflating: vendor/themify-icons/SVG/pin-alt.svg  
+  inflating: vendor/themify-icons/SVG/pinterest.svg  
+  inflating: vendor/themify-icons/SVG/pinterest-alt.svg  
+  inflating: vendor/themify-icons/SVG/plug.svg  
+  inflating: vendor/themify-icons/SVG/plus.svg  
+  inflating: vendor/themify-icons/SVG/power-off.svg  
+  inflating: vendor/themify-icons/SVG/printer.svg  
+  inflating: vendor/themify-icons/SVG/pulse.svg  
+  inflating: vendor/themify-icons/SVG/quote-left.svg  
+  inflating: vendor/themify-icons/SVG/quote-right.svg  
+  inflating: vendor/themify-icons/SVG/receipt.svg  
+  inflating: vendor/themify-icons/SVG/reddit.svg  
+  inflating: vendor/themify-icons/SVG/reload.svg  
+  inflating: vendor/themify-icons/SVG/rocket.svg  
+  inflating: vendor/themify-icons/SVG/rss.svg  
+  inflating: vendor/themify-icons/SVG/rss-alt.svg  
+  inflating: vendor/themify-icons/SVG/ruler.svg  
+  inflating: vendor/themify-icons/SVG/ruler-alt.svg  
+  inflating: vendor/themify-icons/SVG/ruler-alt-2.svg  
+  inflating: vendor/themify-icons/SVG/ruler-pencil.svg  
+  inflating: vendor/themify-icons/SVG/save.svg  
+  inflating: vendor/themify-icons/SVG/save-alt.svg  
+  inflating: vendor/themify-icons/SVG/search.svg  
+  inflating: vendor/themify-icons/SVG/server.svg  
+  inflating: vendor/themify-icons/SVG/settings.svg  
+  inflating: vendor/themify-icons/SVG/share.svg  
+  inflating: vendor/themify-icons/SVG/share-alt.svg  
+  inflating: vendor/themify-icons/SVG/sharethis.svg  
+  inflating: vendor/themify-icons/SVG/sharethis-alt.svg  
+  inflating: vendor/themify-icons/SVG/shield.svg  
+  inflating: vendor/themify-icons/SVG/shift-left.svg  
+  inflating: vendor/themify-icons/SVG/shift-left-alt.svg  
+  inflating: vendor/themify-icons/SVG/shift-right.svg  
+  inflating: vendor/themify-icons/SVG/shift-right-alt.svg  
+  inflating: vendor/themify-icons/SVG/shine.svg  
+  inflating: vendor/themify-icons/SVG/shopping-cart.svg  
+  inflating: vendor/themify-icons/SVG/shopping-cart-full.svg  
+  inflating: vendor/themify-icons/SVG/shortcode.svg  
+  inflating: vendor/themify-icons/SVG/signal.svg  
+  inflating: vendor/themify-icons/SVG/skype.svg  
+  inflating: vendor/themify-icons/SVG/slice.svg  
+  inflating: vendor/themify-icons/SVG/smallcap.svg  
+  inflating: vendor/themify-icons/SVG/soundcloud.svg  
+  inflating: vendor/themify-icons/SVG/split-h.svg  
+  inflating: vendor/themify-icons/SVG/split-v.svg  
+  inflating: vendor/themify-icons/SVG/split-v-alt.svg  
+  inflating: vendor/themify-icons/SVG/spray.svg  
+  inflating: vendor/themify-icons/SVG/stack-overflow.svg  
+  inflating: vendor/themify-icons/SVG/stamp.svg  
+  inflating: vendor/themify-icons/SVG/star.svg  
+  inflating: vendor/themify-icons/SVG/stats-down.svg  
+  inflating: vendor/themify-icons/SVG/stats-up.svg  
+  inflating: vendor/themify-icons/SVG/support.svg  
+  inflating: vendor/themify-icons/SVG/tablet.svg  
+  inflating: vendor/themify-icons/SVG/tag.svg  
+  inflating: vendor/themify-icons/SVG/target.svg  
+  inflating: vendor/themify-icons/SVG/text.svg  
+  inflating: vendor/themify-icons/SVG/themify-favicon.svg  
+  inflating: vendor/themify-icons/SVG/themify-favicon-alt.svg  
+  inflating: vendor/themify-icons/SVG/themify-logo.svg  
+  inflating: vendor/themify-icons/SVG/thought.svg  
+  inflating: vendor/themify-icons/SVG/thumb-down.svg  
+  inflating: vendor/themify-icons/SVG/thumb-up.svg  
+  inflating: vendor/themify-icons/SVG/ticket.svg  
+  inflating: vendor/themify-icons/SVG/time.svg  
+  inflating: vendor/themify-icons/SVG/timer.svg  
+  inflating: vendor/themify-icons/SVG/trash.svg  
+  inflating: vendor/themify-icons/SVG/trello.svg  
+  inflating: vendor/themify-icons/SVG/truck.svg  
+  inflating: vendor/themify-icons/SVG/tumblr.svg  
+  inflating: vendor/themify-icons/SVG/tumblr-alt.svg  
+  inflating: vendor/themify-icons/SVG/twitter.svg  
+  inflating: vendor/themify-icons/SVG/twitter-alt.svg  
+  inflating: vendor/themify-icons/SVG/underline.svg  
+  inflating: vendor/themify-icons/SVG/unlink.svg  
+  inflating: vendor/themify-icons/SVG/unlock.svg  
+  inflating: vendor/themify-icons/SVG/upload.svg  
+  inflating: vendor/themify-icons/SVG/uppercase.svg  
+  inflating: vendor/themify-icons/SVG/user.svg  
+  inflating: vendor/themify-icons/SVG/vector.svg  
+  inflating: vendor/themify-icons/SVG/video-camera.svg  
+  inflating: vendor/themify-icons/SVG/video-clapper.svg  
+  inflating: vendor/themify-icons/SVG/view-grid.svg  
+  inflating: vendor/themify-icons/SVG/view-list.svg  
+  inflating: vendor/themify-icons/SVG/view-list-alt.svg  
+  inflating: vendor/themify-icons/SVG/vimeo.svg  
+  inflating: vendor/themify-icons/SVG/vimeo-alt.svg  
+  inflating: vendor/themify-icons/SVG/volume.svg  
+  inflating: vendor/themify-icons/SVG/wallet.svg  
+  inflating: vendor/themify-icons/SVG/wand.svg  
+  inflating: vendor/themify-icons/SVG/wheelchair.svg  
+  inflating: vendor/themify-icons/SVG/widget.svg  
+  inflating: vendor/themify-icons/SVG/widget-alt.svg  
+  inflating: vendor/themify-icons/SVG/widgetized.svg  
+  inflating: vendor/themify-icons/SVG/window.svg  
+  inflating: vendor/themify-icons/SVG/wordpress.svg  
+  inflating: vendor/themify-icons/SVG/world.svg  
+  inflating: vendor/themify-icons/SVG/write.svg  
+  inflating: vendor/themify-icons/SVG/yahoo.svg  
+  inflating: vendor/themify-icons/SVG/youtube.svg  
+  inflating: vendor/themify-icons/SVG/zip.svg  
+  inflating: vendor/themify-icons/SVG/zoom-in.svg  
+  inflating: vendor/themify-icons/SVG/zoom-out.svg  
+  inflating: vendor/themify-icons/Themify IconFonts 5-23-2014.json  
+  inflating: vendor/themify-icons/themify-icons.css  
+                                                                                                          
+──(root㉿kali)-[/images/debian-apache/site]
+└─# ls
+ about.html         contact.html    img          projects.html   site1.zip
+ blog.html          css             index.html   scss           'Sparsh Architecture - Doc'
+ blog-single.html   elements.html   js           service.html    vendor
+                                                                                                          
+┌──(root㉿kali)-[/images/debian-apache/site]
+└─# rm site1.zip 
+                                                                                                          
+┌──(root㉿kali)-[/images/debian-apache/site]
+└─# ls
+ about.html         contact.html    img          projects.html  'Sparsh Architecture - Doc'
+ blog.html          css             index.html   scss            vendor
+ blog-single.html   elements.html   js           service.html
+                                                                                                          
+┌──(root㉿kali)-[/images/debian-apache/site]
+└─# tar -czf site.tar ./
+tar: .: file changed as we read it
+                                                                                                          
+┌──(root㉿kali)-[/images/debian-apache/site]
+└─# ls
+ about.html         contact.html    img          projects.html   site.tar
+ blog.html          css             index.html   scss           'Sparsh Architecture - Doc'
+ blog-single.html   elements.html   js           service.html    vendor
+                                                                                                          
+┌──(root㉿kali)-[/images/debian-apache/site]
+└─# cp site.tar ../          
+                                                                                                          
+┌──(root㉿kali)-[/images/debian-apache/site]
+└─# cd ..          
+                                                                                                          
+┌──(root㉿kali)-[/images/debian-apache]
+└─# ls
+site  site.tar
+                                                                                                          
+──(root㉿kali)-[/images/debian-apache]
+└─# rm -Rf site 
+                                                                                                          
+┌──(root㉿kali)-[/images/debian-apache]
+└─# ls
+site.tar
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# cd /images    
+                                                                                                          
+┌──(root㉿kali)-[/images]
+└─# ls
+debian-apache  ubuntu-python
+                                                                                                          
+┌──(root㉿kali)-[/images]
+└─# cd debian-apache 
+                                                                                                          
+┌──(root㉿kali)-[/images/debian-apache]
+└─# ls
+dockerfile  site.tar
+                                                                                                          
+┌──(root㉿kali)-[/images/debian-apache]
+└─# cat dockerfile  
+
+# Versao do sistema que sera executado no container.
+FROM debian
+
+# Comandos para atualiza e instalacao do apache no container.
+RUN apt-get update && apt-get install -y apache2 && apt-get clean
+
+# Evita que mais de uma versao do apache esteja em execucao no mesmo container.
+ENV APACHE_LOCK_DIR="var/lock"
+
+# Arquivo de processo onde ele sera executado.
+ENV APACHE_PID_FILE="var/run/apache2.pid"
+
+# Usuario que vai executar o apache
+ENV APACHE_RUN_USER="www-data"
+
+# Grupo do usuario do apache
+ENV APACHE_RUN_GROUP="www-data"
+
+# Pasta onde sera armazenado LOGS
+ENV APACHE_LOG_DIR="/var/log/apache2"
+
+
+# O "ADD" diferedo do "CP" permite copia os arquivos para o local especificado e vai descompactar esse arquivo.
+
+ADD site.tar /var/www/html
+
+# Apenas uma descricao
+LABEL description = "Apache webserver 1.0"
+
+# E o local dentro do container.
+VOLUME /var/www/html
+
+# Porta da Minha Aplicacao
+EXPOSE 80
+
+# EXECUCAO EM SEGUNDO PLANO
+EXTRYPOINT ["/usr/sbin/apachectl"]
+
+CMD ["-d","FOREGROUNF"]
+                                                                                                          
+┌──(root㉿kali)-[/images/debian-apache]
+└─# 
+
+
+
+
+
+```
+
 
 
 
