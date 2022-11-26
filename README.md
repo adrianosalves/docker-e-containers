@@ -1142,6 +1142,69 @@ e42fa71d93af   ubuntu-C   28.54%    49.91MiB / 128MiB   38.99%    1.02kB / 0B   
 
 ```
 
+### Informações, logs e processos
+
+Como coletar informações dos container.
+
+```
+┌──(root㉿kali)-[/home/kali]
+└─# docker info                            
+Client:
+ Context:    default
+ Debug Mode: false
+
+Server:
+ Containers: 3
+  Running: 3
+  Paused: 0
+  Stopped: 0
+ Images: 8
+ Server Version: 20.10.19+dfsg1
+ Storage Driver: overlay2
+  Backing Filesystem: extfs
+  Supports d_type: true
+  Native Overlay Diff: true
+  userxattr: false
+ Logging Driver: json-file
+ Cgroup Driver: systemd
+ Cgroup Version: 2
+ Plugins:
+  Volume: local
+  Network: bridge host ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file local logentries splunk syslog
+ Swarm: inactive
+ Runtimes: io.containerd.runc.v2 io.containerd.runtime.v1.linux runc
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: 1.6.9~ds1-1
+ runc version: 1.1.4+ds1-1
+ init version: 
+ Security Options:
+  apparmor
+  seccomp
+   Profile: default
+  cgroupns
+ Kernel Version: 5.16.0-kali7-amd64
+ Operating System: Kali GNU/Linux Rolling
+ OSType: linux
+ Architecture: x86_64
+ CPUs: 2
+ Total Memory: 974.9MiB
+ Name: kali
+ ID: RD32:D4RY:UJHQ:X2MJ:X5GE:YGXN:7OHW:C7RT:JY4B:CRN2:MNZ7:XM2K
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: false
+ Registry: https://index.docker.io/v1/
+ Labels:
+ Experimental: false
+ Insecure Registries:
+  127.0.0.0/8
+ Live Restore Enabled: false
+
+                                                                                                          
+┌──(root㉿kali)-[/home/kali]
+└─# 
+```
 
 
 
