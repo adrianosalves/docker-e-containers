@@ -3328,12 +3328,45 @@ Removing intermediate container 0d6b44f8f4cc
 Successfully built 6005e6fee061
 Successfully tagged debian-apache:1.0
                                                                                                           
+──(root㉿kali)-[/images/debian-apache]
+└─# docker images                             
+REPOSITORY      TAG          IMAGE ID       CREATED              SIZE
+debian-apache   1.0          6005e6fee061   About a minute ago   276MB
+ubuntu-python   latest       ae7845f0f8d0   43 minutes ago       148MB
+<none>          <none>       d395bdf57b29   48 minutes ago       148MB
+mysql           latest       3842e9cdffd2   10 days ago          538MB
+httpd           latest       8653efc8c72d   10 days ago          145MB
+php             7.4-apache   20a3732f422b   11 days ago          453MB
+debian          10           1036dd279580   11 days ago          114MB
+debian          latest       c31f65dd4cc9   11 days ago          124MB
+ubuntu          latest       a8780b506fa4   3 weeks ago          77.8MB
+debian          9            662c05203bab   5 months ago         101MB
+centos          latest       5d0da3dc9764   14 months ago        231MB
+                                                                                                          
 ┌──(root㉿kali)-[/images/debian-apache]
-└─# 
-
-
-
-
+└─# docker run -dti -p 80:80 --name meu-apache debian-apache:1.0
+28e812dcb0814a1d8b2c93af578c127ef9b4db01bf93dbb95faa5569606eb297
+                                                                                                          
+┌──(root㉿kali)-[/images/debian-apache]
+└─# docker ps                                                   
+CONTAINER ID   IMAGE               COMMAND                  CREATED         STATUS         PORTS                               NAMES
+28e812dcb081   debian-apache:1.0   "/usr/sbin/apachectl…"   6 seconds ago   Up 5 seconds   0.0.0.0:80->80/tcp, :::80->80/tcp   meu-apache
+                                                                                                          
+┌──(root㉿kali)-[/images/debian-apache]
+└─# ip a              
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:db:96:6a brd ff:ff:ff:ff:ff:ff
+    inet 192.168.1.107/24 brd 192.168.1.255 scope global dynamic noprefixroute eth0
+       valid_lft 3832sec preferred_lft 3832sec
+    inet6 fe80::a00:27ff:fedb:966a/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+3: docker0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default 
 
 ```
 
