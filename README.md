@@ -4531,7 +4531,46 @@ a153fac509d2   webdevops/php-apache:alpine-php7   "/entrypoint supervi…"   2 h
 ```
 
 ### Criando um container de uma Aplicação WEB
-      
+
+- Criando um arquivo YML com definicoes de um servidor apache (httpd);
+- Especificar no arquivo YML o local onde os arquivos da aplicação estarão. A aplicação será um simples Hello World.
+- Subir o arquivo YML e a aplicação para um repositório Github.
+
+# Criando um Cluster com o Docker Swarm
+
+### O que é um Cluster?
+
+Vamos trabalhar com o Docker Swarm, importante saber o que é um cluster.
+
+computadores ligados que trabalham em conjuntos, e que em muitos aspectos  podem ser considerados como um único sistema.
+computadores em cluster executam a mesma tarefa controlado e programado por software.
+
+Cada computador presente em cluster é conhecido como nó (node).
+
+### O que é Docker Swarm?
+
+È um recurso do Docker que fornece funcionalidades de orquestração de contêiner, incluindo clustering nativo de hosts do Docker e agendamento de cargas de trabalho de contêineres. Um grupo de hosts do Docker formam um cluster "Swarm".
+
+### Nós gerenciadores e nós de trabalho
+
+Um swarm é composto de dois tipos de hosts de contêiner: nós *gerenciadores* e nós de *trabaho*.
+Todos os comandos CLI do Docker para controlar e monitorar um swarm deve ser executados em um de seus nós *gerenciadores*.
+
+Os nós gerenciadores podem ser considerados os "ZELADORES" do estado Swarm - juntos, ele formam um grupo de consenso que mantem o reconhecimento do estado dos servicos em execução no swarm, e o trabalho deles é garantir que o estado real do swarm seja sempre condizente com o estado desejado, conforme definido pelo desenvolvedor ou administrador. Para ingressar em um swarm, um nó de trabalho deve usar "token de associacao' gerado pelo nó gerenciador quando o swarm foi inicializado.
+
+![image](https://user-images.githubusercontent.com/33209944/209484128-442ce3d1-87cd-43df-a7b1-849bac39776b.png)
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
