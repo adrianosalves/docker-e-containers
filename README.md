@@ -4560,6 +4560,27 @@ Os nós gerenciadores podem ser considerados os "ZELADORES" do estado Swarm - ju
 
 ![image](https://user-images.githubusercontent.com/33209944/209484128-442ce3d1-87cd-43df-a7b1-849bac39776b.png)
 
+Vantagens de ter um cluster se perder um nó!. Os containers serão migrados pelo gerenciador swarm para os demais nós.
+
+![image](https://user-images.githubusercontent.com/33209944/209484273-3b86f319-be73-4d91-aabe-61091e93c050.png)
+
+O nó onde o swarm está instalado tambem pode ser o nó gerenciamento somente ou também nó de trabalho recebendo containers, caso não recursos financeiro pode usar tambem.
+
+![image](https://user-images.githubusercontent.com/33209944/209484345-45838f04-aa4b-4f98-80b4-8264eff2fc52.png)
+
+Se caso perder o nó gerenciador com o swarm tambem perderá os outros containers. Por isso recomenda-se que se tenha um backup do nó onde está instalado o swarm.
+
+![image](https://user-images.githubusercontent.com/33209944/209484427-e8a3273d-fbdd-4d77-9b9b-cd3e839e2b48.png)
+
+Caso um nó cair um dos backup será acionado desde que se tenha pelo menos 51% dos managers funcionando. Sempre tenha backup em números impars.
+
+![image](https://user-images.githubusercontent.com/33209944/209484506-55158ffd-e1a4-4855-882f-37872c99afe0.png)
+
+
+
+
+
+
 
 
 
