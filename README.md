@@ -4641,7 +4641,23 @@ Associamos o **Destino** para 0.0.0.0/0 e **Alvo** será o nosso ID do Gateway:
 ![image](https://user-images.githubusercontent.com/33209944/209485949-b0969852-a20b-40f3-bd7c-6b8c381a4212.png)
 
 
+### Cluster em nuvem - Subindo máquinas EC2
 
+Clique em **Executar instância**:
+
+![image](https://user-images.githubusercontent.com/33209944/209486134-e0bcece5-c665-47dc-b753-05a434ff3033.png)
+
+Nome de nossas maquinas **Nome e tags** será Docker Swarm:
+
+![image](https://user-images.githubusercontent.com/33209944/209486452-d19f993a-4ac7-4e36-8e80-4c62ee5c90f6.png)
+
+Em **Network settings** vamos associar a nossa VPC e nossa Sub-rede, Ativar IP Publico, e Criar u grupo de segurança:
+
+![image](https://user-images.githubusercontent.com/33209944/209486615-ec385820-bf6d-4d2a-8f9e-4724cfc59011.png)
+
+Vamos subir 4 instancias e na opção **Dados do usuário** adicionamos as linhas de nosso script para instalação automatica do docker em todas as maquinas.
+
+![image](https://user-images.githubusercontent.com/33209944/209486368-16cdf63a-bebd-4231-81e7-47f7e8badafd.png)
 
 
 
