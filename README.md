@@ -4576,9 +4576,40 @@ Caso um nó cair um dos backup será acionado desde que se tenha pelo menos 51% 
 
 ![image](https://user-images.githubusercontent.com/33209944/209484506-55158ffd-e1a4-4855-882f-37872c99afe0.png)
 
+### Cluster em nuvem - Redes e sub redes
+
+O cluster pode estar em nuvem que seria o ideal. Como AWS, GCP, AZUR, ORACLE ou outros...
+
+Exemplo AWS - EC2:
+
+Importante criar uma subrede para gerenciar seu cluster com o VPC.
+
+![image](https://user-images.githubusercontent.com/33209944/209484674-2be84a87-789f-4757-9fc3-eed1110d3e67.png)
+
+![image](https://user-images.githubusercontent.com/33209944/209484686-afc196b0-0700-419a-a1e9-bea2153f48cd.png)
+
+Criar VPC escolha a opção **Somente VPC**, atribuir uma **Tag de nome** no nosso caso foi **docker**, e escolha a opção **Entrada manual de CIDR IPv4** e informe CIDR IPv4 exemplo **172.31.0.0/24**, e escolha a opção **Nenhum bloco CIDR Ipv6**. Depois clique em Criar VPC.
+
+![image](https://user-images.githubusercontent.com/33209944/209484781-8bad9f78-3bc4-4bc4-ad9f-9da9375bfe70.png)
+
+Sua rede será criada:
+
+![image](https://user-images.githubusercontent.com/33209944/209484796-5262bed6-c3b3-4727-a489-4222973582ee.png)
+
+Agora vamos criar uma sub-rede:
+
+![image](https://user-images.githubusercontent.com/33209944/209485237-18dcb650-4926-4aaf-a92a-0b0e4f5d837a.png)
+
+E atribuimos ela a rede **docker**
+
+![image](https://user-images.githubusercontent.com/33209944/209485273-12f86d2e-f1bf-4c55-a7e8-dba1d488475c.png)
+
+Na **Configuracoes de sub-rede** definimos um nome da sub-rede **sub-rede-docker**, selecionamos a **zona de disponibilidade**, e atribuimos o mesmo **Bloco CIDR IPv4** 172.31.0.0/24, depois clicar em Criar sub-rede:
+
+![image](https://user-images.githubusercontent.com/33209944/209485360-51eb41e2-e6a3-4980-a987-724eb68a645e.png)
 
 
-
+![image](https://user-images.githubusercontent.com/33209944/209485324-4bfe3307-7a8e-47ae-bc06-03383b36fd7d.png)
 
 
 
