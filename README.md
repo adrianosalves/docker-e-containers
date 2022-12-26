@@ -4608,8 +4608,45 @@ Na **Configuracoes de sub-rede** definimos um nome da sub-rede **sub-rede-docker
 
 ![image](https://user-images.githubusercontent.com/33209944/209485360-51eb41e2-e6a3-4980-a987-724eb68a645e.png)
 
+![image](https://user-images.githubusercontent.com/33209944/209485469-581ae48a-0af8-4560-b62a-732bca461cd3.png)
 
-![image](https://user-images.githubusercontent.com/33209944/209485324-4bfe3307-7a8e-47ae-bc06-03383b36fd7d.png)
+O proximo passo é configurar o nosso **Gateway** para que a nossa rede tenha acesso a Internet.
+
+![image](https://user-images.githubusercontent.com/33209944/209485520-73329598-ac33-4789-a43f-553deea86547.png)
+
+Vamos aribuir uma **Tag de nome** que será gateway-docker para ficar fácil associar a nossa rede docker.
+
+![image](https://user-images.githubusercontent.com/33209944/209485566-350b531f-027e-4aca-b28f-59cc1e263512.png)
+
+Agora vamos precisar do **ID do gateway da Internet** selecionado e copiado acima, e clique **Associar a uma VPC**:
+
+![image](https://user-images.githubusercontent.com/33209944/209485657-cc1538a2-b90d-4b11-abdf-06e71f28fa74.png)
+
+![image](https://user-images.githubusercontent.com/33209944/209485705-134284bf-3879-4836-92d0-b58e3379c57a.png)
+
+![image](https://user-images.githubusercontent.com/33209944/209485726-c244f767-f768-4db2-b676-0db191709515.png)
+
+Um ultimo passo é associa a **Tabelas de rotas**, clique no ID referente a nossa rede VPC:
+
+![image](https://user-images.githubusercontent.com/33209944/209485783-7cca30b8-4751-4e68-8de2-2449ce932b02.png)
+
+Depois clique em **Editar Rotas**:
+
+![image](https://user-images.githubusercontent.com/33209944/209485875-ad30d785-6526-4810-b0c6-b60dc1bb9749.png)
+
+Associamos o **Destino** para 0.0.0.0/0 e **Alvo** será o nosso ID do Gateway:
+
+![image](https://user-images.githubusercontent.com/33209944/209485922-08567e2c-183c-43fa-a076-86ca61fb7900.png)
+
+![image](https://user-images.githubusercontent.com/33209944/209485949-b0969852-a20b-40f3-bd7c-6b8c381a4212.png)
+
+
+
+
+
+
+
+
 
 
 
